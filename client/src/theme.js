@@ -1,18 +1,26 @@
 import { createTheme } from '@mui/material';
 
 let theme = createTheme({
+  typography: {
+    fontFamily: ['Inter', 'sans-serif'].join(','),
+    button: {
+      fontSize: '15px',
+      fontWeight: '500',
+      textTransform: 'none',
+    },
+  },
   shape: {
-    borderRadius: 4,
+    borderRadius: '4px',
   },
   palette: {
     text: {
-      primary: '#333',
+      primary: '#FFFFFF',
     },
     type: 'light',
     primary: {
       main: '#334ACC',
       dark: '#223289',
-      light: '#e6f0fd',
+      light: '#E8EAF6',
       contrastText: '#fff',
     },
     secondary: {
@@ -29,11 +37,13 @@ let theme = createTheme({
     success: {
       main: '#00A980',
       light: '#DBEBDB',
+      dark: '#00A980',
       contrastText: '#fff',
     },
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
     },
     background: {
@@ -43,106 +53,87 @@ let theme = createTheme({
 });
 
 theme = createTheme(theme, {
-  typography: {
-    fontSize: 16,
-    fontWeightLight: 300,
-    h1: {
-      fontWeight: 700,
-      lineHeight: 1.2,
-      fontSize: '2.25rem',
-      letterSpacing: '-0.1rem',
-    },
-    h2: {
-      fontWeight: 700,
-      fontSize: '2.074rem',
-    },
-    h3: {
-      fontWeight: 700,
-      fontSize: '1.728rem',
-    },
-    h4: {
-      fontWeight: 700,
-      fontSize: '1.44rem',
-    },
-    h5: {
-      fontSize: '1.44rem',
-    },
-    h6: {
-      fontSize: '1.44rem',
-    },
-    body1: {
-      fontSize: '1.2rem',
-    },
-  },
   components: {
-    MuiAppBar: {
+    MuiButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#fff',
-          color: '#333',
+          // apply theme's border-radius instead of component's defaul
         },
-      },
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: theme.shape.borderRadius,
-          color: theme.palette.grey['500'],
-          ':hover': {
-            borderRadius: 0,
-            backgroundColor: 'transparent',
-            color: theme.palette.primary.main,
-          },
-          '&.Mui-selected': {
-            borderRadius: 0,
-            backgroundColor: 'transparent',
-            borderBottom: '2px solid #0666eb',
-            color: theme.palette.primary.main,
-          },
-          '.MuiTypography-root': {
-            fontWeight: '500',
-            fontSize: '14px',
+        outlinedPrimary: {
+          border: 0,
+          background: theme.palette.primary.light,
+          '&:hover': {
+            background: theme.palette.secondary.dark,
+            border: 0,
+            color: theme.palette.primary.dark,
           },
         },
-      },
-    },
-    MuiCheckbox: {
-      styleOverrides: {
-        root: {
-          color: '#33333350',
+        containedError: {
+          background: theme.palette.error.light,
+          border: 0,
+          color: theme.palette.error.main,
+          '&:hover': {
+            background: theme.palette.error.main,
+            border: 0,
+            color: theme.palette.error.contrastText,
+          },
+          '&:active': {
+            background: theme.palette.error.light,
+            border: 0,
+            color: theme.palette.error.main,
+          },
         },
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: '8px',
-          padding: '40px 32px',
-          border: 'none',
-          boxShadow: theme.shadows[3],
+        outlinedError: {
+          '&:hover': {
+            background: '#FDE8E0',
+            borderColor: theme.palette.error.main,
+            color: theme.palette.error.main,
+          },
         },
-      },
-    },
-    MuiCardHeader: {
-      styleOverrides: {
-        root: {
-          padding: '0',
-          fontSize: '24px',
+        containedSuccess: {
+          background: theme.palette.success.light,
+          border: 0,
+          color: theme.palette.success.dark,
+          '&:hover': {
+            background: theme.palette.success.dark,
+            border: 0,
+            color: theme.palette.success.contrastText,
+          },
+          '&:active': {
+            background: theme.palette.success.light,
+            border: 0,
+            color: theme.palette.success.dark,
+          },
         },
-      },
-    },
-    MuiCardContent: {
-      styleOverrides: {
-        root: {
-          padding: '0',
+        outlinedSuccess: {
+          '&:hover': {
+            background: theme.palette.success.light,
+            borderColor: theme.palette.success.dark,
+            color: theme.palette.success.dark,
+          },
         },
-      },
-    },
-    MuiToolbar: {
-      styleOverrides: {
-        root: {
-          borderRadius: theme.shape.borderRadius,
+        containedWarning: {
+            background: theme.palette.warning.light,
+            border: 0,
+            color: theme.palette.warning.dark,
+          '&:hover': {
+            background: theme.palette.warning.main,
+            border: 0,
+            color: theme.palette.warning.light,
+          },
+          '&:active': {
+            background: theme.palette.warning.light,
+            border: 0,
+            color: theme.palette.warning.dark,
+          },
         },
+        outlinedWarning: {
+          '&:hover': {
+            background: theme.palette.warning.light,
+            borderColor: theme.palette.warning.main,
+            color: theme.palette.warning.main,
+          },
+        }
       },
     },
   },

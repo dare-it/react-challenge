@@ -1,3 +1,5 @@
+import * as React from 'react';
+import img from './../../assets/unknown_error.png';
 import { Box, Typography } from '@mui/material';
 
 export const Error = ({ error }) => {
@@ -10,10 +12,11 @@ export const Error = ({ error }) => {
         flexDirection: 'column',
       }}
     >
+          <img src={img} alt="Unexpected Error"/>
       {
         error?.message?.includes('Network Error') ? (
-          <Typography>Uruchom Server!</Typography>
-        ) : null //  TODO in TASK 1
+          <Typography>Wystąpił nieoczekiwany błąd</Typography>
+        ) : null
       }
     </Box>
   );

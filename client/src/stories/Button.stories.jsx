@@ -58,6 +58,57 @@ const All = () => (
         Button
       </Button>
     </Grid>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Contained</Typography>
+      </Grid>
+      <Button variant={'contained'} color={'primary'}>
+        + Button
+      </Button>
+      <Button variant={'contained'} color={'error'}>
+        + Button
+      </Button>
+      <Button variant={'contained'} color={'success'}>
+        + Button
+      </Button>
+      <Button variant={'contained'} color={'warning'}>
+        + Button
+      </Button>
+    </Grid>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Contained</Typography>
+      </Grid>
+      <Button variant={'contained'} color={'primary'}>
+        Button {'>'}
+      </Button>
+      <Button variant={'contained'} color={'error'}>
+        Button {'>'}
+      </Button>
+      <Button variant={'contained'} color={'success'}>
+        Button {'>'}
+      </Button>
+      <Button variant={'contained'} color={'warning'}>
+        Button {'>'}
+      </Button>
+    </Grid>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Contained</Typography>
+      </Grid>
+      <Button variant={'contained'} color={'primary'}>
+      {'>'}
+      </Button>
+      <Button variant={'contained'} color={'error'}>
+      {'>'}
+      </Button>
+      <Button variant={'contained'} color={'success'}>
+      {'>'}
+      </Button>
+      <Button variant={'contained'} color={'warning'}>
+      {'>'}
+      </Button>
+    </Grid>
     <Grid container sx={{ mt: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Outlined</Typography>
@@ -73,6 +124,35 @@ const All = () => (
       </Button>
       <Button variant={'outlined'} color={'warning'}>
         Button
+      </Button>
+    </Grid>
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Contained</Typography>
+      </Grid>
+      <Button variant={'contained'} color={'primary'} disabled>
+        Prim cont
+      </Button>
+      <Button variant={'outlined'} color={'primary'} disabled>
+        Prim out
+      </Button>
+      <Button variant={'contained'} color={'error'} disabled>
+        Err cont
+      </Button>
+      <Button variant={'outlined'} color={'error'} disabled>
+        Err out
+      </Button>
+      <Button variant={'contained'} color={'warning'} disabled>
+        War cont
+      </Button>
+      <Button variant={'outlined'} color={'warning'} disabled>
+        War out
+      </Button>
+      <Button variant={'contained'} color={'success'} disabled>
+        Suc cont
+      </Button>
+      <Button variant={'outlined'} color={'success'} disabled>
+        Suc out
       </Button>
     </Grid>
   </>
