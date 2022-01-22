@@ -2,8 +2,9 @@ import {Box, Typography} from '@mui/material';
 import errorIcon from "../../assets/unknown_error.png"
 import {styled} from "@mui/system";
 import {theme} from "../../theme";
+
 const StyleErrorParagraph = styled('p')({
-    color: `${theme.palette.text.secondary}`
+    color: `rgba(${theme.palette.text.secondary},0.5)`
 
 })
 

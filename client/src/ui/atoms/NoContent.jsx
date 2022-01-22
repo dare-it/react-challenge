@@ -4,7 +4,7 @@ import {Box} from '@mui/material';
 import {theme} from "../../theme"
 
 const StyledNoContentParagraph = styled('p')({
-    color: `${theme.palette.text.secondary}`
+    color: `rgba(${theme.palette.text.secondary},0.5)`
 
 })
 export const NoContent = () => {
