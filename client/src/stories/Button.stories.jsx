@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -45,70 +46,74 @@ const All = () => (
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
+      <Button variant={'contained'} color={'primary'} size={'large'}>
         Button
       </Button>
-      <Button variant={'contained'} color={'error'}>
+      <Button variant={'contained'} color={'error'} size={'large'}>
         Button
       </Button>
-      <Button variant={'contained'} color={'success'}>
+      <Button variant={'contained'} color={'success'} size={'large'}>
         Button
       </Button>
-      <Button variant={'contained'} color={'warning'}>
+      <Button variant={'contained'} color={'warning'} size={'large'}>
         Button
       </Button>
     </Grid>
+
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
+      <Button variant={'contained'} color={'primary'} size={'large'}>
         + Button
       </Button>
-      <Button variant={'contained'} color={'error'}>
+      <Button variant={'contained'} color={'error'} size={'large'}>
         + Button
       </Button>
-      <Button variant={'contained'} color={'success'}>
+      <Button variant={'contained'} color={'success'} size={'large'}>
         + Button
       </Button>
-      <Button variant={'contained'} color={'warning'}>
+      <Button variant={'contained'} color={'warning'} size={'large'}>
         + Button
       </Button>
     </Grid>
+
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
-        Button {'>'}
+      <Button variant={'contained'} color={'primary'} size={'large'}>
+        Button <ArrowForwardIosIcon fontSize={'10'}/>
       </Button>
-      <Button variant={'contained'} color={'error'}>
-        Button {'>'}
+      <Button variant={'contained'} color={'error'} size={'large'}>
+        Button <ArrowForwardIosIcon fontSize={'10'}/>
       </Button>
-      <Button variant={'contained'} color={'success'}>
-        Button {'>'}
+      <Button variant={'contained'} color={'success'} size={'large'}>
+        Button <ArrowForwardIosIcon fontSize={'10'}/>
       </Button>
-      <Button variant={'contained'} color={'warning'}>
-        Button {'>'}
+      <Button variant={'contained'} color={'warning'} size={'large'}>
+        Button <ArrowForwardIosIcon fontSize={'10'}/>
       </Button>
     </Grid>
+
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
-      {'>'}
+      <Button variant={'contained'} color={'primary'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15'}/>
       </Button>
-      <Button variant={'contained'} color={'error'}>
-      {'>'}
+      <Button variant={'contained'} color={'error'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15'}/>
       </Button>
-      <Button variant={'contained'} color={'success'}>
-      {'>'}
+      <Button variant={'contained'} color={'success'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15'}/>
       </Button>
-      <Button variant={'contained'} color={'warning'}>
-      {'>'}
+      <Button variant={'contained'} color={'warning'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15'}/>
       </Button>
     </Grid>
+
     <Grid container sx={{ mt: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Outlined</Typography>
@@ -126,6 +131,7 @@ const All = () => (
         Button
       </Button>
     </Grid>
+
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>

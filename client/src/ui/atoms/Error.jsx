@@ -15,7 +15,13 @@ export const Error = ({ error }) => {
           <img src={img} alt="Unexpected Error"/>
       {
         error?.message?.includes('Network Error') ? (
-          <Typography>Wystąpił nieoczekiwany błąd</Typography>
+          <Typography sx={{
+            fontWeight: '400',
+            fontSize: '19.2px',
+            lineHeight: '29px',
+            color: 'rgba(51, 51, 51, 0.5)'
+          }}
+          >Wystąpił nieoczekiwany błąd</Typography>
         ) : null
       }
     </Box>

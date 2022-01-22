@@ -9,6 +9,7 @@ let theme = createTheme({
       textTransform: 'none',
     },
   },
+  shadows: 'none',
   shape: {
     borderRadius: '4px',
   },
@@ -113,9 +114,9 @@ theme = createTheme(theme, {
           },
         },
         containedWarning: {
-            background: theme.palette.warning.light,
-            border: 0,
-            color: theme.palette.warning.dark,
+          background: theme.palette.warning.light,
+          border: 0,
+          color: theme.palette.warning.dark,
           '&:hover': {
             background: theme.palette.warning.main,
             border: 0,
@@ -133,7 +134,7 @@ theme = createTheme(theme, {
             borderColor: theme.palette.warning.main,
             color: theme.palette.warning.main,
           },
-        }
+        },
       },
     },
   },
