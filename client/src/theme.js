@@ -51,15 +51,37 @@ let theme = createTheme({
       default: '#F8F8F8',
     },
   },
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+  },
 });
 
 theme = createTheme(theme, {
   components: {
+
     MuiButton: {
       styleOverrides: {
         root: {
-          // apply theme's border-radius instead of component's defaul
+          height: '34px',
+          minWidth: '34px',
         },
+
+        iconSizeLarge: {
+          '& > *:first-child': {
+            fontSize: 15,
+          },
+        },
+      
+        iconSizeMedium: {
+          '& > *:first-child': {
+            fontSize: 15,
+          },
+        },
+
         outlinedPrimary: {
           border: 0,
           background: theme.palette.primary.light,
@@ -69,6 +91,7 @@ theme = createTheme(theme, {
             color: theme.palette.primary.dark,
           },
         },
+
         containedError: {
           background: theme.palette.error.light,
           border: 0,
@@ -91,6 +114,7 @@ theme = createTheme(theme, {
             color: theme.palette.error.main,
           },
         },
+
         containedSuccess: {
           background: theme.palette.success.light,
           border: 0,
@@ -113,6 +137,7 @@ theme = createTheme(theme, {
             color: theme.palette.success.dark,
           },
         },
+
         containedWarning: {
           background: theme.palette.warning.light,
           border: 0,
