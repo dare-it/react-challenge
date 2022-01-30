@@ -34,10 +34,15 @@ let theme = createTheme({
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
     },
     background: {
       default: '#F8F8F8',
+    },
+    greys: {
+      main: '#33333340',
+      light: '#33333312',
     },
   },
 });
@@ -46,6 +51,7 @@ theme = createTheme(theme, {
   typography: {
     fontSize: 16,
     fontWeightLight: 300,
+    fontFamily: 'Inter, sans-serif',
     h1: {
       fontWeight: 700,
       lineHeight: 1.2,
@@ -74,7 +80,193 @@ theme = createTheme(theme, {
       fontSize: '1.2rem',
     },
   },
+
+  //Added buttons in the theme
   components: {
+
+    // Disable the ripple in the button
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true,
+      },
+    },
+
+    //Styling in the buttons
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          fontWeight: '500',
+          fontFamily: 'Inter, sans-serif',
+          boxShadow: 'none',
+          padding: '8px 12px',
+          minWidth: '40px',
+          minHeight: '40px',
+          lineHeight: '22px',
+          ':hover': {
+            boxShadow: 'none',
+          },
+          ':active': {
+            boxShadow: 'none',
+          },
+        },
+        outlined: {
+          border: theme.palette.main,
+        },
+        containedPrimary: {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
+          ':hover': {
+            backgroundColor: theme.palette.primary.dark,
+            border: 'none',
+            color: theme.palette.primary.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.primary.dark,
+            border: 'none',
+            color: theme.palette.primary.contrastText,
+          },
+          ':disabled': {
+            backgroundColor: theme.palette.greys.light,
+            color: theme.palette.greys.main,
+          },
+        },
+        outlinedPrimary: {
+          border: 'none',
+          backgroundColor: theme.palette.secondary.light,
+          color: theme.palette.primary.main,
+          ':hover': {
+            backgroundColor: theme.palette.secondary.dark,
+            border: 'none',
+            color: theme.palette.primary.dark,
+          },
+          ':active:': {
+            backgroundColor: theme.palette.secondary.dark,
+            border: 'none',
+            color: theme.palette.primary.dark,
+          },
+          ':disabled': {
+            backgroundColor: theme.palette.greys.light,
+            color: theme.palette.greys.main,
+            border: 'none',
+          },
+        },
+        containedError: {
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.main,
+          ':hover': {
+            backgroundColor: theme.palette.error.main,
+            border: 'none',
+            color: theme.palette.error.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.error.light,
+            color: theme.palette.error.main,
+            border: 'none',
+          },
+          ':disabled': {
+            backgroundColor: theme.palette.greys.light,
+            color: theme.palette.greys.main,
+            border: 'none',
+          },
+        },
+        outlinedError: {
+          backgroundColor: 'transparent',
+          color: theme.palette.error.main,
+
+          ':hover': {
+            backgroundColor: theme.palette.error.light,
+            color: theme.palette.error.main,
+          },
+          ':active': {
+            backgroundColor: theme.palette.error.light,
+            color: theme.palette.error.main,
+          },
+          ':disabled': {
+            backgroundColor: 'transparent',
+            color: theme.palette.greys.main,
+            border: '1px solid {theme.palette.greys.main}',
+          },
+        },
+        containedSuccess: {
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.main,
+          fontWeight: '600',
+          ':hover': {
+            backgroundColor: theme.palette.success.main,
+            border: 'none',
+            color: theme.palette.success.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.success.light,
+            color: theme.palette.success.main,
+            border: 'none',
+          },
+          ':disabled': {
+            backgroundColor: theme.palette.greys.light,
+            color: theme.palette.greys.main,
+            border: 'none',
+          },
+        },
+        outlinedSuccess: {
+          backgroundColor: 'transparent',
+          color: theme.palette.success.main,
+          fontWeight: '600',
+          ':hover': {
+            backgroundColor: theme.palette.success.light,
+            color: theme.palette.success.main,
+          },
+          ':active': {
+            backgroundColor: theme.palette.success.light,
+            color: theme.palette.success.main,
+          },
+          ':disabled': {
+            backgroundColor: 'transparent',
+            color: theme.palette.greys.main,
+            border: '1px solid {theme.palette.greys.main}',
+          },
+        },
+        containedWarning: {
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.dark,
+          fontWeight: '600',
+          ':hover': {
+            backgroundColor: theme.palette.warning.main,
+            border: 'none',
+            color: theme.palette.warning.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.warning.dark,
+            border: 'none',
+          },
+          ':disabled': {
+            backgroundColor: theme.palette.greys.light,
+            color: theme.palette.greys.main,
+            border: 'none',
+          },
+        },
+        outlinedWarning: {
+          backgroundColor: 'transparent',
+          color: theme.palette.warning.main,
+          fontWeight: '600',
+          ':hover': {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.warning.main,
+          },
+          ':active': {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.warning.main,
+          },
+          ':disabled': {
+            backgroundColor: 'transparent',
+            color: theme.palette.greys.main,
+            border: '1px solid {theme.palette.greys.main}',
+          },
+        },
+      },
+    },
+
     MuiAppBar: {
       styleOverrides: {
         root: {
