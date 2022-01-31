@@ -99,7 +99,7 @@ theme = createTheme(theme, {
           },
           '&:disabled': {
             border: 0,
-          }
+          },
         },
 
         containedError: {

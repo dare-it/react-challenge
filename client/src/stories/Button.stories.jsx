@@ -100,12 +100,13 @@ const All = () => (
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Success</Typography>
       </Grid>
-
-      
-      <Button variant={'contained'} color={'success'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
+      <Button variant={'contained'} color={'success'} size={'large'}>
         Button
       </Button>
       <Button variant={'contained'} color={'success'} size={'large'} startIcon={<AddIcon/>}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'success'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
         Button
       </Button>
       <Button variant={'contained'} color={'success'} size={'medium'}>
