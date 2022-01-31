@@ -83,7 +83,6 @@ theme = createTheme(theme, {
 
   //Added buttons in the theme
   components: {
-
     // Disable the ripple in the button
     MuiButtonBase: {
       defaultProps: {
