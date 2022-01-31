@@ -3,8 +3,16 @@ import { Button as MuiButton } from '@mui/material';
 
 //Added onClick function
 export function Button({ children, ...props }) {
-  //Content of the button to be modified
-  const content = props;
 
-  return <MuiButton onClick={() => { console.log("click") }} {...props}>{children}, {content}</MuiButton>;
+  const content = "randomText"
+
+  return <MuiButton
+    // Adding icons in the button content
+    // startIcon={ }
+    // endIcon={ }
+    onClick={() => { console.log("click") }}
+    {...props}>
+    {children},
+    {content}
+  </MuiButton>;
 }
