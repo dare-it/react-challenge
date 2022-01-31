@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../ui';
-import { Grid, IconButton, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -44,121 +44,108 @@ const All = () => (
   <>
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Contained</Typography>
+        <Typography variant={'subheading'}>Primary</Typography>
       </Grid>
       <Button variant={'contained'} color={'primary'} size={'large'}>
         Button
       </Button>
-      <Button variant={'contained'} color={'error'} size={'large'}>
+      <Button variant={'contained'} color={'primary'} size={'large'} startIcon={<AddIcon/>}>
         Button
       </Button>
-      <Button variant={'contained'} color={'success'} size={'large'}>
+      <Button variant={'contained'} color={'primary'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
         Button
       </Button>
-      <Button variant={'contained'} color={'warning'} size={'large'}>
+      <Button variant={'contained'} color={'primary'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15px'}/>
+      </Button>
+      <Button variant={'outlined'} color={'primary'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'primary'} disabled>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'primary'} disabled>
         Button
       </Button>
     </Grid>
 
     <Grid container>
       <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Contained</Typography>
+      <Typography variant={'subheading'}>Error</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'} size={'large'} startIcon={<AddIcon/>}>
+      <Button variant={'contained'} color={'error'} size={'large'}>
         Button
       </Button>
       <Button variant={'contained'} color={'error'} size={'large'} startIcon={<AddIcon/>}>
         Button
       </Button>
+      <Button variant={'contained'} color={'error'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'error'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15px'}/>
+      </Button>
+      <Button variant={'outlined'} color={'error'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'error'} disabled>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'error'} disabled>
+        Button
+      </Button>
+    </Grid>
+
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Success</Typography>
+      </Grid>
+
+      
+      <Button variant={'contained'} color={'success'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
+        Button
+      </Button>
       <Button variant={'contained'} color={'success'} size={'large'} startIcon={<AddIcon/>}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'success'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15px'}/>
+      </Button>
+      <Button variant={'outlined'} color={'success'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'success'} disabled>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'success'} disabled>
+        Button
+      </Button>
+    </Grid>
+
+    <Grid container>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Warning</Typography>
+      </Grid>
+      <Button variant={'contained'} color={'warning'} size={'large'}>
         Button
       </Button>
       <Button variant={'contained'} color={'warning'} size={'large'} startIcon={<AddIcon/>}>
         Button
       </Button>
-    </Grid>
-
-    <Grid container>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Contained</Typography>
-      </Grid>
-      <Button variant={'contained'} color={'primary'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
-        Button
-      </Button>
-      <Button variant={'contained'} color={'error'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
-        Button
-      </Button>
-      <Button variant={'contained'} color={'success'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
-        Button
-      </Button>
       <Button variant={'contained'} color={'warning'} size={'large'} endIcon={<ArrowForwardIosIcon/>}>
         Button
       </Button>
-    </Grid>
-
-    <Grid container>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Contained</Typography>
-      </Grid>
-      <IconButton variant={'contained'} color={'primary'} size={'medium'}>
-      <ArrowForwardIosIcon/>
-      </IconButton>
-      <IconButton variant={'contained'} color={'error'} size={'medium'}>
-      <ArrowForwardIosIcon/>
-      </IconButton>
-      <IconButton variant={'contained'} color={'success'} size={'medium'}>
-      <ArrowForwardIosIcon/>
-      </IconButton>
-      <IconButton variant={'contained'} color={'warning'} size={'medium'}>
-      <ArrowForwardIosIcon/>
-      </IconButton>
-    </Grid>
-
-    <Grid container sx={{ mt: 5 }}>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Outlined</Typography>
-      </Grid>
-      <Button variant={'outlined'} color={'primary'}>
-        Button
-      </Button>
-      <Button variant={'outlined'} color={'error'}>
-        Button
-      </Button>
-      <Button variant={'outlined'} color={'success'}>
-        Button
+      <Button variant={'contained'} color={'warning'} size={'medium'}>
+      <ArrowForwardIosIcon fontSize={'15px'}/>
       </Button>
       <Button variant={'outlined'} color={'warning'}>
         Button
       </Button>
-    </Grid>
-
-    <Grid container>
-      <Grid item xs={12} sx={{ mb: 2 }}>
-        <Typography variant={'subheading'}>Contained</Typography>
-      </Grid>
-      <Button variant={'contained'} color={'primary'} disabled>
-        Prim cont
-      </Button>
-      <Button variant={'outlined'} color={'primary'} disabled>
-        Prim out
-      </Button>
-      <Button variant={'contained'} color={'error'} disabled>
-        Err cont
-      </Button>
-      <Button variant={'outlined'} color={'error'} disabled>
-        Err out
-      </Button>
       <Button variant={'contained'} color={'warning'} disabled>
-        War cont
+        Button
       </Button>
       <Button variant={'outlined'} color={'warning'} disabled>
-        War out
-      </Button>
-      <Button variant={'contained'} color={'success'} disabled>
-        Suc cont
-      </Button>
-      <Button variant={'outlined'} color={'success'} disabled>
-        Suc out
+        Button
       </Button>
     </Grid>
   </>

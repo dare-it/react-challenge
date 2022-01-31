@@ -11,7 +11,9 @@ let theme = createTheme({
   },
   shadows: 'none',
   shape: {
-    borderRadius: '4px',
+    root: {
+      borderRadius: '4px',
+    },
   },
   palette: {
     text: {
@@ -62,12 +64,17 @@ let theme = createTheme({
 
 theme = createTheme(theme, {
   components: {
-
     MuiButton: {
       styleOverrides: {
         root: {
           height: '34px',
-          minWidth: '34px',
+          minWidth: '0px',
+          padding: '9.5px',
+          margin: '10px',
+          '&:disabled': {
+            background: 'rgba(51, 51, 51, 0.07)',
+            color: 'rgba(51, 51, 51, 0.25)',
+          },
         },
 
         iconSizeLarge: {
@@ -75,7 +82,7 @@ theme = createTheme(theme, {
             fontSize: 15,
           },
         },
-      
+
         iconSizeMedium: {
           '& > *:first-child': {
             fontSize: 15,
@@ -90,6 +97,9 @@ theme = createTheme(theme, {
             border: 0,
             color: theme.palette.primary.dark,
           },
+          '&:disabled': {
+            border: 0,
+          }
         },
 
         containedError: {
@@ -112,6 +122,9 @@ theme = createTheme(theme, {
             background: '#FDE8E0',
             borderColor: theme.palette.error.main,
             color: theme.palette.error.main,
+          },
+          '&:disabled': {
+            background: 'none',
           },
         },
 
@@ -136,6 +149,9 @@ theme = createTheme(theme, {
             borderColor: theme.palette.success.dark,
             color: theme.palette.success.dark,
           },
+          '&:disabled': {
+            background: 'none',
+          },
         },
 
         containedWarning: {
@@ -158,6 +174,9 @@ theme = createTheme(theme, {
             background: theme.palette.warning.light,
             borderColor: theme.palette.warning.main,
             color: theme.palette.warning.main,
+          },
+          '&:disabled': {
+            background: 'none',
           },
         },
       },
