@@ -141,15 +141,15 @@ theme = createTheme(theme, {
         outlinedPrimary: {
           backgroundColor: theme.palette.secondary.main,
           color: theme.palette.secondary.contrastText,
-          border: 'none',
+          border: '0',
           '&:hover,&:active': {
             backgroundColor: theme.palette.secondary.dark,
             color: theme.palette.secondary.hoverText,
-            border: 'none',
+            border: '0',
           },
           '&.Mui-disabled': {
             backgroundColor: theme.palette.primary.disabled,
-            border: 'none',
+            border: '0',
           },
         },
         containedError: {
