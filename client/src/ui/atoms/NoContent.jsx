@@ -1,24 +1,13 @@
 import { Box, Typography } from '@mui/material';
 import NoContentImg from '../../assets/no_content.png';
 import { theme } from '../../theme';
+import { muiStylesNoContent } from './styles';
 
 export const NoContent = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
+    <Box sx={muiStylesNoContent.container}>
       <Box alt="img-no-content" component="img" src={NoContentImg} />
-      <Typography
-        sx={{
-          fontWeight: '400',
-          color: theme.palette.text.errorMessage,
-        }}
-      >
+      <Typography sx={muiStylesNoContent.text}>
         Brak danych do wyświetlenia
       </Typography>
     </Box>
