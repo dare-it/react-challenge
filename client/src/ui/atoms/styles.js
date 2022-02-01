@@ -1,9 +1,9 @@
-import {theme} from '../../theme'
+import { theme } from '../../theme';
 
 export const muiStylesError = {
-    text: {
-        fontFamily: "Inter",
-        fontWeight: "400",
-        color: theme.palette.text.errorMessage
-    }
-}
+  text: {
+    fontFamily: `"Inter", sans-serif`,
+    fontWeight: '400',
+    color: theme.palette.text.errorMessage,
+  },
+};
