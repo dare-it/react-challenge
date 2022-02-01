@@ -57,7 +57,7 @@ let theme = createTheme({
       contrastText: '#B28C09',
       hoverText: '#fff',
       outlined: {
-        main: 'fff',
+        main: '#fff',
         dark: '#FFF5D2',
       },
     },
