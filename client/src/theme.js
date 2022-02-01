@@ -7,6 +7,7 @@ let theme = createTheme({
   palette: {
     text: {
       primary: '#333',
+      errorMessage: 'rgba(51, 51, 51, 0,5)'
     },
     type: 'light',
     primary: {
