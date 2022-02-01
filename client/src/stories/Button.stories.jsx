@@ -175,13 +175,6 @@ const generateButtons = (color) => (
     </Grid>
   </>
 );
-const Template = ({ label, ...args }) => <Button {...args}>{label}</Button>;
-
-export const Playground = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
-  label: 'Button',
-};
 
 const PrimaryButtons = () => generateButtons('primary');
 const ErrorButtons = () => generateButtons('error');
