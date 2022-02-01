@@ -7,7 +7,7 @@ let theme = createTheme({
   palette: {
     text: {
       primary: '#333',
-      errorMessage: 'red',
+      errorMessage: 'rgba(51, 51, 51, 0.5)',
     },
     type: 'light',
     primary: {
@@ -45,6 +45,7 @@ let theme = createTheme({
 
 theme = createTheme(theme, {
   typography: {
+    fontFamily: `"Inter", sans-serif`,
     fontSize: 16,
     fontWeightLight: 300,
     h1: {

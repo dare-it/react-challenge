@@ -17,7 +17,6 @@ export const Error = ({ error }) => {
         error?.message?.includes('Network Error') ? (
           <Typography>Uruchom Server!</Typography>
         ) : (<><Box alt="image-unknown-error" component="img" src={ErrorImg} /><Typography sx={{
-          fontFamily: `"Inter", sans-serif`,
           fontWeight: "400",
           color: theme.palette.text.errorMessage,
         }}>Wystąpił nieoczekiwany błąd</Typography></>
