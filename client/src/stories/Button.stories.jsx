@@ -2,8 +2,11 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import AddIcon from '@mui/icons-material/Add';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+/* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   title: 'Zadanie 1/Button',
   component: Button,
@@ -33,6 +36,10 @@ export default {
         default: false,
         type: 'boolean',
       },
+    },
+    fontSize: {
+      options: ["small", "medium", "large"],
+      control: { type: "radio" },
     },
   },
 };
@@ -85,3 +92,6 @@ Playground.args = {
 };
 
 export const AllStories = All.bind({});
+AllStories.args = {
+  label: 'Button',
+};
