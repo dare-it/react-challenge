@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
