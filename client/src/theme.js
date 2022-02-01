@@ -83,6 +83,7 @@ theme = createTheme(theme, {
         },
       },
     },
+    
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -105,6 +106,16 @@ theme = createTheme(theme, {
           },
         },
       },
+    },
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {
+        },
+        '&:hover': {
+          backgroundColor: 'red',
+          opacity: '100%'
+        }
+      }
     },
     MuiCheckbox: {
       styleOverrides: {
