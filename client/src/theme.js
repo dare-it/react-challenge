@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material';
+import '@fontsource/inter';
 
 let theme = createTheme({
   shape: {
@@ -34,7 +35,13 @@ let theme = createTheme({
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
+    },
+    grays: {
+      l1: 'rgba(51, 51, 51, 0.07)',
+      l3: 'rgba(51, 51, 51, 0.25)',
+      l4: 'rgba(51, 51, 51, 0.5)',
     },
     background: {
       default: '#F8F8F8',
@@ -142,6 +149,121 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           borderRadius: theme.shape.borderRadius,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          padding: '8px 12px',
+          fontFamily: `'Inter'`,
+          fontWeight: 500,
+          fontSize: '15px',
+          textTransform: 'capitalize',
+          border: 'none',
+          boxShadow: 'none',
+          '&:hover': {
+            border: 'transparent',
+            boxShadow: 'none',
+          },
+          '&:disabled': {
+            backgroundColor: theme.palette.grays.l1,
+            color: theme.palette.grays.l3,
+            border: 'none',
+            padding: '6px 16px',
+          },
+        },
+        outlinedPrimary: {
+          backgroundColor: theme.palette.secondary.main,
+          color: theme.palette.primary.main,
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
+            border: 'none',
+            boxShadow: 'none',
+          },
+          '&:disabled': {
+            backgroundColor: theme.palette.grays.l1,
+            border: 'none',
+          },
+        },
+        containedError: {
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.main,
+          '&:hover': {
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+            boxShadow: 'none',
+          },
+        },
+        outlinedError: {
+          backgroundColor: 'transparent',
+          color: theme.palette.error.main,
+          border: `1px solid ${theme.palette.error.main}`,
+          '&:hover': {
+            backgroundColor: theme.palette.error.light,
+            color: theme.palette.error.main,
+            border: `1px solid ${theme.palette.error.main}`,
+          },
+          '&:disabled': {
+            backgroundColor: 'transparent',
+            border: `1px solid ${theme.palette.grays.l1}`,
+          },
+        },
+        containedSuccess: {
+          fontWeight: 600,
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.main,
+          '&:hover': {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
+          },
+        },
+        outlinedSuccess: {
+          fontWeight: 600,
+          backgroundColor: 'transparent',
+          color: theme.palette.success.main,
+          border: `1px solid ${theme.palette.success.main}`,
+          '&:hover': {
+            backgroundColor: theme.palette.success.light,
+            color: theme.palette.success.main,
+            border: `1px solid ${theme.palette.success.main}`,
+          },
+          '&:disabled': {
+            backgroundColor: 'transparent',
+            border: `1px solid ${theme.palette.grays.l1}`,
+          },
+        },
+        containedWarning: {
+          fontWeight: 600,
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.dark,
+          '&:hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+          },
+        },
+        outlinedWarning: {
+          fontWeight: 600,
+          backgroundColor: 'transparent',
+          color: theme.palette.warning.main,
+          border: `1px solid ${theme.palette.warning.main}`,
+          '&:hover': {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.warning.main,
+            border: `1px solid ${theme.palette.warning.main}`,
+          },
+          '&:disabled': {
+            backgroundColor: 'transparent',
+            border: `1px solid ${theme.palette.grays.l1}`,
+          },
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: theme.palette.grays.l4,
         },
       },
     },
