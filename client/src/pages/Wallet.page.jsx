@@ -1,6 +1,9 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { LedgerWidget, Page } from 'ui';
+import { Button } from '../ui/atoms/Button';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+
 
 export const WalletPage = () => (
   <Page title={'Portfel'}>
