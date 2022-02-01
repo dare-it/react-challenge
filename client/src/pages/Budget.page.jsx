@@ -16,24 +16,7 @@ export const BudgetPage = () => {
         }
       >
         <Grid container>
-          <Grid item xs={12}>
-            <Button
-              color="primary"
-              variant="outlined"
-              disabled={true}
-              onClick={() => console.log('click')}
-            >
-              Click me
-            </Button>
-            <Button
-              color="primary"
-              variant="contained"
-              disabled={true}
-              onClick={() => console.log('click')}
-            >
-              Click me
-            </Button>
-          </Grid>
+          <Grid item xs={12}></Grid>
         </Grid>
       </Card>
     </Page>
