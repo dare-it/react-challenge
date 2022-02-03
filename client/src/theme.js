@@ -76,6 +76,9 @@ theme = createTheme(theme, {
     body1: {
       fontSize: '1.2rem',
     },
+    p:{
+      color: `rgba(${theme.palette.text.secondary},0.5)`
+    }
   },
   components: {
     MuiAppBar: {
