@@ -83,6 +83,7 @@ theme = createTheme(theme, {
         },
       },
     },
+
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -103,6 +104,15 @@ theme = createTheme(theme, {
             fontWeight: '500',
             fontSize: '14px',
           },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {},
+        '&:hover': {
+          backgroundColor: 'red',
+          opacity: '100%',
         },
       },
     },
