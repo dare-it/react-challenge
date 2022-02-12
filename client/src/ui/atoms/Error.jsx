@@ -11,6 +11,7 @@ export const Error = ({ error }) => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        height: '100%'
       }}
     >
       {
@@ -24,17 +25,16 @@ export const Error = ({ error }) => {
                   height: 248,
                   width: 248,
                 }}
-                alt="Error"
+                alt=""
                 src={errorImg}
               />
-               <Box sx={ (theme) => ({
-                  typography: 'body1',
+               <Typography  variant="body1" sx={ (theme) => ({
                   fontFamily: theme.typography.fontFamily,
                   color: theme.palette.greys.level4 })
                   }
                 >
                   Wystąpił nieoczekiwany błąd
-                </Box>
+                </Typography>
           </React.Fragment>
         )
       }

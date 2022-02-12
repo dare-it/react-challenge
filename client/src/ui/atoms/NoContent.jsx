@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import noContent from '../../assets/no_content.png'
 
 export const NoContent = () => {
@@ -9,6 +9,7 @@ export const NoContent = () => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        height: '100%'
       }}
     >
       <Box
@@ -17,14 +18,13 @@ export const NoContent = () => {
           height: 202,
           width: 202,
         }}
-        alt="No content"
+        alt=""
         src={noContent}
       />
-      <Box sx={ (theme) => ({
-        typography: 'body1',
+      <Typography variant="body1" sx={ (theme) => ({
         fontFamily: theme.typography.fontFamily,
         color: theme.palette.greys.level4 })
-      }>Brak danych do wyświetlenia</Box>
+      }>Brak danych do wyświetlenia</Typography>
     </Box>
   )
 };
