@@ -23,7 +23,7 @@ export const Error = ({ error }) => {
       {
         error?.message?.includes('Network Error') ? (
           <Typography width= '261px' height='29px' >Wystąpił nieoczekiwany błąd</Typography>
-       ) : "Wystąpił nieoczekiwany błąd" //  TODO in TASK 1
+       ):'Wystąpił nieoczekiwany błąd' //  TODO in TASK 1
       }
     </Box>
   );

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Button as MuiButton } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
 import { ThemeProvider, createTheme } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {theme} from '../../theme.js';
@@ -20,8 +19,9 @@ let buttonTheme = createTheme(theme,{
           margin: "5px",
           minWidth: "38px",
           minHeight: "38px",
-          maxWidth:"102px",
-          maxHeight: "38px"
+          maxWidth:"auto",
+          maxHeight: "38px",
+          possition: "static"
         },
       
         outlinedPrimary: {
