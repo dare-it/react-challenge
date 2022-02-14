@@ -97,6 +97,7 @@ theme = createTheme(theme, {
           fontFamily: 'Inter, sans-serif',
           minWidth: 0,
           minHeight: 0,
+          cursor: 'pointer',
           padding: '6px 12px',
           '&:hover,&:active': {
             boxShadow: 'none',

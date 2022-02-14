@@ -10,11 +10,12 @@ import Checkbox from '@mui/material/Checkbox';
 import { EnhancedTableHead } from './components/EnhancedTableHead';
 import { EnhancedTableToolbar } from './components/EnhancedTableToolbar';
 
+
+
 export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const handleSelectAllClick = (event) => {
     setSelected(event.target.checked ? rows.map((n) => getUniqueId(n)) : []);
   };
@@ -62,7 +63,7 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 const uniqueId = getUniqueId(row);
-                const isItemSelected = selected.includes(uniqueId);
+                const isItemSelected = selected.includes(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
