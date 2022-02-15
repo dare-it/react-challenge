@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Layout } from 'ui';
 import { WalletPage } from 'pages/Wallet.page';
@@ -26,19 +27,23 @@ const routing = [
   },
 ];
 
+const queryClient = new QueryClient();
+
 const Routing = () => (
-  <Router>
-    <Layout routing={routing}>
-      <Switch>
-        {routing.map((config) => (
-          <Route
-            key={config.path}
-            path={config.path}
-            component={config.component}
-          />
-        ))}
-      </Switch>
-    </Layout>
+  <QueryClientProvider client={queryClient}>
+  <Router>    
+      <Layout routing={routing}>
+        <Switch>
+          {routing.map((config) => (
+            <Route
+              key={config.path}
+              path={config.path}
+              component={config.component}
+            />
+          ))}
+        </Switch>
+      </Layout>   
   </Router>
+  </QueryClientProvider>
 );
 export default Routing;

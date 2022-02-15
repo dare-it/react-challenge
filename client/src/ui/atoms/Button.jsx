@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function Button({ children, isActive, ...props }) {
+export function Button({ children, ...props }) {
   const classes = useStyles(props);
   return <MuiButton className={classes.root} {...props}>{children}</MuiButton>;
 }
