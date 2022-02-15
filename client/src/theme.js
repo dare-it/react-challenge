@@ -45,7 +45,7 @@ let theme = createTheme({
       300: 'rgba(51,51,51,0.25)',
       400: 'rgba(51,51,51,0.5)',
       500: 'rgba(51,51,51,0.75)',
-    }
+    },
   },
 });
 
@@ -84,13 +84,13 @@ theme = createTheme(theme, {
       fontWeight: 500,
       lineHeight: '1.375rem',
       fontSize: '0.937rem',
-      textTransform: 'capitalize'
+      textTransform: 'none',
     },
     messageCaption: {
       fontSize: '1.2rem',
       lineHeight: '1.812rem',
-      color: theme.palette.greys[400]
-    }
+      color: theme.palette.greys[400],
+    },
   },
   components: {
     MuiAppBar: {
@@ -165,7 +165,5 @@ theme = createTheme(theme, {
     },
   },
 });
-
-
 
 export { theme };
