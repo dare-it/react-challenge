@@ -39,6 +39,13 @@ let theme = createTheme({
     background: {
       default: '#F8F8F8',
     },
+    greys: {
+      100: 'rgba(51,51,51,0.07)',
+      200: 'rgba(51,51,51,0.15)',
+      300: 'rgba(51,51,51,0.25)',
+      400: 'rgba(51,51,51,0.5)',
+      500: 'rgba(51,51,51,0.75)',
+    }
   },
 });
 
@@ -73,6 +80,17 @@ theme = createTheme(theme, {
     body1: {
       fontSize: '1.2rem',
     },
+    button: {
+      fontWeight: 500,
+      lineHeight: '1.375rem',
+      fontSize: '0.937rem',
+      textTransform: 'capitalize'
+    },
+    messageCaption: {
+      fontSize: '1.2rem',
+      lineHeight: '1.812rem',
+      color: theme.palette.greys[400]
+    }
   },
   components: {
     MuiAppBar: {
@@ -147,5 +165,7 @@ theme = createTheme(theme, {
     },
   },
 });
+
+
 
 export { theme };
