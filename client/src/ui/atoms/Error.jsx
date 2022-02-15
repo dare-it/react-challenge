@@ -1,20 +1,22 @@
-import { Box, Typography } from '@mui/material';
+import { useState } from 'react';
+
+import { MessageCard } from "../templates/MessageCard";
+import unknown_error from "../../assets/unknown_error.png";
 
 export const Error = ({ error }) => {
+
+  const [errorMessage, setErrorMessage] = useState('Wystąpił nieoczekiwany błąd');
+
+  if (error && error.message && error.message.includes('Network Error')) {
+    if (errorMessage !== 'Uruchom Server!') {
+      setErrorMessage('Uruchom Server!')
+    }
+  }
+  
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      {
-        error?.message?.includes('Network Error') ? (
-          <Typography>Uruchom Server!</Typography>
-        ) : null //  TODO in TASK 1
-      }
-    </Box>
+    <MessageCard
+      message={errorMessage}
+      image={unknown_error}
+    />
   );
 };
