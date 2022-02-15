@@ -10,8 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CircleIcon from '@mui/icons-material/Circle';
 import { NoContent } from 'ui/atoms/NoContent.jsx';
 
-function createHeader( id, disablePadding, label)
-{
+function createHeader( id, disablePadding, label){
   return {id, disablePadding, label, renderCell: (params) => (params[id])};
 }
 
@@ -38,16 +37,14 @@ function statusName(row){
 const BudgetTable = () => {
   const getAllBudget = async (key) => {
     const res = await BudgetService.findAll();
-    console.log('getAll')
-    console.log(res);
+    //console.log('BudgetTable' + res);
     return res;
   };
   
   const { isLoading, isError, data, error } = useQuery('budget', getAllBudget);
 
   const deleteBudget = async (selected) => {
-    console.log("deleteBudget" + selected);
-    console.log(selected);
+    //console.log("deleteBudget" + selected);
     const res = await BudgetService.remove({ids: selected});
     return res;
   };
@@ -56,7 +53,6 @@ const BudgetTable = () => {
 
   {
     onSuccess: () => {
-      console.log('mutation:onSuccess');
       queryClient.invalidateQueries('budget');
     },
   },
@@ -65,7 +61,6 @@ const BudgetTable = () => {
 if (isLoading) return <Loader></Loader>;
 if (isError) return <Error error={error}></Error>;
 if (data.length === 0) { return <NoContent></NoContent>}; 
-console.log(data);
 
 let rows = [];
 
@@ -85,23 +80,16 @@ data.map((row) => {
 })
 
 function getUniqueId(row) {
-  console.log(row)
   return row[6];  
 };
 
 function deleteRecords(selected) {
-
-  console.log("RemoveBudget : before mutate");
   deleteSelected.mutate(selected);
-
 };
-
 
 return <Table rows = {rows} headCells= {headCells} getUniqueId= {getUniqueId} deleteRecords = {deleteRecords}></Table> ;
 
 };
-
-
 
 export const BudgetPage = () => {
   return (
@@ -120,9 +108,7 @@ export const BudgetPage = () => {
         
         <QueryClientProvider client={queryClient}><BudgetTable/></QueryClientProvider>
         <Grid container>
-          <Grid item xs={12}> </Grid>
-          
-          
+          <Grid item xs={12}> </Grid>  
         </Grid>
       </Card>
     </Page>

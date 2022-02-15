@@ -54,8 +54,6 @@ export class BudgetService {
    * @throws ApiError
    */
   static remove({ ids }) {
-    console.log('BusgetService:remove');
-    console.log(ids);
     return ids.length === 1
       ? request({
           method: 'DELETE',
