@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ActionHeader, Card, Page } from 'ui';
+import { ActionHeader, Button, Card, Page } from 'ui';
 import { Grid } from '@mui/material';
-
+import AddRoundedIcon from '@mui/icons-material/AddRounded';
 export const BudgetPage = () => {
   return (
     <Page title="Budżet">
@@ -11,12 +11,13 @@ export const BudgetPage = () => {
           <ActionHeader
             variant={'h1'}
             title="Budżet"
-            renderActions={() => null}
+            renderActions={() => <Button variant="contained" color="primary" label="Zdefiniuj budżet" startIcon={<AddRoundedIcon/>}/>}
           />
         }
       >
         <Grid container>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+          </Grid>
         </Grid>
       </Card>
     </Page>
