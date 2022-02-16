@@ -50,7 +50,7 @@ const columns = [
   {
     id: 'name',
     label: 'Nazwa',
-    renderCell: (row) => <Box sx={{display: 'flex', alignItems:'center'}}><FiberManualRecordIcon fontSize='small' sx={{color:'#37C4D7', marginRight: '10px'}} /> {row.category.name}</Box>,
+    renderCell: (row) => <Box sx={{display: 'flex', alignItems:'center'}}><FiberManualRecordIcon fontSize='small' sx={{color:'#37C4D7', marginRight: '10px'}} />{row.category.name}</Box>,
   },
   {
     id: 'amountInCents',
