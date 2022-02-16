@@ -100,7 +100,7 @@ const { isLoading, error, data} = useQuery(
             headCells={headCell}           
             rows={data}
             getUniqueId={e => e.id} 
-            deleteRecords={(selected) => mutation.mutate(selected)}>
+            deleteRecords={(selected) => mutation.mutate({ids: selected})}>
           </Table>       
       </Card>
     </Page>
