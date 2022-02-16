@@ -63,9 +63,8 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 const uniqueId = getUniqueId(row);
-                const isItemSelected = selected.includes(row.id);
+                const isItemSelected = selected.includes(uniqueId);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
                   <TableRow
                     hover
@@ -87,7 +86,6 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
                     </TableCell>
                     {headCells.map((head) => {
                       const renderedRow = head.renderCell(row) || '';
-
                       return (
                         <TableCell key={head.id} align="left">
                           {renderedRow}
