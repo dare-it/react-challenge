@@ -13,16 +13,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Box from '@mui/material/Box';
 
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-      refetchOnmount: false,
-      refetchOnReconnect: false,
-      retry: false,
-    },
-  },
-});
+const queryClient = new QueryClient();
 
 export const BudgetPage = () => {
   return (
