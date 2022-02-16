@@ -41,8 +41,9 @@ const columns = [
   {
     id: 'name',
     label: 'Nazwa',
-    renderCell: (row) => <Box sx={{display: 'flex', alignItems:'center'}}><FiberManualRecordIcon fontSize='small' sx={{color:'#37C4D7', marginRight: '10px'}} />{row.category.name}</Box>,
-  },
+  renderCell: (row) => (
+        <CategoryCell color={row.category?.color} name={row.category?.name} />
+      ),
   {
     id: 'amountInCents',
     label: 'Planowane wydatki',
