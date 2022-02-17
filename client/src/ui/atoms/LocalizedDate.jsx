@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import moment from 'moment'
+import { DateTime } from "luxon";
 export const LocalizedDate = ({ date }) => {
-  return moment(date).format('DD.MM.YYYY, h:mm:ss');
+  const dateISO = new Date(date).toISOString()
+  return DateTime.fromISO(dateISO).toFormat('dd.LL.yyyy HH:mm:ss');
 };
