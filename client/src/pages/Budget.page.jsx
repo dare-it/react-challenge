@@ -10,16 +10,16 @@ import AddIcon from '@mui/icons-material/Add';
 import CircleIcon from '@mui/icons-material/Circle';
 import { NoContent } from 'ui/atoms/NoContent.jsx';
 
-function createHeader( id, disablePadding, label){
+function createHeader( {id, disablePadding, label{){
   return {id, disablePadding, label, renderCell: (params) => (params[id])};
 }
 
 const headCells = [
-  createHeader(1, false, 'Nazwa'),
-  createHeader(2, false, 'Planowane wydatki'),
-  createHeader(3, false, 'Obecna kwota'),
-  createHeader(4, false, 'Status'),
-  createHeader(5, false, 'Data utworzenia'),
+  createHeader({id: 1, disablePadding: false, label: 'Nazwa'}),
+  createHeader({id: 2, disablePadding: false, label: 'Planowane wydatki'}),
+  createHeader({id: 3, disablePadding: false, label: 'Obecna kwota'}),
+  createHeader({id: 4, disablePadding: false, label: 'Status'}),
+  createHeader({id: 5, disablePadding: false, label: 'Data utworzenia'}),
 ]
 
 const queryClient = new QueryClient()
