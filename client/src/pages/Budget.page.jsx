@@ -37,7 +37,6 @@ function statusName(row){
 const BudgetTable = () => {
   const getAllBudget = async (key) => {
     const res = await BudgetService.findAll();
-    //console.log('BudgetTable' + res);
     return res;
   };
   
