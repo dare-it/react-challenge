@@ -10,7 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CircleIcon from '@mui/icons-material/Circle';
 import { NoContent } from 'ui/atoms/NoContent.jsx';
 
-function createHeader( {id, disablePadding, label{){
+function createHeader( {id, disablePadding, label}){
   return {id, disablePadding, label, renderCell: (params) => (params[id])};
 }
 
