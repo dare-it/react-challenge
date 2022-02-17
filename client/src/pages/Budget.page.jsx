@@ -44,8 +44,7 @@ const BudgetTable = () => {
 
   const deleteBudget = async (selected) => {
     //console.log("deleteBudget" + selected);
-    const res = await BudgetService.remove({ids: selected});
-    return res;
+    return await BudgetService.remove({ids: selected});
   };
 
   const deleteSelected = useMutation((selected) => deleteBudget(selected),
