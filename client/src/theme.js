@@ -40,6 +40,7 @@ let theme = createTheme({
     },
     background: {
       default: '#F8F8F8',
+      blue: '#37C4D7'
     },
     greys: {
       level1: 'rgba(51, 51, 51, 0.07)',
