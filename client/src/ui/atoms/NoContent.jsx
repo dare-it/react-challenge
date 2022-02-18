@@ -29,13 +29,8 @@ export const NoContent = (error) => {
         width= "202px"
         height= '202px' /> 
          
-   
-      {
-        error?.message?.includes('No Content Error') ? (
-          <Typography width= '269px' height='29px' >Brak danych do wyświetlenia</Typography>
-       ) :null //  TODO in TASK 1
-      }
-
+      <Typography width= '269px' height='29px' >Brak danych do wyświetlenia</Typography>
+    
     </Box>
   );
 };
