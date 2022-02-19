@@ -24,22 +24,26 @@ const headCell = [
 {
   id: '2',
   label: 'Nazwa',
-  renderCell: (row) => <Box sx={{display:'flex',  alignItems: 'center'}} ><ColorBox  color={row.category.color}></ColorBox><p>{row.category.name}</p></Box>
+  renderCell: (row) => <Box sx={{display:'flex',  alignItems: 'center'}} ><ColorBox  color={row.category?.color}></ColorBox><p>{row.category?.name}</p></Box>
 },
 {
   id: '3',
   label: 'Planowane wydatki',
-  renderCell: (row) => <Money inCents={ row.currentSpending}></Money>
+  renderCell: (row) => <Money inCents={ row.amountInCents}></Money>
 },
 {
   id: '4',
   label: 'Obecna kwota',
-  renderCell: (row) => <Money inCents={ row.amountInCents }></Money>  
+  renderCell: (row) => <Money inCents={ row.currentSpending }></Money>  
 },
 {
   id: '5',
   label: 'Status',
-  renderCell: (row) => <p>Shopping</p>
+  renderCell: (row) => {
+    if(row.currentSpending === row.amountInCents) return 'Wykorzystany';
+    if(row.currentSpending > row.amountInCents) return 'Przekroczone';
+    if(row.currentSpending < row.amountInCents) return 'W normie'; 
+  }  
 },
 {
   id: '6',
@@ -48,16 +52,16 @@ const headCell = [
 },
 ]
 
-
 export const BudgetPage = () => {
-const handleOnClick = () => {
-  console.log("klick")
-}
 
-const { isLoading, error, data} = useQuery(
-  'budgetData',
-  async () =>
-      BudgetService.findAll(),
+  const handleOnClick = () => {
+    console.log("klick")
+  }
+
+const queryClient = useQueryClient();
+
+const { isLoading, error, data} = useQuery('budgetData', () => 
+BudgetService.findAll(),
   {
     retry: false,
     retryDelay: 500,
@@ -66,22 +70,21 @@ const { isLoading, error, data} = useQuery(
   }
   );
 
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation(
-    (ids) => BudgetService.remove(ids),
+  const mutation = useMutation((ids) => BudgetService.remove({ids}),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries('budgetData')
+      onSuccess: async () => {
+        await queryClient.invalidateQueries('budgetData')
       }
     }
   )
+
+  const deleteRecords = (ids) => mutation.mutate(ids);
 
   if (isLoading) return <Loader />;
 
   if (error) return <Error />;
 
-  if(data.length===0) return <NoContent />;
+  if(!data?.length) return <NoContent />;
 
 
   return (
@@ -95,12 +98,12 @@ const { isLoading, error, data} = useQuery(
             renderActions={() => <Button onClick={handleOnClick} variant={'contained'} color={'primary'} startIcon={<AddIcon fontSize="small" />}>Zdefiniuj budżet</Button>}
           />
         }
-      >        
+      >
        <Table 
             headCells={headCell}           
             rows={data}
-            getUniqueId={e => e.id} 
-            deleteRecords={(selected) => mutation.mutate({ids: selected})}>
+            getUniqueId={(row) => row.id} 
+            deleteRecords={deleteRecords}>
           </Table>       
       </Card>
     </Page>
