@@ -1,6 +1,9 @@
 import React from 'react';
+import { ActionHeader, Card, Button } from 'ui';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveIcon from '@mui/icons-material/Remove';
+import { Grid, Box } from '@mui/material';
 
-import { ActionHeader, Card } from 'ui';
 
 export const LedgerWidget = () => {
   return (
@@ -9,9 +12,33 @@ export const LedgerWidget = () => {
         <ActionHeader
           variant={'h1'}
           title="Portfel"
-          renderActions={() => <></>}
+          renderActions={() => <>
+            <Box sx={{
+              display: 'flex',
+              width: 'auto',
+              justifyContent: 'space-between',
+            }}>
+              <Button variant={'outlined'} startIcon={<AddOutlinedIcon />}
+                sx={{
+                  m: 1
+                }}  >
+                Wpłać
+              </Button>
+              <Button variant={'outlined'} startIcon={<RemoveIcon />}
+                sx={{
+                  m: 1
+                }}>
+                Wypłać
+              </Button>
+            </Box>
+          </>}
         />
       }
-    />
+    >
+      <Grid container>
+        <Grid item xs={12}>
+        </Grid>
+      </Grid>
+    </Card >
   );
 };

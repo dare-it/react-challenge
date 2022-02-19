@@ -157,7 +157,7 @@ theme = createTheme(theme, {
     MuiButton: {
       defaultProps: {
         variant: 'outlined',
-      },
+        },
       styleOverrides: {
         root: {
           borderRadius: theme.shape.borderRadius,
