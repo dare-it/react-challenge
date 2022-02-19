@@ -53,7 +53,6 @@ const headCell = [
 ]
 
 export const BudgetPage = () => {
-
   const handleOnClick = () => {
     console.log("klick")
   }
