@@ -3,7 +3,7 @@ import { ActionHeader, Card, Page } from 'ui';
 import { Box } from '@mui/material';
 import {Button} from "../ui/atoms/Button"
 import {Table} from "../ui/molecules/table/Table"
-import AddIcon from '@mui/icons-material/Add';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { useQuery,
   useMutation,
   useQueryClient } from 'react-query';
@@ -53,21 +53,10 @@ const headCell = [
 ]
 
 export const BudgetPage = () => {
-  const handleOnClick = () => {
-    console.log("klick")
-  }
 
 const queryClient = useQueryClient();
 
-const { isLoading, error, data} = useQuery('budgetData', () => 
-BudgetService.findAll(),
-  {
-    retry: false,
-    retryDelay: 500,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  }
-  );
+const { isLoading, error, data} = useQuery('budgetData', () => BudgetService.findAll());
 
   const mutation = useMutation((ids) => BudgetService.remove({ids}),
     {
@@ -94,7 +83,7 @@ BudgetService.findAll(),
           <ActionHeader
             variant={'h1'}
             title="Budżet"
-            renderActions={() => <Button onClick={handleOnClick} variant={'contained'} color={'primary'} startIcon={<AddIcon fontSize="small" />}>Zdefiniuj budżet</Button>}
+            renderActions={() => <Button variant={'contained'} color={'primary'} startIcon={<AddOutlinedIcon />}>Zdefiniuj budżet</Button>}
           />
         }
       >
