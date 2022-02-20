@@ -1,7 +1,6 @@
 import React from 'react'
-import { Modal, Typography, Box, CardHeader } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 import { Button } from 'ui/atoms/Button'
-import { useState } from 'react'
 
 const modalStyling = {
     position: 'absolute',
@@ -13,33 +12,34 @@ const modalStyling = {
     bgcolor: '#FFFFFF',
     borderRadius: '8px',
     boxShadow: 20,
-    p: 2,
+    p: 4,
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
 
 }
 
-const MoneyManageModal = ({ title, description, children, ...props }) => {
-    const [openModal, setOpenModal] = useState(false);
-    const handleOpen = () => setOpenModal(true);
-    const handleClose = () => setOpenModal(false);
+const modalButtonsStyling = {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+}
+
+const MoneyManageModal = ({ title, description, handleClose, handleSubmit, ...props }) => {
 
     return (
-        <Modal
-            open={openModal}
-            onClose={handleClose}
-            modalTitle={title}
-            modalDescription={description}
-            modalContent={children}>
-            <Box sx={modalStyling}>
-                <CardHeader>{title}</CardHeader>
-                <Typography variant={'h4'}>{description}</Typography>
-                <Box>
-                    <Button variant={'outlined'} onClose={() => null}>Anuluj</Button>
-                    <Button variant={'contained'} onSubmit={() => null}>Zatwierdz</Button>
-                </Box>
+
+        <Box sx={modalStyling}>
+
+            <Typography variant={'h3'}>{title}</Typography>
+
+            <Typography variant={'h4'}>{description}</Typography>
+            <Box sx={modalButtonsStyling} >
+                <Button variant={'outlined'} onClick={handleClose} sx={{ m: 1 }}>Anuluj</Button>
+                <Button variant={'contained'} onClick={handleSubmit} sx={{ m: 1 }}>Zatwierdz</Button>
             </Box>
-        </Modal >
+        </Box>
+        // </Modal >
     )
 }
 
