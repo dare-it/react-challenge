@@ -83,13 +83,15 @@ theme = createTheme(theme, {
     },
     h4: {
       fontWeight: 700,
-      fontSize: '1.44rem',
+      fontSize: '1.25rem',
+      lineHeight: '1.44rem',
     },
     h5: {
       fontSize: '1.44rem',
     },
     h6: {
-      fontSize: '1.44rem',
+      fontWeight: 700,
+      lineHeight: '1.44rem',
     },
     body1: {
       fontSize: '1.2rem',
