@@ -3,6 +3,7 @@ import { ActionHeader, Card, Button } from 'ui';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Grid, Box } from '@mui/material';
+import { LedgerTableWidget } from './LedgerTable.widget';
 
 
 export const LedgerWidget = () => {
@@ -37,6 +38,7 @@ export const LedgerWidget = () => {
     >
       <Grid container>
         <Grid item xs={12}>
+          <LedgerTableWidget />
         </Grid>
       </Grid>
     </Card >
