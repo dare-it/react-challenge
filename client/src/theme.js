@@ -76,9 +76,9 @@ theme = createTheme(theme, {
     body1: {
       fontSize: '1.2rem',
     },
-    p:{
-      color: `rgba(${theme.palette.text.secondary},0.5)`
-    }
+    p: {
+      color: `rgba(${theme.palette.text.secondary},0.5)`,
+    },
   },
   components: {
     MuiAppBar: {
@@ -97,6 +97,7 @@ theme = createTheme(theme, {
           fontFamily: 'Inter, sans-serif',
           minWidth: 0,
           minHeight: 0,
+          cursor: 'pointer',
           padding: '6px 12px',
           '&:hover,&:active': {
             boxShadow: 'none',
