@@ -5,6 +5,7 @@ import { LEDGER_QUERY } from 'queryKeys';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Loader, NoContent, Error, CategoryCell, LocalizedDate, Money } from 'ui';
 import { Title } from 'ui/atoms/Title';
+import { Box } from '@mui/material';
 
 export const LedgerTableWidget = () => {
     const queryClient = useQueryClient();
@@ -27,29 +28,45 @@ export const LedgerTableWidget = () => {
         {
             id: 'name',
             label: 'Nazwa',
-            renderCell: (row) => {
+            renderCell: (row) => (
                 <Title title={row.title} />
-            }
+            )
+
         },
         {
             id: 'category',
             label: 'Kategoria',
             renderCell: (row) => {
-                <CategoryCell color={row.category?.color} name={row.category?.name} />
+                if (row.mode !== 'INCOME') {
+                    return <CategoryCell color={row.category?.color} name={row.category?.name} />
+                }
+                else {
+                    return <CategoryCell color={row.category?.color} name={"WPŁYW"} />
+                }
             }
         },
         {
             id: 'date',
             label: 'Data',
-            renderCell: (row) => {
+            renderCell: (row) => (
                 <LocalizedDate date={row.createdAt} />
-            }
+            )
         },
         {
             id: 'amount',
             label: 'Kwota',
             renderCell: (row) => {
-                <Money inCents={row.amountInCents} />
+                if (row.mode !== 'INCOME')
+                    return (<Box sx={{
+                        color: '#FF5D5D'
+                    }}>
+                        - <Money inCents={row.amountInCents} />
+                    </Box>)
+                else return (<Box sx={{
+                    color: '#00A980'
+                }}>
+                    + <Money inCents={row.amountInCents} />
+                </Box>)
             }
         },
     ]
@@ -65,8 +82,6 @@ export const LedgerTableWidget = () => {
     if (!data?.length) {
         return <NoContent />
     }
-
-    console.log(data)
 
     return (
         <Table
