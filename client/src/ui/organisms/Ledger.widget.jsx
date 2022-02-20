@@ -19,13 +19,19 @@ export const LedgerWidget = () => {
               width: 'auto',
               justifyContent: 'space-between',
             }}>
-              <Button variant={'outlined'} startIcon={<AddOutlinedIcon />}
+              <Button
+                variant={'outlined'}
+                startIcon={<AddOutlinedIcon />}
+                onClick={() => null}
                 sx={{
                   m: 1
                 }}  >
                 Wpłać
               </Button>
-              <Button variant={'outlined'} startIcon={<RemoveIcon />}
+              <Button
+                variant={'outlined'}
+                startIcon={<RemoveIcon />}
+                onClick={() => null}
                 sx={{
                   m: 1
                 }}>

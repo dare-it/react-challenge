@@ -13,7 +13,10 @@ export const BudgetPage = () => {
             variant={'h1'}
             title="Budżet"
             renderActions={() => (
-              <Button variant={'contained'} startIcon={<AddOutlinedIcon />}>
+              <Button
+                variant={'contained'}
+                startIcon={<AddOutlinedIcon />}
+                onClick={() => null}>
                 Zdefiniuj budżet
               </Button>
             )}
