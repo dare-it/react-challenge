@@ -9,6 +9,7 @@ import { Loader } from '../ui/atoms/Loader';
 import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
+import AddIcon from '@mui/icons-material/Add';
 
 
 export const BudgetPage = () => {
@@ -19,7 +20,7 @@ export const BudgetPage = () => {
           <ActionHeader
             variant={'h1'}
             title='Budżet'
-            renderActions={() => <Button variant='contained' color='primary' startIcon>Zdefiniuj budżet </Button>}
+            renderActions={() => <Button variant='contained' color='primary' startIcon={<AddIcon/>}>Zdefiniuj budżet </Button>}
           />
         }
       >
