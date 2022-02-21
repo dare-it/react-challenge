@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from "react-query";
 
 import { Layout } from 'ui';
 import { WalletPage } from 'pages/Wallet.page';
@@ -27,10 +26,8 @@ const routing = [
   },
 ];
 
-const queryClient = new QueryClient();
-
 const Routing = () => (
-  <QueryClientProvider client={queryClient}>
+
   <Router>    
       <Layout routing={routing}>
         <Switch>
@@ -44,6 +41,6 @@ const Routing = () => (
         </Switch>
       </Layout>   
   </Router>
-  </QueryClientProvider>
+
 );
 export default Routing;
