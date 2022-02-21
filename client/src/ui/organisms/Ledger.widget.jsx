@@ -1,15 +1,22 @@
-import React from 'react';
 import { ActionHeader, Card, CategoryCell, Error, Loader, LocalizedDate, Money, NoContent, Table } from 'ui';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { LedgerService } from '../../api';
 import Box from '@mui/material/Box';
 import { theme } from '../../theme';
-import { Modal } from '../molecules/modal/Modal';
 import { Button } from '../atoms/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
+import { AddNewLedgerRecordModal } from './AddNewLegerRecord.modal';
+import { useState } from 'react';
+
 export const LedgerWidget = () => {
+  const [openLedgerModal, setOpenLedgerModal] = useState(false)
+  const [modalType, setModalType] = useState('')
+  const handleOpenModal =(string)=>{
+    setModalType(string)
+    setOpenLedgerModal(true)
+  }
   return (
     <Card
       title={
@@ -17,14 +24,14 @@ export const LedgerWidget = () => {
           variant={'h1'}
           title='Portfel'
           renderActions={() => <Box>
-            <Button variant='outlined' color='primary' startIcon={<AddIcon />} sx={{ m: 2 }}>Wpłać</Button>
-            <Button variant='outlined' color='primary' startIcon={<RemoveIcon />}>Wypłać</Button>
+            <Button variant='outlined' color='primary' startIcon={<AddIcon />} sx={{ m: 2 }} onClick={()=>handleOpenModal("INCOME")} >Wpłać</Button>
+            <Button variant='outlined' color='primary' startIcon={<RemoveIcon />} onClick={()=>handleOpenModal("EXPENSE")}>Wypłać</Button>
           </Box>}
         />
       }
     >
       <LedgerTable />
-      <Modal />
+      <AddNewLedgerRecordModal type={modalType} open={openLedgerModal} handleClose={()=>setOpenLedgerModal(false)}>content</AddNewLedgerRecordModal>
     </Card>
   );
 };

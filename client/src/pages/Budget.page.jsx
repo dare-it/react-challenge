@@ -10,9 +10,15 @@ import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
 import AddIcon from '@mui/icons-material/Add';
+import {  useState } from 'react';
+import { AddNewBudgetRecordModal } from '../ui/organisms/AddNewBudgetRecord.modal';
 
 
 export const BudgetPage = () => {
+const [openBudgetModal, setOpenBudgetModal] =useState(false)
+  const handleOpenModal =()=>{
+    setOpenBudgetModal(true)
+  }
   return (
     <Page title='Budżet'>
       <Card
@@ -20,7 +26,7 @@ export const BudgetPage = () => {
           <ActionHeader
             variant={'h1'}
             title='Budżet'
-            renderActions={() => <Button variant='contained' color='primary' startIcon={<AddIcon/>}>Zdefiniuj budżet </Button>}
+            renderActions={() => <Button variant='contained' color='primary' startIcon={<AddIcon/>} onClick={handleOpenModal}>Zdefiniuj budżet </Button>}
           />
         }
       >
@@ -30,7 +36,9 @@ export const BudgetPage = () => {
           </Grid>
         </Grid>
       </Card>
+      <AddNewBudgetRecordModal description="Zdefiniuj budżet" open={openBudgetModal} handleClose={()=>setOpenBudgetModal(false)}>content</AddNewBudgetRecordModal>
     </Page>
+
   );
 };
 const columns = [
