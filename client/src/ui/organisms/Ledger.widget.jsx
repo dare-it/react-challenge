@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { LEDGER_QUERY } from 'queryKeys';
 import { LedgerService } from 'api';
 import AddIcon from '@mui/icons-material/Add';
@@ -19,14 +19,20 @@ import {
 } from 'ui';
 
 export const LedgerWidget = () => {
+  const queryClient = useQueryClient();
+
   const { isLoading, isError, data } = useQuery(
     LEDGER_QUERY,
     LedgerService.findAll,
   );
 
-  const deleteRecords = () => {
-    console.log('usunięte');
-  };
+  const { mutate } = useMutation(LedgerService.remove, {
+    onSuccess: () => {
+      return queryClient.invalidateQueries(LEDGER_QUERY);
+    },
+  });
+
+  const deleteRecords = (ids) => mutate({ ids });
 
   const headCells = [
     {
