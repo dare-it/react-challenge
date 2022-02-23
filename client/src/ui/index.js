@@ -18,6 +18,7 @@ export { Table } from './molecules/table/Table';
 export { AppBar } from './organisms/AppBar';
 export { MainMenu } from './organisms/Menu';
 export { LedgerWidget } from './organisms/Ledger.widget';
+export { BudgetWidget } from './organisms/Budget.widget';
 
 // templates
 export { Page } from './templates/Page';
