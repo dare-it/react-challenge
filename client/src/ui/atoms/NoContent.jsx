@@ -32,9 +32,9 @@ const typographyStyle = {
 export const NoContent = () => {
   const { src, alt, title } = noContent;
   return (
-    <Box sx={boxStyle}>
+    <Box id="budżet"  sx={boxStyle}>
       <Avatar sx={avatarStyle} src={src} alt={alt} variant="square"/>
-      <Typography sx={typographyStyle} > {title} </Typography>
+      <Typography  sx={typographyStyle} > {title} </Typography>
     </Box>
   );
 };

@@ -11,7 +11,7 @@ const errorContent= {
 export const Error = ({ error }) => {
   const { src, alt, title } = errorContent;
   return (
-    <Box
+    <Box id="budżet"
       sx={{
         display: 'flex',
         justifyContent: 'center',
