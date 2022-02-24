@@ -1,7 +1,8 @@
 import React from 'react';
-
-import { ActionHeader, Card, Page } from 'ui';
+import { ActionHeader, Button, Card, Page } from 'ui';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Grid } from '@mui/material';
+import { BudgetTableWidget } from 'ui/organisms/BudgetTable.widget';
 
 export const BudgetPage = () => {
   return (
@@ -11,12 +12,18 @@ export const BudgetPage = () => {
           <ActionHeader
             variant={'h1'}
             title="Budżet"
-            renderActions={() => null}
+            renderActions={() => (
+              <Button variant={'contained'} startIcon={<AddOutlinedIcon />}>
+                Zdefiniuj budżet
+              </Button>
+            )}
           />
         }
       >
         <Grid container>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <BudgetTableWidget />
+          </Grid>
         </Grid>
       </Card>
     </Page>
