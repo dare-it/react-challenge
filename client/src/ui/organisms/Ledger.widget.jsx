@@ -10,7 +10,11 @@ import { Modal } from '@mui/material';
 
 export const LedgerWidget = () => {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const [modalButtonType, setModalButtonType] = useState("");
+  const handleOpen = (modalType) => {
+    setModalButtonType(modalType);
+    setOpen(true)
+  };
   const handleClose = () => setOpen(false);
   const handleSubmit = () => console.log("submit")
 
@@ -29,16 +33,17 @@ export const LedgerWidget = () => {
               <Button
                 variant={'outlined'}
                 startIcon={<AddOutlinedIcon />}
-                onClick={handleOpen}
+                onClick={() => handleOpen("INCOME")}
                 sx={{
                   m: 1
                 }}  >
                 Wpłać
               </Button>
+
               <Button
                 variant={'outlined'}
                 startIcon={<RemoveIcon />}
-                onClick={handleOpen}
+                onClick={() => handleOpen("EXPENSE")}
                 sx={{
                   m: 1
                 }}>
@@ -48,7 +53,7 @@ export const LedgerWidget = () => {
                 open={open}
               >
                 <AddNewLedgerRecordModal
-                  type="INCOME"
+                  type={modalButtonType}
                   handleOpen={handleOpen}
                   handleClose={handleClose}
                   handleSubmit={handleSubmit} />

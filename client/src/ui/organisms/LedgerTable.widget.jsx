@@ -36,14 +36,9 @@ export const LedgerTableWidget = () => {
         {
             id: 'category',
             label: 'Kategoria',
-            renderCell: (row) => {
-                if (row.mode !== 'INCOME') {
-                    return <CategoryCell color={row.category?.color} name={row.category?.name} />
-                }
-                else {
-                    return <CategoryCell color={row.category?.color} name={"WPŁYW"} />
-                }
-            }
+            renderCell: (row) =>
+                (<CategoryCell color={row.category?.color} name={row.category?.name} />)
+
         },
         {
             id: 'date',

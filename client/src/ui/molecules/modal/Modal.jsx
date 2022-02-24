@@ -36,7 +36,7 @@ const MoneyManageModal = ({ title, description, handleClose, handleSubmit, ...pr
             <Typography variant={'h4'}>{description}</Typography>
             <Box sx={modalButtonsStyling} >
                 <Button variant={'outlined'} onClick={handleClose} sx={{ m: 1 }}>Anuluj</Button>
-                <Button variant={'contained'} onClick={handleSubmit} sx={{ m: 1 }}>Zatwierdz</Button>
+                <Button variant={'contained'} onClick={handleSubmit} sx={{ m: 1 }}>Zapisz</Button>
             </Box>
         </Box>
         // </Modal >

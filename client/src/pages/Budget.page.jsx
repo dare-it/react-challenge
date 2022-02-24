@@ -24,7 +24,7 @@ export const BudgetPage = () => {
               <Button
                 variant={'contained'}
                 startIcon={<AddOutlinedIcon />}
-                onClick={() => null}>
+                onClick={handleOpen}>
                 Zdefiniuj budżet
               </Button>
             )}
