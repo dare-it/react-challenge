@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box, Button as MuiButton, Typography } from '@mui/material';
 import { createTheme } from '@mui/material';
-import { theme } from 'theme';
 import { ThemeProvider } from '@mui/material';
+import { theme } from '../../theme';
 
 let buttonTheme = createTheme(theme, {
   components: {
@@ -103,17 +103,17 @@ export function Button({ children, label, color, ...props }) {
     }
   });
   if (!localTheme) {
-    setLocalTheme(tempLocalTheme) 
+    setLocalTheme(tempLocalTheme)
   }
- 
+
   return (
     <Typography variant="button">
-      <ThemeProvider theme={localTheme}>
+      {localTheme && <ThemeProvider theme={localTheme}>
         <MuiButton color={color} {...props}>
           {label && <Box component="span" >{label}</Box>}
           {children}
         </MuiButton>
-      </ThemeProvider>
+      </ThemeProvider>}
     </Typography>
   );
 }
