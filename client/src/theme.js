@@ -34,6 +34,7 @@ let theme = createTheme({
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
     },
     background: {
@@ -84,7 +85,7 @@ theme = createTheme(theme, {
       fontWeight: 500,
       lineHeight: '1.375rem',
       fontSize: '0.937rem',
-      textTransform: 'capitalize'
+      textTransform: 'none',
     },
     messageCaption: {
       fontSize: '1.2rem',
@@ -98,6 +99,26 @@ theme = createTheme(theme, {
         root: {
           backgroundColor: '#fff',
           color: '#333',
+        },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        disableElevation: true,
+        disableRipple: true,
+      },
+      styleOverrides: {
+        root: {
+          minWidth: '2.375rem',
+          minHeight: '2.375rem',
+          padding: '0.5rem',
+          borderRadius: theme.shape.borderRadius,
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            margin: 0
+          },
+          "& .MuiSvgIcon-root": {
+            padding: '0.125rem'
+          }
         },
       },
     },

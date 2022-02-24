@@ -1,119 +1,52 @@
 import * as React from 'react';
-import { Box, Button as MuiButton, Typography } from '@mui/material';
-import { createTheme } from '@mui/material';
-import { theme } from 'theme';
-import { ThemeProvider } from '@mui/material';
+import { Button as MuiButton, Typography } from '@mui/material';
+import { styled } from '@mui/material';
 
-let buttonTheme = createTheme(theme, {
-  components: {
-    MuiButton: {
-      defaultProps: {
-        disableElevation: true,
-        disableRipple: true,
-      },
-      styleOverrides: {
-        root: {
-          minWidth: '2.375rem',
-          minHeight: '2.375rem',
-          padding: '0.5rem',
-          borderRadius: theme.shape.borderRadius,
-          ".MuiButton-startIcon, .MuiButton-endIcon": {
-            margin: 0
-          },
-          "& .MuiBox-root": {
-            margin: '0 0.25rem',
-            lineHeight: '1.375rem'
-          },
-          '&.MuiButton-warning, &.MuiButton-warning:active': {
-            color: theme.palette.warning.dark,
-            backgroundColor: theme.palette.warning.light
-          },
-          '&.MuiButton-warning:hover': {
-            color: theme.palette.warning.contrastText,
-            backgroundColor: theme.palette.warning.main,
-          },
-          '&.MuiButton-contained.MuiButton-containedPrimary': {
-            backgroundColor: theme.palette.primary.main,
-            color: theme.palette.secondary.contrastText,
-            '&:hover, &:active': {
-              backgroundColor: theme.palette.primary.dark,
-              color: theme.palette.secondary.main,
-            }
-          },
-          '&.MuiButton-outlined.MuiButton-outlinedPrimary': {
-            backgroundColor: theme.palette.secondary.main,
-            color: theme.palette.primary.main,
-            '&, &:hover, &:active, &:disabled.Mui-disabled': {
-              border: 'none',
-            },
-            '&:hover, &:active': {
-              backgroundColor: theme.palette.secondary.dark,
-              color: theme.palette.primary.dark,
-            },
-            "&:disabled.Mui-disabled": {
-              backgroundColor: theme.palette.greys['100'],
-              color: theme.palette.greys['300'],
-            }
-          },
-          "&.MuiButton-root:disabled": {
-            color: theme.palette.greys['300'],
-          },
-          "&.MuiButton-contained:disabled": {
-            backgroundColor: theme.palette.greys['100'],
-          },
-          '&.MuiButton-outlined:disabled': {
-            borderColor: theme.palette.greys['100'],
-          },
-        }
-      }
+import { theme as t } from 'theme';
+
+const MyButton = styled(MuiButton)(({ color, variant }) => ({
+  '&, &.MuiButton-contained:active': {
+    backgroundColor: variant === 'contained' ? t.palette[color]['light'] : t.palette[color]['contrastText'],
+    borderColor: variant === 'contained' ? t.palette[color]['light'] : t.palette[color]['main'],
+    color: variant === 'contained' ? t.palette[color]['main'] : t.palette[color]['main'],
+  },
+  '&:hover, &:active': {
+    backgroundColor: variant === 'contained' ? t.palette[color]['main'] : t.palette[color]['light'],
+    color: variant === 'contained' ? t.palette[color]['contrastText'] : t.palette[color]['main'],
+  },
+  '&:disabled, &.MuiButton-contained:disabled, &.MuiButton-outlined:disabled': {
+    backgroundColor: (variant === 'contained' || color === 'primary') ? t.palette.greys['100'] : t.palette[color]['contrastText'],
+    color: t.palette.greys['300'],
+    borderColor: (variant === 'contained' || color === 'primary') ? t.palette[color]['contrastText'] : t.palette.greys['100'],
+  },
+  '&.MuiButton-containedWarning, &.MuiButton-containedWarning:active': {
+    color: t.palette.warning.dark,
+  },
+  '&.MuiButton-containedPrimary': {
+    backgroundColor: t.palette.primary.main,
+    color: t.palette.primary.contrastText,
+    '&:hover, &:active': {
+      backgroundColor: t.palette.primary.dark,
+      color: t.palette.secondary.light,
     }
-  }
-});
-
-
-export function Button({ children, label, color, ...props }) {
-
-  const [localTheme, setLocalTheme] = React.useState();
-
-  let tempLocalTheme = createTheme(buttonTheme, {
-    components: {
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            '&.MuiButton-contained, &.MuiButton-contained.MuiButton-contained:active': {
-              backgroundColor: theme['palette'][color]['light'],
-              color: theme['palette'][color]['main'],
-            },
-            '&.MuiButton-contained:hover': {
-              backgroundColor: theme['palette'][color]['main'],
-              color: theme['palette'][color]['contrastText'],
-            },
-            '&.MuiButton-outlined': {
-              backgroundColor: theme['palette'][color]['contrastText'],
-              borderColor: theme['palette'][color]['main'],
-              color: theme['palette'][color]['main'],
-              '&:hover, &:active': {
-                color: theme['palette'][color]['main'],
-                backgroundColor: theme['palette'][color]['light'],
-              }
-            },
-          }
-        }
-      }
+  },
+  '&.MuiButton-outlinedPrimary': {
+    backgroundColor: t.palette.secondary.light,
+    color: t.palette.primary.main,
+    borderColor: t.palette.secondary.light,
+    '&:hover, &:active': {
+      backgroundColor: t.palette.secondary.dark,
+      color: t.palette.primary.dark
     }
-  });
-  if (!localTheme) {
-    setLocalTheme(tempLocalTheme) 
-  }
- 
+  },
+}));
+
+export function Button({ label, ...props }) {
   return (
-    <Typography variant="button">
-      <ThemeProvider theme={localTheme}>
-        <MuiButton color={color} {...props}>
-          {label && <Box component="span" >{label}</Box>}
-          {children}
-        </MuiButton>
-      </ThemeProvider>
+    <Typography variant="button" >
+      <MyButton {...props}>
+        {label}
+      </MyButton>
     </Typography>
   );
 }
