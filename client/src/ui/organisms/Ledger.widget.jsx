@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useRef, useEffect } from 'react';
 import { ActionHeader, Card, Button } from 'ui';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -11,12 +11,28 @@ import { Modal } from '@mui/material';
 export const LedgerWidget = () => {
   const [open, setOpen] = useState(false);
   const [modalButtonType, setModalButtonType] = useState("");
+  const ref = useRef();
+
   const handleOpen = (modalType) => {
     setModalButtonType(modalType);
     setOpen(true)
   };
-  const handleClose = () => setOpen(false);
+
+  const handleClose = () => { setOpen(false) };
   const handleSubmit = () => console.log("submit")
+
+  useEffect(() => {
+    const checkIfOutsideClick = (e) => {
+      if (open && !ref.current.contains(e.target)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("click", checkIfOutsideClick, true)
+    return () => {
+      document.removeEventListener("click", checkIfOutsideClick, true)
+    }
+  }, [open]
+  );
 
   return (
     <Card
