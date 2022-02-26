@@ -1,4 +1,4 @@
-import { React, useState, useRef, useEffect } from 'react';
+import { React, useState, } from 'react';
 import { ActionHeader, Card, Button } from 'ui';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -10,7 +10,6 @@ import { Modal } from '@mui/material';
 export const LedgerWidget = () => {
   const [open, setOpen] = useState(false);
   const [modalButtonType, setModalButtonType] = useState("");
-  const modalRef = useRef();
 
   const handleOpen = (modalType) => {
     setModalButtonType(modalType);
@@ -19,29 +18,6 @@ export const LedgerWidget = () => {
 
   const handleClose = () => { setOpen(false) };
   const handleSubmit = () => console.log("submit")
-
-  useEffect(() => {
-    const checkIfOutsideClick = (event) => {
-      // if (modalRef.current && !modalRef.current.contains(event.target)) {
-      //   console.log(modalRef.current);
-      //   console.log(modalRef.current?.contains(event.target))
-      //   setOpen(false)
-      // }
-
-      const modalBox = document.querySelector(".css-y60v9i")
-      if (open && !modalBox.contains(event.target)) {
-        setOpen(false);
-      }
-
-    }
-
-    document.addEventListener("mousedown", checkIfOutsideClick);
-
-    return () => {
-      document.removeEventListener("mousedown", checkIfOutsideClick)
-    }
-  },
-  );
 
   return (
     <Card
@@ -76,10 +52,9 @@ export const LedgerWidget = () => {
               </Button>
               <Modal
                 open={open}
-                ref={modalRef}
+                onClose={handleClose}
               >
                 <AddNewLedgerRecordModal
-                  // ref={modalRef}
                   type={modalButtonType}
                   handleOpen={handleOpen}
                   handleClose={handleClose}
