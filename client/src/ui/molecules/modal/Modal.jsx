@@ -25,11 +25,11 @@ const modalButtonsStyling = {
     justifyContent: 'flex-end',
 }
 
-const MoneyManageModal = ({ title, description, handleClose, handleSubmit, ...props }) => {
+const MoneyManageModal = ({ title, description, handleClose, handleSubmit, modalRef, ...props }) => {
 
     return (
 
-        <Box sx={modalStyling}>
+        <Box sx={modalStyling} ref={modalRef}>
 
             <Typography variant={'h3'}>{title}</Typography>
 

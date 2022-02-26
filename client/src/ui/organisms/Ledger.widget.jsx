@@ -7,31 +7,40 @@ import { LedgerTableWidget } from './LedgerTable.widget';
 import { AddNewLedgerRecordModal } from './AddNewLedgerRecord.modal';
 import { Modal } from '@mui/material';
 
-
 export const LedgerWidget = () => {
   const [open, setOpen] = useState(false);
   const [modalButtonType, setModalButtonType] = useState("");
-  const ref = useRef();
+  const modalRef = useRef();
 
   const handleOpen = (modalType) => {
     setModalButtonType(modalType);
-    setOpen(true)
+    setOpen(true);
   };
 
   const handleClose = () => { setOpen(false) };
   const handleSubmit = () => console.log("submit")
 
   useEffect(() => {
-    const checkIfOutsideClick = (e) => {
-      if (open && !ref.current.contains(e.target)) {
+    const checkIfOutsideClick = (event) => {
+      // if (modalRef.current && !modalRef.current.contains(event.target)) {
+      //   console.log(modalRef.current);
+      //   console.log(modalRef.current?.contains(event.target))
+      //   setOpen(false)
+      // }
+
+      const modalBox = document.querySelector(".css-y60v9i")
+      if (open && !modalBox.contains(event.target)) {
         setOpen(false);
       }
+
     }
-    document.addEventListener("click", checkIfOutsideClick, true)
+
+    document.addEventListener("mousedown", checkIfOutsideClick);
+
     return () => {
-      document.removeEventListener("click", checkIfOutsideClick, true)
+      document.removeEventListener("mousedown", checkIfOutsideClick)
     }
-  }, [open]
+  },
   );
 
   return (
@@ -67,8 +76,10 @@ export const LedgerWidget = () => {
               </Button>
               <Modal
                 open={open}
+                ref={modalRef}
               >
                 <AddNewLedgerRecordModal
+                  // ref={modalRef}
                   type={modalButtonType}
                   handleOpen={handleOpen}
                   handleClose={handleClose}
