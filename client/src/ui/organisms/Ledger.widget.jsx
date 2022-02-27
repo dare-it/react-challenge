@@ -6,13 +6,13 @@ import { theme } from '../../theme';
 import { Button } from '../atoms/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-
+import RootContext from '../../context/context'
 import { AddNewLedgerRecordModal } from './AddNewLegerRecord.modal';
-import { useState } from 'react';
+import { useContext } from 'react';
 
 export const LedgerWidget = () => {
-  const [openLedgerModal, setOpenLedgerModal] = useState(false)
-  const [modalType, setModalType] = useState('')
+  const context = useContext(RootContext);
+  const {setModalType, setOpenLedgerModal, modalType, openLedgerModal}=context
   const handleOpenModal =(string)=>{
     setModalType(string)
     setOpenLedgerModal(true)

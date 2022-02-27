@@ -10,12 +10,15 @@ import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
 import AddIcon from '@mui/icons-material/Add';
-import {  useState } from 'react';
+import {  useContext} from 'react';
 import { AddNewBudgetRecordModal } from '../ui/organisms/AddNewBudgetRecord.modal';
+import RootContext from '../context/context';
 
 
 export const BudgetPage = () => {
-const [openBudgetModal, setOpenBudgetModal] =useState(false)
+  const context = useContext(RootContext);
+  const {setOpenBudgetModal, openBudgetModal}=context
+
   const handleOpenModal =()=>{
     setOpenBudgetModal(true)
   }
