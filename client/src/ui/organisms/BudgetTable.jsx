@@ -1,15 +1,17 @@
 import { BUDGET_QUERY } from 'queryKeys';
 import React from 'react';
 import { useQuery, useQueryClient } from 'react-query';
-import { Error, Loader, NoContent } from 'ui';
+import { CategoryCell, Error, Loader, LocalizedDate, Money, NoContent } from 'ui';
 import { Table } from 'ui/molecules/table/Table';
 
 const tableDefinition = [
-  { id: 'name', label: 'Nazwa' },
-  { id: 'plannedExpenses', label: 'Planowane wydatki' },
-  { id: 'currentAmount', label: 'Obecna kwota' },
+  { id: 'name', label: 'Nazwa', renderCell: (row) => (
+    <CategoryCell color={row.category?.color} name={row.category?.name} />
+  ),},
+  { id: 'plannedExpenses', label: 'Planowane wydatki', renderCell: (row) => <Money inCents={row.amountInCents} /> },
+  { id: 'currentAmount', label: 'Obecna kwota', renderCell: (row) => <Money inCents={row.currentSpending} /> },
   { id: 'status', label: 'Status' },
-  { id: 'createdDate', label: 'Data utworzenia' },
+  { id: 'createdDate', label: 'Data utworzenia' ,  renderCell: (row) => <LocalizedDate date={row.createdAt} />},
 ];
 
 const BudgetTable = () => {
@@ -24,6 +26,7 @@ const BudgetTable = () => {
   }
 
   if (error) {
+    console.log(error)
     return <Error error={error} />;
   }
 
@@ -31,7 +34,7 @@ const BudgetTable = () => {
     return <NoContent />
   }
 
-  return <Table rows={data} headCells={tableDefinition} />;
+  return <Table rows={data} getUniqueId={(row) => row.id} headCells={tableDefinition} />;
 };
 
 export default BudgetTable;
