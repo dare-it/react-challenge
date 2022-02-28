@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ActionHeader, Card, Page } from 'ui';
 import { Grid } from '@mui/material';
+import BudgetTable from 'ui/organisms/BudgetTable';
 
 export const BudgetPage = () => {
   return (
@@ -16,7 +17,9 @@ export const BudgetPage = () => {
         }
       >
         <Grid container>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12}>
+            <BudgetTable />
+          </Grid>
         </Grid>
       </Card>
     </Page>
