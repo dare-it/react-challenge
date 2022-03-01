@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import React from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -38,7 +38,9 @@ export const LedgerWidget = () => {
     {
       id: 'category',
       label: 'Kategoria',
-      renderCell: (row) => <CategoryCell name={row.category?.name} />,
+      renderCell: (row) => (
+        <CategoryCell name={row.category?.name} color={row.category?.color} />
+      ),
     },
     {
       id: 'date',
@@ -71,26 +73,31 @@ export const LedgerWidget = () => {
           variant={'h1'}
           title="Portfel"
           renderActions={() => (
-            <>
+            <Box>
               <Button text="Wpłać" variant="outlined" startIcon={<AddIcon />} />
               <Button
                 text="Wypłać"
                 variant="outlined"
+                sx={{ marginLeft: '15px' }}
                 startIcon={<RemoveIcon />}
               />
-            </>
+            </Box>
           )}
         >
-          <Grid container>
-            <Grid item xs={12}>
-              <Table
-                rows={data}
-                getUniqueId={(row) => row.id}
-                headCells={tableDefinition}
-                deleteRecords={deleteRows}
-              />
-            </Grid>
-          </Grid>
+          {isLoading ? (
+            <Loader />
+          ) : error ? (
+            <Error />
+          ) : !data.length ? (
+            <NoContent />
+          ) : (
+            <Table
+              headCells={tableDefinition}
+              rows={data}
+              getUniqueId={(row) => row.id}
+              deleteRecords={deleteRows}
+            />
+          )}
         </ActionHeader>
       }
     />
