@@ -93,14 +93,14 @@ export const LedgerWidget = () => {
                   text="Wpłać"
                   variant="outlined"
                   startIcon={<AddIcon />}
-                  onClick={()=> handleModalOpen('INCOME')}
+                  onClick={() => handleModalOpen('INCOME')}
                 />
                 <Button
                   text="Wypłać"
                   variant="outlined"
                   sx={{ marginLeft: '15px' }}
                   startIcon={<RemoveIcon />}
-                  onClick={()=> handleModalOpen('EXPENSE')}
+                  onClick={() => handleModalOpen('EXPENSE')}
                 />
               </Box>
             )}
