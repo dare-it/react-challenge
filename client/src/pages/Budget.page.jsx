@@ -13,12 +13,14 @@ import {
   NoContent,
   Button,
   CategoryCell,
+  AddNewBudgetRecord,
 } from 'ui';
 import { Grid } from '@mui/material';
 import { BudgetService } from '../api/services/BudgetService';
 import { BUDGET_QUERY } from 'queryKeys';
 
 export const BudgetPage = () => {
+  const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
 
   const { isLoading, isError, data } = useQuery(
@@ -33,8 +35,14 @@ export const BudgetPage = () => {
   });
 
   const deleteRecords = (ids) => mutate({ ids });
-
   const getUniqueId = (row) => row?.id;
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const onSubmit = () => {
+    setOpen(false);
+    alert('zapisano');
+  };
 
   const headCells = [
     {
@@ -74,6 +82,11 @@ export const BudgetPage = () => {
 
   return (
     <Page title="Budżet">
+      <AddNewBudgetRecord
+        open={open}
+        onSubmit={onSubmit}
+        onClose={handleClose}
+      />
       <Card
         title={
           <ActionHeader
@@ -84,6 +97,7 @@ export const BudgetPage = () => {
                 variant={'contained'}
                 color={'primary'}
                 startIcon={<AddIcon />}
+                onClick={() => handleOpen()}
               >
                 Zdefiniuj budżet
               </Button>
