@@ -71,27 +71,23 @@ export const LedgerWidget = () => {
               />
             </Box>
           )}
-        >
-          <Grid container>
-            <Grid item xs={12}>
-              {isLoading ? (
-                <Loader />
-              ) : error ? (
-                <Error />
-              ) : !data.length ? (
-                <NoContent />
-              ) : (
-                <Table
-                  headCells={tableDefinition}
-                  rows={data}
-                  getUniqueId={(row) => row.id}
-                  deleteRecords={deleteRows}
-                />
-              )}
-            </Grid>
-          </Grid>
-        </ActionHeader>
+        />
       }
-    />
+    >
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Error />
+      ) : !data.length ? (
+        <NoContent />
+      ) : (
+        <Table
+          headCells={tableDefinition}
+          rows={data}
+          getUniqueId={(row) => row.id}
+          deleteRecords={deleteRows}
+        />
+      )}
+    </Card>
   );
 };
