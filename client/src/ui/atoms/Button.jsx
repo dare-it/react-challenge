@@ -1,7 +1,17 @@
 import * as React from 'react';
 import { Button as MuiButton } from '@mui/material';
 
-export function Button({ startIcon, endIcon, centerIcon, text, color, disabled, onClick, variant, ...props }) {
+export function Button({
+  startIcon,
+  endIcon,
+  centerIcon,
+  text,
+  color,
+  disabled,
+  onClick,
+  variant,
+  ...props
+}) {
   return (
     <MuiButton
       startIcon={!!startIcon && startIcon}
@@ -11,7 +21,7 @@ export function Button({ startIcon, endIcon, centerIcon, text, color, disabled, 
       onClick={onClick}
       variant={variant}
     >
-      {text? text: centerIcon}
+      {text ? text : centerIcon}
     </MuiButton>
   );
 }
