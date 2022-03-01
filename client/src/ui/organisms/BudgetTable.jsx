@@ -32,7 +32,6 @@ const BudgetTable = () => {
   }
 
   if (error) {
-    console.log(error);
     return <Error error={error} />;
   }
 
