@@ -20,6 +20,7 @@ export function Button({
       disabled={disabled}
       onClick={onClick}
       variant={variant}
+      {...props}
     >
       {text ? text : centerIcon}
     </MuiButton>
