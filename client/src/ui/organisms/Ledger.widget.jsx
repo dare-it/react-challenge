@@ -17,6 +17,7 @@ import {
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { LEDGER_QUERY } from 'queryKeys';
 import { LedgerService } from 'api';
+import { theme } from '../../theme';
 
 export const LedgerWidget = () => {
   const queryClient = useQueryClient();
@@ -50,7 +51,16 @@ export const LedgerWidget = () => {
     {
       id: 'amount',
       label: 'Kwota',
-      renderCell: (row) => <Money inCents={row.amountInCents} />,
+      renderCell: (row) =>
+        row.mode === 'INCOME' ? (
+          <Box sx={{ color: theme.palette.success.dark}}>
+            +<Money inCents={row.amountInCents} />
+          </Box>
+        ) : (
+          <Box sx={{ color: theme.palette.error.dark }}>
+            -<Money inCents={row.amountInCents} />
+          </Box>
+        ),
     },
   ];
 
