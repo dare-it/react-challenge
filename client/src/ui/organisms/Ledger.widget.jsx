@@ -1,10 +1,17 @@
 import { Grid } from '@mui/material';
 import React from 'react';
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import { ActionHeader, Button, Card, Table } from 'ui';
 
 export const LedgerWidget = () => {
+  const tableDefinition = [
+    { id: 'name', label: 'Nazwa', renderCell: (row) => {} },
+    { id: 'category', label: 'Kategoria', renderCell: (row) => {} },
+    { id: 'date', label: 'Data', renderCell: (row) => {} },
+    { id: 'amount', label: 'Kwota', renderCell: (row) => {} },
+  ];
+
   return (
     <Card
       title={
@@ -13,14 +20,18 @@ export const LedgerWidget = () => {
           title="Portfel"
           renderActions={() => (
             <>
-              <Button text="Wpłać" startIcon={<AddOutlinedIcon />} />
-              <Button text="Wypłać" startIcon={<AddOutlinedIcon />} />
+              <Button text="Wpłać" variant="outlined" startIcon={<AddIcon />} />
+              <Button
+                text="Wypłać"
+                variant="outlined"
+                startIcon={<RemoveIcon />}
+              />
             </>
           )}
         >
           <Grid container>
             <Grid item xs={12}>
-              <Table></Table>
+              <Table headCells={tableDefinition}></Table>
             </Grid>
           </Grid>
         </ActionHeader>
