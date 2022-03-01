@@ -54,18 +54,6 @@ export const LedgerWidget = () => {
     },
   ];
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <Error error={error} />;
-  }
-
-  if (!data?.length) {
-    return <NoContent />;
-  }
-
   return (
     <Card
       title={
