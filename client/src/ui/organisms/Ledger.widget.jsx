@@ -81,7 +81,9 @@ export const LedgerWidget = () => {
         open={isModalOpen}
         handleClose={handleModalClose}
         type={modalType}
-      />
+      >
+        content will be here
+      </AddNewLedgerRecordModal>
       <Card
         title={
           <ActionHeader
