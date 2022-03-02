@@ -10,7 +10,7 @@ export const BudgetPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-   setIsModalOpen(true);
+    setIsModalOpen(true);
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
@@ -18,9 +18,12 @@ export const BudgetPage = () => {
 
   return (
     <Page title="Budżet">
-    <AddNewBudgetRecordModal open={isModalOpen} handleClose={handleModalClose}>
-      content will be here
-    </AddNewBudgetRecordModal>
+      <AddNewBudgetRecordModal
+        open={isModalOpen}
+        handleClose={handleModalClose}
+      >
+        content will be here
+      </AddNewBudgetRecordModal>
       <Card
         title={
           <ActionHeader
