@@ -8,6 +8,7 @@
     "@fontsource/roboto": "4.5.1",
     "@mui/icons-material": "5.2.5",
     "@mui/material": "5.2.8",
+    "@mui/styles": "^5.4.4",
     "@mui/utils": "5.2.3",
     "@testing-library/jest-dom": "5.16.1",
     "@testing-library/react": "11.2.7",
@@ -31,7 +32,8 @@
     "@storybook/react": "^6.4.12",
     "prettier": "2.5.1",
     "prop-types": "15.8.1",
-    "puppeteer": "^13.1.0"
+    "puppeteer": "^13.1.0",
+    "storybook-addon-pseudo-states": "^1.0.0"
   },
   "resolutions": {
     "**/@emotion/styled": "^11.0.0"
