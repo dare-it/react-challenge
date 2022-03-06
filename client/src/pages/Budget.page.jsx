@@ -1,16 +1,17 @@
 import React from 'react';
 
-import { ActionHeader, Card, Page, Error, NoContent, Loader, Button, Table, Money, LocalizedDate, CategoryCell } from 'ui';
-import { Grid, Box } from '@mui/material';
-import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { ActionHeader, Card, Page, Button, Money, LocalizedDate, CategoryCell, ContentManagement, AddNewBudgetRecord } from 'ui';
+import { Grid } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
 import { BudgetService } from 'api';
 import { theme } from 'theme'
-import AddIcon from '@mui/icons-material/Add';
+import { BUDGET_QUERY } from 'queryKeys'
+import { useModal } from '../hooks/useModal'
 
 const headers = [
   { id: 'category', label: 'Nazwa',  renderCell: (params) => <CategoryCell color={theme.palette.background.blue} name= {params.category.name} />},
   { id: 'firstName', label: 'Planowane wydatki', renderCell: (params) => <Money inCents={params.amountInCents} />},
-  { id: 'currentSpending', label: 'Obecna kwota', renderCell: (params) => <Money inCents={params.currentSpending} />},
+  { id: 'currentSpending', label: 'Obecna kwota', renderCell: (params) => <Money inCents={params.currentSpending} style={theme.palette.background.blue}/>},
   {
     id: 'age',
     label: 'Status',
@@ -26,31 +27,7 @@ const headers = [
 ];
 
 export const BudgetPage = () => {
-  const queryClient = useQueryClient()
-
-  const { isLoading, error, data } = useQuery('budget', BudgetService.findAll)
-
-  const removeBudget = (budget) => BudgetService.remove(budget)
-
-  const mutation = useMutation( removeBudget , {
-    onSuccess: () => queryClient.invalidateQueries('budget')
-  })
-
-  let renderedContent;
-
-  if (isLoading) renderedContent = <Box  sx={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-      height: '100%'
-    }}> 
-      <Loader />
-    </Box>
-  else if (error) renderedContent = <Error />
-  else if (data && data.length === 0) renderedContent = <NoContent />
-  else renderedContent =  <Table headCells={headers} rows={data} getUniqueId={(element) => element.id} deleteRecords={(id) => mutation.mutate({ids: id})}/>
-
+  const [open, handleOpen, handleClose] = useModal();
 
   return (
     <Page title="Budżet">
@@ -60,8 +37,7 @@ export const BudgetPage = () => {
             variant={'h1'}
             title="Budżet"
             renderActions={() => 
-            <Button variant={'contained'} color={'primary'}>
-              <AddIcon  sx={{ fontSize: 15,  marginRight: '10px' }} />
+            <Button variant={'contained'} color={'primary'} startIcon={<AddIcon />} onClick={handleOpen}>
               Zdefiniuj budżet
             </Button>
             }
@@ -77,10 +53,11 @@ export const BudgetPage = () => {
           <Grid 
             item 
             xs={12}>
-            {renderedContent}
+            <ContentManagement headers={headers} queryName={BUDGET_QUERY} getDataEndpoint={BudgetService.findAll} removeDataEndpoint={BudgetService.remove} />
           </Grid>
         </Grid>
       </Card>
+      <AddNewBudgetRecord open={open} onClose={handleClose} />
     </Page>
   );
 };

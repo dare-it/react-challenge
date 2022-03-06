@@ -40,7 +40,7 @@ let theme = createTheme({
     },
     background: {
       default: '#F8F8F8',
-      blue: '#37C4D7'
+      blue: '#37C4D7',
     },
     greys: {
       level1: 'rgba(51, 51, 51, 0.07)',
@@ -83,13 +83,15 @@ theme = createTheme(theme, {
     },
     h4: {
       fontWeight: 700,
-      fontSize: '1.44rem',
+      fontSize: '1.25rem',
+      lineHeight: '1.44rem',
     },
     h5: {
       fontSize: '1.44rem',
     },
     h6: {
-      fontSize: '1.44rem',
+      fontWeight: 700,
+      lineHeight: '1.44rem',
     },
     body1: {
       fontSize: '1.2rem',

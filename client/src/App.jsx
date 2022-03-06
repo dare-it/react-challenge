@@ -8,12 +8,12 @@ export const queryClient = new QueryClient()
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router />
+        <QueryClientProvider client={queryClient}>
+          <Router />
+        </QueryClientProvider>
       </ThemeProvider>
-    </QueryClientProvider>
   );
 };
 
