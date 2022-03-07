@@ -13,12 +13,14 @@ import {
   NoContent,
   Button,
   CategoryCell,
+  AddNewBudgetRecord,
 } from 'ui';
 import { Grid } from '@mui/material';
 import { BudgetService } from '../api/services/BudgetService';
 import { BUDGET_QUERY } from 'queryKeys';
 
 export const BudgetPage = () => {
+  const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
 
   const { isLoading, isError, data } = useQuery(
@@ -33,8 +35,12 @@ export const BudgetPage = () => {
   });
 
   const deleteRecords = (ids) => mutate({ ids });
-
   const getUniqueId = (row) => row?.id;
+
+  const onSubmit = () => {
+    setOpen(false);
+    alert('zapisano');
+  };
 
   const headCells = [
     {
@@ -74,6 +80,11 @@ export const BudgetPage = () => {
 
   return (
     <Page title="Budżet">
+      <AddNewBudgetRecord
+        open={open}
+        onSubmit={onSubmit}
+        onClose={() => setOpen(false)}
+      />
       <Card
         title={
           <ActionHeader
@@ -84,6 +95,7 @@ export const BudgetPage = () => {
                 variant={'contained'}
                 color={'primary'}
                 startIcon={<AddIcon />}
+                onClick={() => setOpen(true)}
               >
                 Zdefiniuj budżet
               </Button>
@@ -93,13 +105,10 @@ export const BudgetPage = () => {
       >
         <Grid container>
           <Grid item xs={12}>
-            {isLoading ? (
-              <Loader />
-            ) : isError ? (
-              <Error />
-            ) : !data.length ? (
-              <NoContent />
-            ) : (
+            {isLoading && <Loader />}
+            {isError && <Error />}
+            {!isLoading && !isError && !data.length && <NoContent />}
+            {!isLoading && !isError && !!data.length && (
               <Table
                 headCells={headCells}
                 rows={data}
