@@ -15,12 +15,14 @@ import { LocalizedDate } from "../ui/atoms/LocalizedDate";
 import { ColorBox } from "../ui/atoms/ColorBox";
 import { BudgetService } from "../api/services/BudgetService";
 import { BUDGET_QUERY } from 'queryKeys';
+import { Modal } from '../ui/molecules/Modal';
 
 const headCell = [
 {
   id: '1',
   label: 'Nazwa',
-  renderCell: (row) => <Box sx={{display:'flex',  alignItems: 'center'}} ><ColorBox  color={row.category?.color}></ColorBox><p>{row.category?.name}</p></Box>
+  renderCell: (row) => <Box sx={{display:'flex',  alignItems: 'center'}}>
+      <ColorBox color={row.category?.color}></ColorBox><p>{row.category?.name}</p></Box>
 },
 {
   id: '2',
@@ -49,6 +51,11 @@ const headCell = [
 ]
 
 export const BudgetPage = () => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
 
 const queryClient = useQueryClient();
 
@@ -80,12 +87,13 @@ const { isLoading, error, data } = useQuery([BUDGET_QUERY], () => BudgetService.
   return (
     
     <Page title="Budżet">
+      <Modal open={open} title={'Zdefiniuj budżet'} handleClose={handleClose}></Modal>
       <Card
         title={
           <ActionHeader
             variant={'h1'}
             title="Budżet"
-            renderActions={() => <Button variant={'contained'} color={'primary'} startIcon={<AddOutlinedIcon />}>Zdefiniuj budżet</Button>}
+            renderActions={() => <Button variant={'contained'} color={'primary'} startIcon={<AddOutlinedIcon />} onClick={handleOpen}>Zdefiniuj budżet</Button>}
           />
         }
       >
