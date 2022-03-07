@@ -58,7 +58,7 @@ export const Modal = ({
         <CardContent>{children}</CardContent>
         <CardActions sx={buttonsStyle}>
           <Box>
-            <Button variant={'outlined'} color={'primary'} onClick={onClose}>
+            <Button variant="outlined" color="primary" onClick={onClose}>
               Anuluj
             </Button>
             <Button

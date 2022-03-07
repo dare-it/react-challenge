@@ -6,6 +6,7 @@ export const AddNewBudgetRecord = ({
   onSubmit,
   ...props
 }) => {
+
   return (
     <Modal
       title="Zdefiniuj budżet"

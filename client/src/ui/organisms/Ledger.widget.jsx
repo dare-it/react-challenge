@@ -22,8 +22,6 @@ import {
 export const LedgerWidget = () => {
   const [open, setOpen] = React.useState(false);
   const [type, setType] = React.useState('INCOME');
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   const queryClient = useQueryClient();
 
@@ -42,7 +40,7 @@ export const LedgerWidget = () => {
 
   const showModal = (newType) => {
     setType(newType);
-    handleOpen();
+    setOpen(true);
   };
 
   const onSubmit = () => {
@@ -96,7 +94,7 @@ export const LedgerWidget = () => {
       <AddNewLedgerRecord
         open={open}
         onSubmit={onSubmit}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
         type={type}
       />
       <Card
@@ -128,13 +126,10 @@ export const LedgerWidget = () => {
           />
         }
       >
-        {isLoading ? (
-          <Loader />
-        ) : isError ? (
-          <Error />
-        ) : !data.length ? (
-          <NoContent />
-        ) : (
+        {isLoading && <Loader />}
+        {isError && <Error />}
+        {!isLoading && !isError && !data.length && <NoContent />}
+        {!isLoading && !isError && !!data.length && (
           <Table
             headCells={headCells}
             rows={data}

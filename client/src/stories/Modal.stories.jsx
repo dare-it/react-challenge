@@ -10,8 +10,6 @@ export default {
 
 export const ModalTest = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <>
@@ -19,11 +17,15 @@ export const ModalTest = () => {
         variant={'contained'}
         color={'primary'}
         startIcon={<AddIcon />}
-        onClick={handleOpen}
+        onClick={() => setOpen(true)}
       >
         Zdefiniuj budżet
       </Button>
-      <Modal title="Zdefiniuj budżet" open={open} onClose={handleClose}></Modal>
+      <Modal
+        title="Zdefiniuj budżet"
+        open={open}
+        onClose={() => setOpen(false)}
+      ></Modal>
     </>
   );
 };

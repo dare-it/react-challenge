@@ -7,26 +7,13 @@ export const AddNewLedgerRecord = ({
   type,
   ...props
 }) => {
-  if (type === 'INCOME')
-    return (
-      <Modal
-        title="Dodaj wpływ"
-        open={open}
-        onSubmit={onSubmit}
-        onClose={onClose}
-      >
-        {props.children}
-      </Modal>
-    );
-  if (type === 'EXPENSE')
-    return (
-      <Modal
-        title="Dodaj wydatek"
-        open={open}
-        onSubmit={onSubmit}
-        onClose={onClose}
-      >
-        {props.children}
-      </Modal>
-    );
+  let title;
+  if (type === 'INCOME') title = 'Dodaj wpływ';
+  if (type === 'EXPENSE') title = 'Dodaj wydatek';
+  
+  return (
+    <Modal title={title} open={open} onSubmit={onSubmit} onClose={onClose}>
+      {props.children}
+    </Modal>
+  );
 };

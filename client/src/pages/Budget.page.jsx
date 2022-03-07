@@ -37,8 +37,6 @@ export const BudgetPage = () => {
   const deleteRecords = (ids) => mutate({ ids });
   const getUniqueId = (row) => row?.id;
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
   const onSubmit = () => {
     setOpen(false);
     alert('zapisano');
@@ -85,7 +83,7 @@ export const BudgetPage = () => {
       <AddNewBudgetRecord
         open={open}
         onSubmit={onSubmit}
-        onClose={handleClose}
+        onClose={() => setOpen(false)}
       />
       <Card
         title={
@@ -97,7 +95,7 @@ export const BudgetPage = () => {
                 variant={'contained'}
                 color={'primary'}
                 startIcon={<AddIcon />}
-                onClick={() => handleOpen()}
+                onClick={() => setOpen(true)}
               >
                 Zdefiniuj budżet
               </Button>
@@ -107,13 +105,10 @@ export const BudgetPage = () => {
       >
         <Grid container>
           <Grid item xs={12}>
-            {isLoading ? (
-              <Loader />
-            ) : isError ? (
-              <Error />
-            ) : !data.length ? (
-              <NoContent />
-            ) : (
+            {isLoading && <Loader />}
+            {isError && <Error />}
+            {!isLoading && !isError && !data.length && <NoContent />}
+            {!isLoading && !isError && !!data.length && (
               <Table
                 headCells={headCells}
                 rows={data}
