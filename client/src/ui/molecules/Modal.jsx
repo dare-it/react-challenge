@@ -29,6 +29,8 @@ const modalStyle = {
 const buttonsStyle = {
   display: 'flex',
   justifyContent: 'flex-end',
+  padding: '0px',
+  marginTop: '45px',
 };
 
 export const Modal = ({
@@ -37,6 +39,7 @@ export const Modal = ({
   onClose,
   onSubmit,
   title,
+  description,
   ...props
 }) => {
   return (
@@ -49,7 +52,7 @@ export const Modal = ({
       <Card sx={modalStyle}>
         <CardHeader
           title={title}
-          subheader={props.description}
+          subheader={description}
           titleTypographyProps={{ variant: 'h4' }}
           sx={{
             '.MuiCardHeader-title': { fontFamily: 'Inter' },

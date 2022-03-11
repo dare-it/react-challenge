@@ -9,6 +9,8 @@ export { Loader } from './atoms/Loader';
 export { Error } from './atoms/Error';
 export { NoContent } from './atoms/NoContent';
 export { Card } from './atoms/Card';
+export { FormTextField } from './atoms/FormTextField';
+export { Select } from './molecules/Select';
 
 // molecules
 export { CategoryCell } from './molecules/CategoryCell';
