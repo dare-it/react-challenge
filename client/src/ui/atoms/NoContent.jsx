@@ -1,21 +1,19 @@
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import noContent from '../../assets/no_content.png';
 
 export const NoContent = () => {
-  
   const styles = {
     text: {
-      color: "#333",
-      fontSize: "19.2px"
+      color: '#333',
+      fontSize: '19.2px',
     },
     image: {
-      width: "202px",
-      height: "202px"
+      width: '202px',
+      height: '202px',
     },
-  }
+  };
 
   return (
-
     <Box
       sx={{
         height: '100vh',
@@ -25,8 +23,8 @@ export const NoContent = () => {
         flexDirection: 'column',
       }}
     >
-      <img style = {styles.image}src={noContent} alt="no content" />
-      <div style = {styles.text}>Brak danych do wyświetlenia</div>
+      <img style={styles.image} src={noContent} alt="no content" />
+      <div style={styles.text}>Brak danych do wyświetlenia</div>
     </Box>
-    );
+  );
 };

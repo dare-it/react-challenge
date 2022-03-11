@@ -4,20 +4,21 @@ import unknownError from '../../assets/unknown_error.png';
 export const Error = ({ error }) => {
   const styles = {
     text: {
-      color: "#333",
-      fontSize: "19.2px"
+      color: '#333',
+      fontSize: '19.2px',
     },
     image: {
-      width: "202px",
-      height: "202px"
+      width: '202px',
+      height: '202px',
     },
-  }
+  };
 
-  const content =<>
-    <img style = {styles.image}src={unknownError} alt="no content" />
-    <div style = {styles.text}>Wystąpił nieoczekiwany błąd</div>
-  </>
-  
+  const content = (
+    <>
+      <img style={styles.image} src={unknownError} alt="no content" />
+      <div style={styles.text}>Wystąpił nieoczekiwany błąd</div>
+    </>
+  );
 
   return (
     <Box
@@ -29,11 +30,11 @@ export const Error = ({ error }) => {
         flexDirection: 'column',
       }}
     >
-      {
-        error?.message?.includes('Network Error') ? (
-          <Typography>Uruchom Server!</Typography>
-        ) : content
-      }
+      {error?.message?.includes('Network Error') ? (
+        <Typography>Uruchom Server!</Typography>
+      ) : (
+        content
+      )}
     </Box>
   );
 };

@@ -33,3 +33,6 @@ server/build/
 server/coverage/
 server/.DS_Store
 server/yarn.lock
+
+# api keys
+.env

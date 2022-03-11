@@ -20,6 +20,7 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
   };
 
   const handleClick = (event, id) => {
+   
     setSelected(
       selected.includes(id)
         ? selected.filter((selectedId) => selectedId !== id)

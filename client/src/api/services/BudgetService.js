@@ -1,6 +1,10 @@
 import { request } from '../core/request';
 
+
+
 export class BudgetService {
+
+
   /**
    * @returns any
    * @throws ApiError
@@ -54,6 +58,7 @@ export class BudgetService {
    * @throws ApiError
    */
   static remove({ ids }) {
+    console.log(ids)
     return ids.length === 1
       ? request({
           method: 'DELETE',

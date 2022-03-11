@@ -6,8 +6,9 @@ import { theme } from '../../theme.js';
 export function Button({ children, ...props }) {
   return (
     <ThemeProvider theme={theme}>
-      <MuiButton  sx={props.buttonVariant} {...props}>{children}</MuiButton>
+      <MuiButton sx={props.buttonVariant} {...props}>
+        {children}
+      </MuiButton>
     </ThemeProvider>
-    );
+  );
 }
-

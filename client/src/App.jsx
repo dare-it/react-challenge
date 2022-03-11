@@ -4,6 +4,7 @@ import Router from './pages/routing';
 import { theme } from 'theme';
 
 const App = () => {
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

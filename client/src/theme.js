@@ -6,17 +6,17 @@ let theme = createTheme({
   },
   palette: {
     text: {
-      primary: '#fff',
+      primary: '#000',
     },
     type: 'light',
     primary: {
       main: '#334ACC',
       dark: '#223289',
       contrastText: '#fff',
-      outlinedMain: "#E8EAF6",
-      outlinedHover: "#C5CAE9",
-      outlinedTextMain: "#334ACC",
-      outlinedTextSecondary: "#223289",
+      outlinedMain: '#E8EAF6',
+      outlinedHover: '#C5CAE9',
+      outlinedTextMain: '#334ACC',
+      outlinedTextSecondary: '#223289',
     },
     secondary: {
       main: '#E8EAF6',
@@ -28,30 +28,29 @@ let theme = createTheme({
       dark: '#FF5D5D',
       contrastText: '#FF5D5D',
       border: '#FF5D5D',
-      hover: "#FDE8E0",
+      hover: '#FDE8E0',
     },
     success: {
       dark: '#00A980',
       main: '#DBEBDB',
       contrastText: '#00A980',
-      border: "#66BB6A",
-      hoverText: "#00A980"
+      border: '#66BB6A',
+      hoverText: '#00A980',
     },
     warning: {
       dark: '#FFA726',
       main: '#FFF5D2',
       contrastText: '#B28C09',
-      border: "#FFA726",
-      hoverText: "#00A980",
-      outlinedMain: "#fff",
-      outlinedHover: "#FFF5D2",
-      outlinedTextMain: "#FFA726",
-      outlinedTextSecondary: "#FFA726",
+      border: '#FFA726',
+      hoverText: '#00A980',
+      outlinedMain: '#fff',
+      outlinedHover: '#FFF5D2',
+      outlinedTextMain: '#FFA726',
+      outlinedTextSecondary: '#FFA726',
     },
     background: {
       default: '#F8F8F8',
     },
-
   },
 });
 
@@ -60,6 +59,7 @@ theme = createTheme(theme, {
     fontSize: 15,
     fontWeightLight: 300,
     h1: {
+      color: "#000",
       fontWeight: 700,
       lineHeight: 1.2,
       fontSize: '2.25rem',
@@ -96,28 +96,28 @@ theme = createTheme(theme, {
         },
       },
     },
-    MuiButton: { 
-      styleOverrides: { 
+    MuiButton: {
+      styleOverrides: {
         root: {
-          minWidth: "34px",
-          minHeight: "34px",
-          textTransform: "none",
+          minWidth: '34px',
+          minHeight: '34px',
+          textTransform: 'none',
           padding: '8px 12px',
           outline: 'none',
-          border: "1px solid",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          "& .MuiButton-startIcon": {
-            margin: 0
+          border: '1px solid',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '& .MuiButton-startIcon': {
+            margin: 0,
           },
-          "& .MuiButton-endIcon": {
-            margin: 0
-          }
+          '& .MuiButton-endIcon': {
+            margin: 0,
+          },
         },
-      } 
+      },
     },
-   
+
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -176,10 +176,19 @@ theme = createTheme(theme, {
     MuiToolbar: {
       styleOverrides: {
         root: {
-          borderRadius: theme.shape.borderRadius,
+          borderRadius: 0,
         },
       },
     },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFD'
+          }
+        }
+      }
+    }
   },
 });
 
