@@ -59,7 +59,7 @@ theme = createTheme(theme, {
     fontSize: 15,
     fontWeightLight: 300,
     h1: {
-      color: "#000",
+      color: '#000',
       fontWeight: 700,
       lineHeight: 1.2,
       fontSize: '2.25rem',
@@ -184,11 +184,11 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           '&.Mui-selected': {
-            backgroundColor: '#F9FAFD'
-          }
-        }
-      }
-    }
+            backgroundColor: '#F9FAFD',
+          },
+        },
+      },
+    },
   },
 });
 
