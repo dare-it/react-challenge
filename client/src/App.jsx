@@ -8,12 +8,11 @@ import RootContext from './context/context'
 const queryClient = new QueryClient();
 
 const App = () => {
-  const [openLedgerModal, setOpenLedgerModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
-  const [openBudgetModal, setOpenBudgetModal] =useState(false)
+
   return (
-    // eslint-disable-next-line react/jsx-no-undef
-    <RootContext.Provider value={{openLedgerModal, modalType, setOpenLedgerModal, setModalType, openBudgetModal, setOpenBudgetModal}}>
+    <RootContext.Provider value={{openModal, modalType, setOpenModal, setModalType}}>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <CssBaseline />

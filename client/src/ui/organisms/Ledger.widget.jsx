@@ -12,10 +12,10 @@ import { useContext } from 'react';
 
 export const LedgerWidget = () => {
   const context = useContext(RootContext);
-  const {setModalType, setOpenLedgerModal, modalType, openLedgerModal}=context
+  const {setModalType, setOpenModal, modalType, openModal}=context
   const handleOpenModal =(string)=>{
     setModalType(string)
-    setOpenLedgerModal(true)
+    setOpenModal(true)
   }
   return (
     <Card
@@ -31,7 +31,7 @@ export const LedgerWidget = () => {
       }
     >
       <LedgerTable />
-      <AddNewLedgerRecordModal type={modalType} open={openLedgerModal} handleClose={()=>setOpenLedgerModal(false)}>content</AddNewLedgerRecordModal>
+      <AddNewLedgerRecordModal type={modalType} open={openModal} handleClose={()=>setOpenModal(false)}>content</AddNewLedgerRecordModal>
     </Card>
   );
 };

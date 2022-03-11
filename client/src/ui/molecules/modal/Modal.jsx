@@ -6,7 +6,7 @@ import { Modal as MuiModal } from '@mui/material';
 import Box from '@mui/material/Box';
 
 
-export const Modal = ({ open, description, handleClose, handleSubmit, children }) => {
+export const Modal = ({ open, title, handleClose, handleSubmit, children }) => {
   return (
     <MuiModal open={open} onClose={handleClose}>
       <Box>
@@ -15,7 +15,7 @@ export const Modal = ({ open, description, handleClose, handleSubmit, children }
           title={
             <ActionHeader
               variant={'h4'}
-              title={description} />
+              title={title} />
           }
         >
           <CardContent>{children}</CardContent>

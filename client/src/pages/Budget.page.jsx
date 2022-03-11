@@ -17,10 +17,10 @@ import RootContext from '../context/context';
 
 export const BudgetPage = () => {
   const context = useContext(RootContext);
-  const {setOpenBudgetModal, openBudgetModal}=context
+  const {setOpenModal, openModal}=context
 
   const handleOpenModal =()=>{
-    setOpenBudgetModal(true)
+    setOpenModal(true)
   }
   return (
     <Page title='Budżet'>
@@ -39,7 +39,7 @@ export const BudgetPage = () => {
           </Grid>
         </Grid>
       </Card>
-      <AddNewBudgetRecordModal description="Zdefiniuj budżet" open={openBudgetModal} handleClose={()=>setOpenBudgetModal(false)}>content</AddNewBudgetRecordModal>
+      <AddNewBudgetRecordModal title="Zdefiniuj budżet" open={openModal} handleClose={()=>setOpenModal(false)}>content</AddNewBudgetRecordModal>
     </Page>
 
   );
