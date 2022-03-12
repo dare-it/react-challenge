@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { ActionHeader, Card, Page, Button, Money, LocalizedDate, Error, Loader, CategoryCell } from 'ui';
 import { Grid } from '@mui/material';
@@ -7,8 +7,8 @@ import {BudgetService} from '../api/services/BudgetService.js'
 import { useQuery, useMutation } from 'react-query';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import AddIcon from '@mui/icons-material/Add';
-import CircleIcon from '@mui/icons-material/Circle';
 import { NoContent } from 'ui/atoms/NoContent.jsx';
+import { AddNewBudgetRecord } from 'ui/organisms/AddNewBudgetRecord.modal.jsx';
 
 function createHeader( {id, disablePadding, label}){
   return {id, disablePadding, label, renderCell: (params) => (params[id])};
@@ -43,7 +43,6 @@ const BudgetTable = () => {
   const { isLoading, isError, data, error } = useQuery('budget', getAllBudget);
 
   const deleteBudget = async (selected) => {
-    //console.log("deleteBudget" + selected);
     return await BudgetService.remove({ids: selected});
   };
 
@@ -65,10 +64,7 @@ let rows = [];
 data.map((row) => {
  
   rows.push({
-    1:  <div >
-          <CircleIcon sx={{float:'left', possition: 'static',width:'16px', height:'16px', marginRight:'10px', color:'#37C4D7', order:'0', flex: 'none', flexGrow:'0' }}   />
-          <CategoryCell name={row.category.name}></CategoryCell>
-        </div>,
+    1: <CategoryCell color={row.category?.color} name={row.category.name}></CategoryCell>,
     2: <Money inCents={row.amountInCents}></Money>, 
     3: <Money inCents={row.currentSpending}></Money>,
     4: statusName(row),
@@ -85,11 +81,22 @@ function deleteRecords(selected) {
   deleteSelected.mutate(selected);
 };
 
+
+
 return <Table rows = {rows} headCells= {headCells} getUniqueId= {getUniqueId} deleteRecords = {deleteRecords}></Table> ;
 
 };
 
 export const BudgetPage = () => {
+  const [open, setOpen] = useState(false);
+const handleOpen = () => {
+  setOpen(true);
+};
+
+const handleClose = () => {
+  setOpen(false);
+};
+
   return (
     <Page title="Budżet">
       <Card
@@ -97,16 +104,21 @@ export const BudgetPage = () => {
           <ActionHeader
             variant={'h1'}
             title="Twój budżet"
-            renderActions={() => <Button variant='contained' color='primary' startIcon={<AddIcon/>}>Zdefiniuj budżet</Button> }
+            renderActions={() => 
+            <>
+            <Button onClick={handleOpen} variant='contained' color='primary' startIcon={<AddIcon/>}>Zdefiniuj budżet</Button> 
+            {open ? <AddNewBudgetRecord open={open} onClose={handleClose}/> : null}
+            </>}
             
           />
         }
         
       >
         
-        <QueryClientProvider client={queryClient}><BudgetTable/></QueryClientProvider>
         <Grid container>
-          <Grid item xs={12}> </Grid>  
+          <Grid item xs={12}>
+            <QueryClientProvider client={queryClient}><BudgetTable/></QueryClientProvider> 
+          </Grid>  
         </Grid>
       </Card>
     </Page>

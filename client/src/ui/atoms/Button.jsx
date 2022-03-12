@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button as MuiButton } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import {theme} from '../../theme.js';
 
 
@@ -99,15 +98,12 @@ let buttonTheme = createTheme(theme,{
           width: "72px", height: "38px"
         },
 */
-        endIcon: { /* jeśli chevronleft */
-          transform: "rotate(-180deg)"
-        },
       },
     },
 
   },
 
-})
+});
 
 
 
