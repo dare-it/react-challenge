@@ -25,6 +25,31 @@ export const Error = ({ error }) => {
           <Typography width= '261px' height='29px' >Wystąpił nieoczekiwany błąd</Typography>
        ):'Wystąpił nieoczekiwany błąd' //  TODO in TASK 1
       }
+     {/* {error?.message?.includes('Network Error') ? (
+        <Typography>Uruchom Server!</Typography>
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <img
+            alt=""
+            src={ErrorImage}
+            style={{
+              height: '100%',
+              weight: '100%',
+              maxHeight: '248px',
+              maxWidth: '248px',
+            }}
+          />
+          <Typography sx={{ color: '#33333350' }}>
+            Wystąpił nieoczekiwany błąd
+          </Typography>
+        </Box>
+          )} */}
     </Box>
   );
 };

@@ -29,7 +29,12 @@ export const NoContent = (error) => {
         width= "202px"
         height= '202px' /> 
          
-      <Typography width= '269px' height='29px' >Brak danych do wyświetlenia</Typography>
+      <Typography 
+        width= '269px' 
+        height='29px'
+      >
+        Brak danych do wyświetlenia
+      </Typography>
     
     </Box>
   );
