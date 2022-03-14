@@ -3,7 +3,7 @@ import Router from './pages/routing';
 import { theme } from 'theme';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState } from 'react';
-import RootContext from './context/context'
+import RootContext from './context/context';
 
 const queryClient = new QueryClient();
 
@@ -13,7 +13,16 @@ const App = () => {
   const [category, setCategory] = useState();
 
   return (
-    <RootContext.Provider value={{openModal, modalType, setOpenModal, setModalType, category, setCategory}}>
+    <RootContext.Provider
+      value={{
+        openModal,
+        modalType,
+        setOpenModal,
+        setModalType,
+        category,
+        setCategory,
+      }}
+    >
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <CssBaseline />

@@ -13,39 +13,56 @@ import * as yup from 'yup';
 import RootContext from '../../context/context';
 import { Button } from '../atoms/Button';
 
-
 export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
   const context = useContext(RootContext);
   const { setOpenModal, setCategory, category } = context;
 
   const schema = yup.object().shape({
-    name: yup.string().trim('Nazwa nie może być pusta').required('Nazwa nie może być pusta'),
-    amount: yup.number().typeError('Kwota musi być numerem').required('Kwota nie może być pusta').min(0.01, 'Kwota musi być większa niż 0').max(1000000, 'Kwota nie może być większa niż 1000000').positive('Kwota musi być większa niż 0'),
+    name: yup
+      .string()
+      .trim('Nazwa nie może być pusta')
+      .required('Nazwa nie może być pusta'),
+    amount: yup
+      .number()
+      .typeError('Kwota musi być numerem')
+      .required('Kwota nie może być pusta')
+      .min(0.01, 'Kwota musi być większa niż 0')
+      .max(1000000, 'Kwota nie może być większa niż 1000000')
+      .positive('Kwota musi być większa niż 0'),
   });
 
-  const { control, handleSubmit, formState, formState: { errors }, reset } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState,
+    formState: { errors },
+    reset,
+  } = useForm({
     defaultValues: {
       name: '',
       amount: '',
       select: '',
-    }, mode: 'all', shouldUnregister: false, resolver: yupResolver(schema),
+    },
+    mode: 'all',
+    shouldUnregister: false,
+    resolver: yupResolver(schema),
   });
   const queryClient = useQueryClient();
-  const { data } = useQuery('categoriesData', () =>
-    CategoryService.findAll(),
+  const { data } = useQuery('categoriesData', () => CategoryService.findAll());
+  const mutation = useMutation(
+    (requestBody) => LedgerService.create({ requestBody }),
+    { onSuccess: () => queryClient.invalidateQueries('ledgerData') },
   );
-  const mutation = useMutation((requestBody) => LedgerService.create({ requestBody }), { onSuccess: () => queryClient.invalidateQueries('ledgerData') });
   const onSubmit = (data) => {
-    const output ={
+    const output = {
       mode: type,
       amountInCents: data.amount * 100,
       categoryId: data.select,
-      title: data.name
-    }
+      title: data.name,
+    };
     setOpenModal(false);
     mutation.mutate(output);
     reset();
-
   };
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -57,54 +74,88 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
   };
 
   return (
-    <Modal handleClose={handleCancel}{...props} title={type === 'INCOME' ? 'Dodaj wpływ' : 'Dodaj wydatek'}>
+    <Modal
+      handleClose={handleCancel}
+      {...props}
+      title={type === 'INCOME' ? 'Dodaj wpływ' : 'Dodaj wydatek'}
+    >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name='name'
+          name="name"
           control={control}
           rules={{ required: true, minLength: 1 }}
-          render={({ field: { onChange, onBlur, value } }) => <TextField value={value} onBlur={onBlur}
-                                                                         onChange={onChange}
-                                                                         label='Nazwa' />}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextField
+              value={value}
+              onBlur={onBlur}
+              onChange={onChange}
+              label="Nazwa"
+            />
+          )}
         />
         <p>{errors.name?.message}</p>
         <Controller
-          name='amount'
+          name="amount"
           control={control}
           rules={{ required: true, min: 0.01, max: 1000000 }}
-          render={({ field }) => <TextField {...field} type='number' inputProps={{ inputMode: 'numeric' }}
-                                            label='Kwota' />}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              type="number"
+              inputProps={{ inputMode: 'numeric' }}
+              label="Kwota"
+            />
+          )}
         />
         <p>{errors.amount?.message}</p>
-        {type === 'EXPENSE' &&
-        <>
-          <Controller
-            name='select'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => <FormControl fullWidth>
-              <InputLabel>Kategoria</InputLabel>
-              <Select
-                name='select'
-                value={category}
-                label='Kategoria'
-                onChange={handleChange}
-                {...field}
-              >
-                {data.map((category) =>
-                  <MenuItem value={category.id} key={category.id}><CategoryCell color={category?.color}
-                                                                                name={category?.name} /></MenuItem>)
-                }
-              </Select>
-            </FormControl>}
-          />
-          <p>{errors.select?.message}</p>
-        </>
-        }
+        {type === 'EXPENSE' && (
+          <>
+            <Controller
+              name="select"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormControl fullWidth>
+                  <InputLabel>Wybierz kategorię</InputLabel>
+                  <Select
+                    name="select"
+                    value={category}
+                    label="Wybierz kategorię"
+                    onChange={handleChange}
+                    {...field}
+                  >
+                    {data.map((category) => (
+                      <MenuItem value={category.id} key={category.id}>
+                        <CategoryCell
+                          color={category?.color}
+                          name={category?.name}
+                        />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              )}
+            />
+            <p>{errors.select?.message}</p>
+          </>
+        )}
         <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant='outlined' color='primary' sx={{ m: 2 }}
-                  onClick={props => handleCancel(props)}>Anuluj</Button>
-          <Button variant='contained' color='primary' type='submit' disabled={!formState.isValid}>Zapisz</Button>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ m: 2 }}
+            onClick={(props) => handleCancel(props)}
+          >
+            Anuluj
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={!formState.isValid}
+          >
+            Zapisz
+          </Button>
         </CardActions>
       </form>
     </Modal>
