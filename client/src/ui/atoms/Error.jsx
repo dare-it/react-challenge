@@ -1,9 +1,5 @@
 import { Box, Typography } from '@mui/material';
-<<<<<<< HEAD
-import unknown_error from '../../unknown_error.png'
-=======
 import ErrorImage from 'assets/unknown_error.png';
->>>>>>> upstream/task-2-solution
 
 export const Error = ({ error }) => {
   return (
@@ -15,13 +11,6 @@ export const Error = ({ error }) => {
         flexDirection: 'column',
       }}
     >
-<<<<<<< HEAD
-      {
-        error?.message?.includes('Network Error') ? (
-          <Typography>Uruchom Server!</Typography>
-        ) :(<><Typography> Wystąpił nieoczekiwany błąd</Typography><img src={unknown_error} /></>)
-      }
-=======
       {error?.message?.includes('Network Error') ? (
         <Typography>Uruchom Server!</Typography>
       ) : (
@@ -47,7 +36,6 @@ export const Error = ({ error }) => {
           </Typography>
         </Box>
       )}
->>>>>>> upstream/task-2-solution
     </Box>
   );
 };
