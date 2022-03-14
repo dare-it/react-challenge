@@ -99,7 +99,10 @@ const BudgetTable = () => {
   );
 
   const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
-    onSuccess: () => {queryClient.invalidateQueries('budgetData'); queryClient.invalidateQueries('categoriesData')}
+    onSuccess: () => {
+      queryClient.invalidateQueries('budgetData');
+      queryClient.invalidateQueries('categoriesData');
+    },
   });
 
   if (isLoading) return <Loader />;

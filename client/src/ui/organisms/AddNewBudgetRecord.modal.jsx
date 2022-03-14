@@ -13,7 +13,7 @@ import * as yup from 'yup';
 import RootContext from '../../context/context';
 import { Button } from '../atoms/Button';
 
-export const AddNewBudgetRecordModal = ({ handleClose,...props }) => {
+export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
   const context = useContext(RootContext);
   const { setOpenModal, setCategory, category } = context;
 
@@ -42,14 +42,21 @@ export const AddNewBudgetRecordModal = ({ handleClose,...props }) => {
     resolver: yupResolver(schema),
   });
   const queryClient = useQueryClient();
-  const { data } = useQuery('categoriesData', () => CategoryService.findAll(true));
+  const { data } = useQuery('categoriesData', () =>
+    CategoryService.findAll(true),
+  );
   const mutation = useMutation(
     (requestBody) => BudgetService.create({ requestBody }),
-    { onSuccess: () => {queryClient.invalidateQueries('budgetData');queryClient.invalidateQueries('categoriesData')} },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('budgetData');
+        queryClient.invalidateQueries('categoriesData');
+      },
+    },
   );
   const onSubmit = (data) => {
     const output = {
-      amountInCents: data.amount*100,
+      amountInCents: data.amount * 100,
       categoryId: data.select,
     };
     setOpenModal(false);
@@ -64,67 +71,69 @@ export const AddNewBudgetRecordModal = ({ handleClose,...props }) => {
     reset();
     handleClose();
   };
-  return (<Modal {...props}>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name="amount"
-        control={control}
-        rules={{ required: true, min: 0.01, max: 1000000 }}
-        render={({ field }) => (
-          <TextField
-            {...field}
-            type="number"
-            inputProps={{ inputMode: 'numeric' }}
-            label="Kwota"
-          />
-        )}
-      />
-      <p>{errors.amount?.message}</p>
-      <Controller
-        name='select'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <FormControl fullWidth>
-            <InputLabel>Wybierz kategorię</InputLabel>
-            <Select
-              name='select'
-              value={category}
-              label='Kategoria'
-              onChange={handleChange}
+  return (
+    <Modal {...props}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name="amount"
+          control={control}
+          rules={{ required: true, min: 0.01, max: 1000000 }}
+          render={({ field }) => (
+            <TextField
               {...field}
-            >
-              {data?.map((category) => (
-                <MenuItem value={category.id} key={category.id}>
-                  <CategoryCell
-                    color={category?.color}
-                    name={category?.name}
-                  />
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        )}
-      />
-      <p>{errors.select?.message}</p>
-      <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-        <Button
-          variant="outlined"
-          color="primary"
-          sx={{ m: 2 }}
-          onClick={(props) => handleCancel(props)}
-        >
-          Anuluj
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          disabled={!formState.isValid}
-        >
-          Zapisz
-        </Button>
-      </CardActions>
-    </form>
-  </Modal>);
+              type="number"
+              inputProps={{ inputMode: 'numeric' }}
+              label="Kwota"
+            />
+          )}
+        />
+        <p>{errors.amount?.message}</p>
+        <Controller
+          name="select"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <FormControl fullWidth>
+              <InputLabel>Wybierz kategorię</InputLabel>
+              <Select
+                name="select"
+                value={category}
+                label="Kategoria"
+                onChange={handleChange}
+                {...field}
+              >
+                {data?.map((category) => (
+                  <MenuItem value={category.id} key={category.id}>
+                    <CategoryCell
+                      color={category?.color}
+                      name={category?.name}
+                    />
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        />
+        <p>{errors.select?.message}</p>
+        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ m: 2 }}
+            onClick={(props) => handleCancel(props)}
+          >
+            Anuluj
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disabled={!formState.isValid}
+          >
+            Zapisz
+          </Button>
+        </CardActions>
+      </form>
+    </Modal>
+  );
 };
