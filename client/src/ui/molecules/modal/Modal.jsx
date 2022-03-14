@@ -6,7 +6,8 @@ import { Modal as MuiModal } from '@mui/material';
 import Box from '@mui/material/Box';
 
 
-export const Modal = ({ open, title, handleClose, handleSubmit, children }) => {
+
+export const Modal = ({ open, title, handleClose, children }) => {
   return (
     <MuiModal open={open} onClose={handleClose}>
       <Box>
@@ -19,10 +20,6 @@ export const Modal = ({ open, title, handleClose, handleSubmit, children }) => {
           }
         >
           <CardContent>{children}</CardContent>
-          <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant='outlined' color='primary' sx={{ m: 2 }} onClick={handleClose}>Anuluj</Button>
-            <Button variant='contained' color='primary' onClick={handleSubmit}>Zapisz</Button>
-          </CardActions>
         </Card>
       </Box>
     </MuiModal>

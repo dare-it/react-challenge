@@ -10,9 +10,10 @@ const queryClient = new QueryClient();
 const App = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalType, setModalType] = useState('');
+  const [category, setCategory] = useState();
 
   return (
-    <RootContext.Provider value={{openModal, modalType, setOpenModal, setModalType}}>
+    <RootContext.Provider value={{openModal, modalType, setOpenModal, setModalType, category, setCategory}}>
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
           <CssBaseline />

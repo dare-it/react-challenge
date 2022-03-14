@@ -70,7 +70,6 @@ const LedgerTable = () => {
   );
 
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), { onSuccess: () => queryClient.invalidateQueries('ledgerData') });
-
   if (isLoading) return <Loader />;
   if (error) return <Error />;
   if (data.length === 0) return <NoContent />;
