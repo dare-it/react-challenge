@@ -26,7 +26,6 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
     },
   });
 
-
   const {
     control,
     handleSubmit,
@@ -58,66 +57,68 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
     handleClose();
   };
 
+  const renderForm = () => (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        height: '100%',
+      }}
+    >
+      <Controller
+        name="name"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            label="Nazwa"
+            error={errors.name}
+            helperText={errors.name && errors.name.message}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name="amount"
+        control={control}
+        render={({ field }) => (
+          <TextField
+            error={errors.amount}
+            label="Kwota"
+            helperText={errors.amount && errors.amount.message}
+            {...field}
+          />
+        )}
+      />
+      {type === 'EXPENSE' && (
+        <Controller
+          name="categoryId"
+          control={control}
+          render={({ field }) => (
+            <Select label="Wybierz kategorię" {...field}>
+              {categoryList?.map((category) => (
+                <MenuItem key={category.id} value={category.id}>
+                  <CategoryCell color={category.color} name={category.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          )}
+        />
+      )}
+    </form>
+  );
+
   return (
     <Modal
       {...props}
       handleAccept={handleSubmit(onSubmit)}
       handleClose={handleClose}
       disableSaveButton={!!Object.keys(errors).length}
-      children={
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'spaceBetween',
-          }}
-        >
-          <Controller
-            name="name"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                error={errors.name}
-                helperText={errors.name && errors.name.message}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="amount"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                error={errors.amount}
-                helperText={errors.amount && errors.amount.message}
-                {...field}
-              />
-            )}
-          />
-          {type === 'EXPENSE' && (
-            <Controller
-              name="categoryId"
-              control={control}
-              render={({ field }) => (
-                <Select {...field}>
-                  {categoryList?.map((category) => (
-                    <MenuItem key={category.id} value={category.id}>
-                      <CategoryCell
-                        color={category.color}
-                        name={category.name}
-                      />
-                    </MenuItem>
-                  ))}
-                </Select>
-              )}
-            />
-          )}
-          {/* <input type="submit" /> */}
-        </form>
-      }
       header={type === 'INCOME' ? 'Dodaj wpływ' : 'Dodaj wydatek'}
-    />
+    >
+      {renderForm()}
+    </Modal>
   );
 };
 
