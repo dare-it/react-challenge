@@ -33,7 +33,7 @@ export const Modal = (props) => {
                 </CardContent>
                 <CardActions sx= {{ display: 'flex', justifyContent: 'flex-end'}}>
                     <Button onClick={props.onClose} variant='outlined' color='primary' sx={{marginRight: '12px'}}>Anuluj</Button>
-                    <Button onClick={props.onSubmit} variant='contained' color='primary'>Zapisz</Button>
+                    <Button onClick={props.onSubmit} variant='contained' color='primary' {...props}>Zapisz</Button>
                 </CardActions>
             </Card>
         </MuiModal>
