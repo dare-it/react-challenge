@@ -42,6 +42,7 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
     mode: 'onChange',
     defaultValues: {
       name: '',
+      amount: '',
       categoryId: '',
     },
     resolver: yupResolver(ledgerValidatoin),
@@ -66,6 +67,7 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
 
   const renderForm = () => (
     <form
+      id="form"
       onSubmit={handleSubmit(onSubmit)}
       style={{
         display: 'flex',
@@ -125,7 +127,6 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
   return (
     <Modal
       {...props}
-      handleAccept={handleSubmit(onSubmit)}
       handleClose={handleClose}
       disableSaveButton={!!Object.keys(errors).length}
       header={type === 'INCOME' ? 'Dodaj wpływ' : 'Dodaj wydatek'}

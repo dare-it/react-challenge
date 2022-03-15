@@ -29,6 +29,7 @@ const Modal = ({
           onClick={handleAccept}
           type="submit"
           disabled={disableSaveButton}
+          form="form"
         />
       </DialogActions>
     </MuiModal>

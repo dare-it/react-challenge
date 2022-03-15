@@ -30,6 +30,7 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
   const { mutate } = useMutation(createBudget, {
     onSuccess: async () => {
       await queryClient.invalidateQueries('budgetData');
+      await queryClient.invalidateQueries('categoryData');
     },
   });
 
@@ -64,6 +65,7 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
 
   const renderForm = () => (
     <form
+      id="form"
       onSubmit={handleSubmit(onSubmit)}
       style={{
         display: 'flex',
@@ -110,7 +112,6 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
     <Modal
       {...props}
       header="Zdefiniuj budżet"
-      handleAccept={handleSubmit(onSubmit)}
       handleClose={handleClose}
       disableSaveButton={!!Object.keys(errors).length}
     >
