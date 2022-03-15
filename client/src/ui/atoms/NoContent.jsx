@@ -1,6 +1,5 @@
 import { Box, Typography } from '@mui/material';
 import NoContentImg from '../../assets/no_content.png';
-import { theme } from '../../theme';
 import { muiStylesNoContent } from './styles';
 
 export const NoContent = () => {

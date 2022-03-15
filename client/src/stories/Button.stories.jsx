@@ -182,6 +182,6 @@ const SuccessButtons = () => generateButtons('success');
 const WarningButtons = () => generateButtons('warning');
 
 export const PrimaryButton = PrimaryButtons.bind({});
-export const ErrorButton =  ErrorButtons.bind({});
-export const SuccessButton =  SuccessButtons.bind({});
+export const ErrorButton = ErrorButtons.bind({});
+export const SuccessButton = SuccessButtons.bind({});
 export const WarningButton = WarningButtons.bind({});
