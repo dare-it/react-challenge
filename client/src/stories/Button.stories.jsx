@@ -2,12 +2,14 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import { decorators } from '../../.storybook/preview';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Zadanie 1/Button',
   component: Button,
   description: 'ahaha',
+  decorators: decorators,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     variant: {
