@@ -1,36 +1,38 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import { QueryClient, QueryClientProvider } from 'react-query';
 
-import { ActionHeader, Button, Card, Page, BudgetWidget } from 'ui';
-
-const queryClient = new QueryClient();
+import { ActionHeader, Button, Card, Page, BudgetWidget, AddNewBudgetRecord } from 'ui';
 
 export const BudgetPage = () => {
+
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Page title="Budżet">
-        <Card
-          title={
-            <ActionHeader
-              variant={'h1'}
-              title="Budżet"
-              renderActions={() => <Button
-                variant="contained"
-                color="primary"
-                label="Zdefiniuj budżet"
-                startIcon={<AddRoundedIcon />} />}
-            />
-          }
-        >
-          <Grid container>
-            <Grid item xs={12}>
-              <BudgetWidget />
-            </Grid>
+    <Page title="Budżet">
+      <Card
+        title={
+          <ActionHeader
+            variant={'h1'}
+            title="Budżet"
+            renderActions={() => <Button
+              variant="contained"
+              color="primary"
+              onClick={handleOpen}
+              label="Zdefiniuj budżet"
+              startIcon={<AddRoundedIcon />} />}
+          />
+        }
+      >
+        <Grid container>
+          <Grid item xs={12}>
+            <BudgetWidget />
+            <AddNewBudgetRecord open={modalOpen} handleClose={handleClose} />
           </Grid>
-        </Card>
-      </Page>
-    </QueryClientProvider>
+        </Grid>
+      </Card>
+    </Page>
   );
 };

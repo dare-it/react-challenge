@@ -17,7 +17,7 @@ export const ActionHeader = ({
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'baseline',
+        alignItems: 'flex-start'
       }}
     >
       <Typography
@@ -28,7 +28,9 @@ export const ActionHeader = ({
       >
         {title}
       </Typography>
-      {renderActions()}
+      <Box>
+        {renderActions()}
+      </Box>
     </Box>
   );
 };

@@ -112,6 +112,7 @@ theme = createTheme(theme, {
           minWidth: '2.375rem',
           minHeight: '2.375rem',
           padding: '0.5rem',
+          margin: '0 0.5rem',
           borderRadius: theme.shape.borderRadius,
           ".MuiButton-startIcon, .MuiButton-endIcon": {
             margin: 0
@@ -176,6 +177,26 @@ theme = createTheme(theme, {
           padding: '0',
         },
       },
+    },
+    MuiModal: {
+      styleOverrides: {
+        root: {
+          '& .MuiPaper-root': {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '28rem',
+            boxShadow: 24,
+            px: 4,
+            py: 5
+          },
+          '& .MuiCardHeader-title': {
+            fontSize: '1.25rem',
+            fontWeight: 700,
+          }
+        }
+      }
     },
     MuiToolbar: {
       styleOverrides: {
