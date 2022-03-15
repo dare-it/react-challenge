@@ -1,7 +1,6 @@
-import { useLocation } from 'react-router-dom';
-import React from 'react';
 import { List } from '@mui/material';
-
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { ListItemLink } from 'ui';
 
 export const MainMenu = ({ routes }) => {
