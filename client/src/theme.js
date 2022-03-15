@@ -6,35 +6,47 @@ let theme = createTheme({
   },
   palette: {
     text: {
-      primary: '#333',
+      primary: '#000',
     },
     type: 'light',
     primary: {
       main: '#334ACC',
       dark: '#223289',
-      light: '#e6f0fd',
       contrastText: '#fff',
+      outlinedMain: '#E8EAF6',
+      outlinedHover: '#C5CAE9',
+      outlinedTextMain: '#334ACC',
+      outlinedTextSecondary: '#223289',
     },
     secondary: {
       main: '#E8EAF6',
       dark: '#C5CAE9',
-      light: '#e6f0fd',
       contrastText: '#fff',
     },
     error: {
-      main: '#FF5D5D',
-      light: '#FCECE6',
-      contrastText: '#fff',
+      main: '#FCECE6',
+      dark: '#FF5D5D',
+      contrastText: '#FF5D5D',
+      border: '#FF5D5D',
+      hover: '#FDE8E0',
     },
     success: {
-      main: '#00A980',
-      light: '#DBEBDB',
-      contrastText: '#fff',
+      dark: '#00A980',
+      main: '#DBEBDB',
+      contrastText: '#00A980',
+      border: '#66BB6A',
+      hoverText: '#00A980',
     },
     warning: {
-      main: '#FFA726',
-      light: '#FFF5D2',
-      contrastText: '#fff',
+      dark: '#FFA726',
+      main: '#FFF5D2',
+      contrastText: '#B28C09',
+      border: '#FFA726',
+      hoverText: '#00A980',
+      outlinedMain: '#fff',
+      outlinedHover: '#FFF5D2',
+      outlinedTextMain: '#FFA726',
+      outlinedTextSecondary: '#FFA726',
     },
     background: {
       default: '#F8F8F8',
@@ -44,9 +56,10 @@ let theme = createTheme({
 
 theme = createTheme(theme, {
   typography: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeightLight: 300,
     h1: {
+      color: '#000',
       fontWeight: 700,
       lineHeight: 1.2,
       fontSize: '2.25rem',
@@ -83,6 +96,28 @@ theme = createTheme(theme, {
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          minWidth: '34px',
+          minHeight: '34px',
+          textTransform: 'none',
+          padding: '8px 12px',
+          outline: 'none',
+          border: '1px solid',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          '& .MuiButton-startIcon': {
+            margin: 0,
+          },
+          '& .MuiButton-endIcon': {
+            margin: 0,
+          },
+        },
+      },
+    },
+
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -141,7 +176,16 @@ theme = createTheme(theme, {
     MuiToolbar: {
       styleOverrides: {
         root: {
-          borderRadius: theme.shape.borderRadius,
+          borderRadius: 0,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFD',
+          },
         },
       },
     },
