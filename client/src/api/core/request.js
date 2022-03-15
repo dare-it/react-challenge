@@ -1,3 +1,10 @@
+// TODO: revision file & eslint rules for request
+/* eslint-disable unicorn/no-array-for-each */
+/* eslint-disable unicorn/no-useless-promise-resolve-reject */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable consistent-return */
+/* eslint-disable no-return-await */
+/* eslint-disable no-shadow */
 import axios from 'axios';
 import FormData from 'form-data';
 

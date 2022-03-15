@@ -1,9 +1,8 @@
-import React from 'react';
 import { Grid } from '@mui/material';
 import { LedgerWidget, Page } from 'ui';
 
 export const WalletPage = () => (
-  <Page title={'Portfel'}>
+  <Page title="Portfel">
     <Grid container spacing={{ xs: 3, md: 6 }}>
       <Grid item xs={12} md={8}>
         <LedgerWidget />

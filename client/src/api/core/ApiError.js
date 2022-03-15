@@ -1,8 +1,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 
-/* eslint-disable */
-
 export class ApiError extends Error {
   constructor(response, message) {
     super(message);

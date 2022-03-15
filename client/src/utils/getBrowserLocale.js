@@ -1,3 +1,6 @@
+/* eslint-disable unicorn/no-object-as-default-parameter */
+/* eslint-disable unicorn/no-useless-undefined */
+
 export const getBrowserLocales = (
   options = {
     languageCodeOnly: false,
