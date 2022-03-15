@@ -1,4 +1,9 @@
-import { Box, Typography } from '@mui/material';
+import React from 'react';
+import { Box, CardMedia, Typography } from '@mui/material';
+
+import {theme} from "../../theme";
+import errorImg from 'assets/unknown_error.png';
+
 
 export const Error = ({ error }) => {
   return (
@@ -8,12 +13,30 @@ export const Error = ({ error }) => {
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
+        height: '600px'
       }}
     >
       {
         error?.message?.includes('Network Error') ? (
           <Typography>Uruchom Server!</Typography>
-        ) : null //  TODO in TASK 1
+        ) : (
+          <Box>
+            <CardMedia
+              component="img"
+              sx={{ width: 248 }}
+              src={errorImg}
+              alt=''
+            />
+            <Typography
+              variant='body1'
+              sx={{
+                color: theme.palette.grey.level4,
+              }}
+            >
+              Wystąpił nieoczekiwany błąd
+            </Typography>
+          </Box>
+        )
       }
     </Box>
   );
