@@ -1,7 +1,14 @@
 import React from 'react';
 import Modal from 'ui/molecules/Modal';
 import { useForm, Controller } from 'react-hook-form';
-import { MenuItem, Select, TextField } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ledgerValidatoin } from 'utils/schemas';
 import { CategoryService, LedgerService } from 'api';
@@ -92,19 +99,25 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
         )}
       />
       {type === 'EXPENSE' && (
-        <Controller
-          name="categoryId"
-          control={control}
-          render={({ field }) => (
-            <Select label="Wybierz kategorię" {...field}>
-              {categoryList?.map((category) => (
-                <MenuItem key={category.id} value={category.id}>
-                  <CategoryCell color={category.color} name={category.name} />
-                </MenuItem>
-              ))}
-            </Select>
-          )}
-        />
+        <FormControl>
+          <InputLabel id="select-category-label">Wybierz kategorię</InputLabel>
+          <Controller
+            name="categoryId"
+            control={control}
+            render={({ field }) => (
+              <Select labelId="select-category-label" {...field}>
+                {categoryList?.map((category) => (
+                  <MenuItem key={category.id} value={category.id}>
+                    <CategoryCell color={category.color} name={category.name} />
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
+          />
+          <FormHelperText error>
+            {errors.categoryId && errors.categoryId.message}
+          </FormHelperText>
+        </FormControl>
       )}
     </form>
   );

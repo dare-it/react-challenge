@@ -3,7 +3,14 @@ import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Modal from 'ui/molecules/Modal';
 import { useForm, Controller } from 'react-hook-form';
-import { MenuItem, Select, TextField } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { budgetValidation } from 'utils/schemas';
 import { CategoryCell } from 'ui';
@@ -34,6 +41,10 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(budgetValidation),
+    defaultValues: {
+      amount: '',
+      categoryId: '',
+    },
   });
 
   const handleClose = () => {
@@ -74,22 +85,28 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
         )}
       />
 
-      <Controller
-        name="categoryId"
-        control={control}
-        render={({ field }) => (
-          <Select label="Wybierz kategorię" {...field}>
-            {categoryList?.map((category) => (
-              <MenuItem key={category.id} value={category.id}>
-                <CategoryCell color={category.color} name={category.name} />
-              </MenuItem>
-            ))}
-          </Select>
-        )}
-      />
+      <FormControl>
+        <InputLabel id="select-category-label">Wybierz kategorię</InputLabel>
+        <Controller
+          name="categoryId"
+          control={control}
+          render={({ field }) => (
+            <Select labelId="select-category-label" {...field}>
+              {categoryList?.map((category) => (
+                <MenuItem key={`category---${category.id}`} value={category.id}>
+                  <CategoryCell color={category.color} name={category.name} />
+                </MenuItem>
+              ))}
+            </Select>
+          )}
+        />
+        <FormHelperText error>
+          {errors.categoryId && errors.categoryId.message}
+        </FormHelperText>
+      </FormControl>
     </form>
   );
-
+  console.log(errors);
   return (
     <Modal
       {...props}

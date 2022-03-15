@@ -8,6 +8,7 @@ export const ledgerValidatoin = yup.object({
     .moreThan(0, 'Kwota musi być większa niż 0')
     .max(1000000, 'Kwota nie może być większa niż 1000000')
     .required('Kwota nie może być pusta'),
+  categoryId: yup.string().required('Kategoria nie moze być pusta'),
 });
 
 export const budgetValidation = yup.object({
@@ -17,5 +18,5 @@ export const budgetValidation = yup.object({
     .moreThan(0, 'Kwota musi być większa niż 0')
     .max(1000000, 'Kwota nie może być większa niż 1000000')
     .required('Kwota nie może być pusta'),
-  category: yup.string().required('Wybierz kategorię'),
+  categoryId: yup.string().required('Kategoria nie moze być pusta'),
 });
