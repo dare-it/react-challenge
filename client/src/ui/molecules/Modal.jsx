@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { ActionHeader, Button } from 'ui';
 
-const Modal = ({ open, handleClose, handleAccept, children, header }) => {
+const Modal = ({ open, disableSaveButton, handleClose, handleAccept, children, header }) => {
   return (
     <MuiModal open={open} onClose={handleClose} maxWidth="sm" fullWidth>
       <DialogTitle>
@@ -16,7 +16,13 @@ const Modal = ({ open, handleClose, handleAccept, children, header }) => {
       <DialogContent>{children}</DialogContent>
       <DialogActions>
         <Button variant="outlined" text="Anuluj" onClick={handleClose} />
-        <Button variant="contained" text="Zapisz" onClick={handleAccept} />
+        <Button
+          variant="contained"
+          text="Zapisz"
+          onClick={handleAccept}
+          type="submit"
+          disabled={disableSaveButton}
+        />
       </DialogActions>
     </MuiModal>
   );
