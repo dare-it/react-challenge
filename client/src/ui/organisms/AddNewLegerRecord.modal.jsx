@@ -120,7 +120,7 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
                   <Select
                     name="select"
                     value={category}
-                    label="Wybierz kategorię"
+                    label="Kategoria"
                     onChange={handleChange}
                     {...field}
                   >

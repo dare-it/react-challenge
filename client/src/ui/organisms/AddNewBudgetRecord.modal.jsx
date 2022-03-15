@@ -25,6 +25,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
       .min(0.01, 'Kwota musi być większa niż 0')
       .max(1000000, 'Kwota nie może być większa niż 1000000')
       .positive('Kwota musi być większa niż 0'),
+    select:yup.string().required("Wybierz kategorię")
   });
   const {
     control,
@@ -37,7 +38,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
       amount: '',
       select: '',
     },
-    mode: 'all',
+    mode: 'onChange',
     shouldUnregister: false,
     resolver: yupResolver(schema),
   });
@@ -72,7 +73,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
     handleClose();
   };
   return (
-    <Modal {...props}>
+    <Modal handleClose={handleCancel} {...props}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="amount"
@@ -94,7 +95,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
           rules={{ required: true }}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel>Wybierz kategorię</InputLabel>
+              <InputLabel>Kategoria</InputLabel>
               <Select
                 name="select"
                 value={category}
