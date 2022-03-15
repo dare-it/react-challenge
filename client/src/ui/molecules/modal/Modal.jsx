@@ -1,7 +1,6 @@
 import { ActionHeader } from '../../atoms/ActionHeader';
-import { Button } from '../../atoms/Button';
 import { Card } from '../../atoms/Card';
-import { CardActions, CardContent } from '@mui/material';
+import {  CardContent } from '@mui/material';
 import { Modal as MuiModal } from '@mui/material';
 import Box from '@mui/material/Box';
 

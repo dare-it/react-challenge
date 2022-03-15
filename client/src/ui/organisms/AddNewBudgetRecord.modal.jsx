@@ -25,7 +25,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
       .min(0.01, 'Kwota musi być większa niż 0')
       .max(1000000, 'Kwota nie może być większa niż 1000000')
       .positive('Kwota musi być większa niż 0'),
-    select:yup.string().required("Wybierz kategorię")
+    select: yup.string().required('Wybierz kategorię'),
   });
   const {
     control,
@@ -92,7 +92,6 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
         <Controller
           name="select"
           control={control}
-          rules={{ required: true }}
           render={({ field }) => (
             <FormControl fullWidth>
               <InputLabel>Kategoria</InputLabel>

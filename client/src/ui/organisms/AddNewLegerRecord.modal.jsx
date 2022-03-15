@@ -15,7 +15,7 @@ import { Button } from '../atoms/Button';
 
 export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
   const context = useContext(RootContext);
-  const { setOpenModal, setCategory, category } = context;
+  const { setOpenModal, category, setCategory } = context;
 
   const schema = yup.object().shape({
     name: yup
@@ -64,15 +64,14 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     mutation.mutate(output);
     reset();
   };
-  const handleChange = (event) => {
-    setCategory(event.target.value);
-  };
 
   const handleCancel = () => {
     reset();
     handleClose();
   };
-
+ const handleChange =(event)=>{
+   setCategory(event.target.value)
+ }
   return (
     <Modal
       handleClose={handleCancel}
@@ -116,7 +115,7 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
               rules={{ required: true }}
               render={({ field }) => (
                 <FormControl fullWidth>
-                  <InputLabel>Wybierz kategorię</InputLabel>
+                  <InputLabel>Kategoria</InputLabel>
                   <Select
                     name="select"
                     value={category}
