@@ -9,6 +9,8 @@ export default {
 };
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = () => <NoContent />;
+const Template = () => (
+    <NoContent />
+);
 
 export const Playground = Template.bind({});
