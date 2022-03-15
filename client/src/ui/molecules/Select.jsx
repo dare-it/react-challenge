@@ -13,12 +13,15 @@ export const Select = ({ options, name, label }) => {
 
   return (
     <FormControl fullWidth sx={{ marginTop: '32px' }}>
-      <InputLabel sx={{ color: '#80848D' }}>Kategoria</InputLabel>
+      <InputLabel sx={{ color: '#80848D' }}>{label}</InputLabel>
       <Controller
         control={control}
         name={name}
         rules={{
-          required: true,
+          required: {
+            value: true,
+            message: 'Wybierz kategorie',
+          },
         }}
         render={({ field: { onChange, value } }) => (
           <MuiSelect value={value} label={label} onChange={onChange}>

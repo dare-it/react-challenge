@@ -29,8 +29,8 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
 
   const { data } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
   const { mutateAsync } = useMutation(LedgerService.create, {
-    onSuccess: () => {
-      return queryClient.invalidateQueries(LEDGER_QUERY);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(LEDGER_QUERY);
     },
   });
 
@@ -43,13 +43,13 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
         title: inputData.title,
       },
     });
-    close();
     reset();
+    close();
   };
 
   const onClose = () => {
-    close();
     reset();
+    close();
   };
 
   return (

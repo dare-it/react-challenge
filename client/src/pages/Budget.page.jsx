@@ -17,7 +17,7 @@ import {
 } from 'ui';
 import { Grid } from '@mui/material';
 import { BudgetService } from '../api/services/BudgetService';
-import { BUDGET_QUERY } from 'queryKeys';
+import { BUDGET_QUERY, CATEGORIES_QUERY } from 'queryKeys';
 
 export const BudgetPage = () => {
   const [open, setOpen] = React.useState(false);
@@ -29,18 +29,14 @@ export const BudgetPage = () => {
   );
 
   const { mutate } = useMutation(BudgetService.remove, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(BUDGET_QUERY);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(BUDGET_QUERY);
+      await queryClient.invalidateQueries(CATEGORIES_QUERY);
     },
   });
 
   const deleteRecords = (ids) => mutate({ ids });
   const getUniqueId = (row) => row?.id;
-
-  const onSubmit = () => {
-    setOpen(false);
-    alert('zapisano');
-  };
 
   const headCells = [
     {
@@ -80,11 +76,7 @@ export const BudgetPage = () => {
 
   return (
     <Page title="Budżet">
-      <AddNewBudgetRecord
-        open={open}
-        onSubmit={onSubmit}
-        onClose={() => setOpen(false)}
-      />
+      <AddNewBudgetRecord open={open} close={() => setOpen(false)} />
       <Card
         title={
           <ActionHeader
