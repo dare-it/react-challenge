@@ -1,4 +1,8 @@
 import { createTheme } from '@mui/material';
+import { alpha } from '@mui/material/styles';
+
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
 
 let theme = createTheme({
   shape: {
@@ -75,6 +79,83 @@ theme = createTheme(theme, {
     },
   },
   components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+        disableElevation: true,
+      },
+      styleOverrides: {
+        root: ({ ownerState }) => ({
+          fontFamily: '"Inter"',
+          fontWeight: 500,
+          textTransform: 'none',
+          minWidth: '34px',
+          '&.Mui-disabled': {
+            backgroundColor: alpha('#333', 0.07),
+            color: alpha('#333', 0.25),
+            border: 'none',
+          },
+          ...(!ownerState.children && {
+            padding: '10px',
+          }),
+          ...(ownerState.color !== 'primary' &&
+            ownerState.variant === 'outlined' && {
+              '&.Mui-disabled': {
+                border: `1px solid ${alpha('#333', 0.07)}`,
+                color: alpha('#333', 0.25),
+              },
+            }),
+        }),
+        contained: ({ ownerState, theme }) => ({
+          ...(ownerState.color !== 'primary' && {
+            backgroundColor: theme.palette[ownerState.color].light,
+            color: theme.palette[ownerState.color].main,
+            '&:hover': {
+              backgroundColor: theme.palette[ownerState.color].main,
+              color: theme.palette[ownerState.color].contrastText,
+            },
+            '&:active': {
+              backgroundColor: theme.palette[ownerState.color].light,
+              color: theme.palette[ownerState.color].main,
+            },
+          }),
+          ...(ownerState.color === 'warning' && {
+            backgroundColor: theme.palette.warning.light,
+            color: '#B28C09',
+            '&:active': {
+              backgroundColor: theme.palette.warning.light,
+              color: '#B28C09',
+            },
+          }),
+        }),
+        containedPrimary: {
+          '&:hover': {
+            color: theme.palette.secondary.main,
+          },
+        },
+        outlined: ({ ownerState, theme }) => ({
+          '&:hover': {
+            backgroundColor: theme.palette[ownerState.color].light,
+            color: theme.palette[ownerState.color].main,
+          },
+        }),
+        outlinedPrimary: {
+          backgroundColor: theme.palette.secondary.main,
+          border: 'none',
+          '&:hover': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
+            border: 'none',
+          },
+        },
+        startIcon: ({ ownerState }) => ({
+          ...(!ownerState.children && {
+            marginRight: 0,
+            marginLeft: 0,
+          }),
+        }),
+      },
+    },
     MuiAppBar: {
       styleOverrides: {
         root: {
