@@ -20,7 +20,7 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
   const queryClient = useQueryClient();
 
   const { data: categoryList } = useQuery('categoryData', () =>
-    CategoryService.findAll(),
+    CategoryService.findAll(true),
   );
 
   const createBudget = (newBudget) => {
@@ -106,7 +106,6 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
       </FormControl>
     </form>
   );
-  console.log(errors);
   return (
     <Modal
       {...props}
