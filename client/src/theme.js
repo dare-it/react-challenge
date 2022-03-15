@@ -27,14 +27,21 @@ let theme = createTheme({
       contrastText: '#fff',
     },
     success: {
-      main: '#00A980',
+      main: '#66bb6a',
       light: '#DBEBDB',
+      dark: '#00A980',
       contrastText: '#fff',
     },
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
+    },
+    grey: {
+      lev1: 'rgba(51, 51, 51, 0.07)',
+      lev3: 'rgba(51, 51, 51, 0.25)',
+      lev4: 'rgba(51, 51, 51, 0.5)',
     },
     background: {
       default: '#F8F8F8',
@@ -142,6 +149,157 @@ theme = createTheme(theme, {
       styleOverrides: {
         root: {
           borderRadius: theme.shape.borderRadius,
+        },
+      },
+    },
+    MuiTouchRipple: {
+      styleOverrides: {
+        root: {
+          display: 'none',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          width: '12px',
+          height: '12px',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          textTransform: 'capitalize',
+          minHeight: '22.7px',
+          minWidth: '22.7px',
+          padding: '6px 12px',
+          fontWeight: '500',
+          backgroundColor: theme.palette.secondary.main,
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.grey.lev1,
+            color: theme.palette.grey.lev3,
+          },
+          ':hover': {
+            boxShadow: 'none',
+          },
+          ':active': {
+            boxShadow: 'none',
+          },
+        },
+        endIcon: {
+          marginLeft: '4px',
+          marginRight: '0',
+        },
+        startIcon: {
+          marginRight: '4px',
+        },
+        containedPrimary: {
+          backgroundColor: theme.palette.primary.main,
+          ':active': {
+            backgroundColor: theme.palette.primary.dark,
+          },
+        },
+        containedError: {
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.main,
+          ':hover': {
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+          },
+        },
+        containedSuccess: {
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.main,
+          ':hover': {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
+          },
+        },
+        containedWarning: {
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.dark,
+          ':hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+          },
+          ':active': {
+            backgroundColor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+          },
+        },
+        outlinedPrimary: {
+          border: 'none',
+          backgroundColor: theme.palette.secondary.main,
+          color: theme.palette.primary.main,
+          ':hover': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
+            border: 'none',
+          },
+          ':active': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
+            border: 'none',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.grey.lev1,
+            color: theme.palette.grey.lev3,
+            border: 'none',
+          },
+        },
+        outlinedError: {
+          backgroundColor: theme.palette.error.contrastText,
+          ':hover': {
+            backgroundColor: theme.palette.error.light,
+          },
+          ':active': {
+            backgroundColor: theme.palette.error.light,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.error.contrastText,
+            color: theme.palette.grey.lev3,
+            borderColor: theme.palette.grey.lev1,
+          },
+        },
+        outlinedSuccess: {
+          border: '1px solid theme.palette.success.main',
+          backgroundColor: theme.palette.success.contrastText,
+          color: theme.palette.success.dark,
+          ':hover': {
+            backgroundColor: theme.palette.success.light,
+          },
+          ':active': {
+            backgroundColor: theme.palette.success.light,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.success.contrastText,
+            color: theme.palette.grey.lev3,
+            borderColor: theme.palette.grey.lev1,
+          },
+        },
+        outlinedWarning: {
+          backgroundColor: theme.palette.warning.contrastText,
+          ':hover': {
+            backgroundColor: theme.palette.warning.light,
+          },
+          ':active': {
+            backgroundColor: theme.palette.warning.light,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.warning.contrastText,
+            color: theme.palette.grey.lev3,
+            borderColor: theme.palette.grey.lev1,
+          },
         },
       },
     },
