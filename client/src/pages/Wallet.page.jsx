@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { LedgerWidget, Page } from 'ui';
 
+
 export const WalletPage = () => (
   <Page title={'Portfel'}>
     <Grid container spacing={{ xs: 3, md: 6 }}>
