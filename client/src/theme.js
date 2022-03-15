@@ -25,10 +25,12 @@ let theme = createTheme({
       main: '#FF5D5D',
       light: '#FCECE6',
       contrastText: '#fff',
+      secondary: '#FDE8E0',
     },
     success: {
-      main: '#00A980',
+      main: '#66BB6A',
       light: '#DBEBDB',
+      dark: '#00A980',
       contrastText: '#fff',
     },
     warning: {
@@ -38,6 +40,13 @@ let theme = createTheme({
     },
     background: {
       default: '#F8F8F8',
+      blue: '#37C4D7'
+    },
+    greys: {
+      level1: 'rgba(51, 51, 51, 0.07)',
+      level2: '',
+      level3: 'rgba(51, 51, 51, 0.25)',
+      level4: 'rgba(51, 51, 51, 0.5)',
     },
   },
 });
@@ -46,6 +55,18 @@ theme = createTheme(theme, {
   typography: {
     fontSize: 16,
     fontWeightLight: 300,
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      'Inter',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      'sans-serif',
+    ].join(','),
     h1: {
       fontWeight: 700,
       lineHeight: 1.2,
@@ -144,6 +165,164 @@ theme = createTheme(theme, {
           borderRadius: theme.shape.borderRadius,
         },
       },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            'Inter',
+            'Oxygen',
+            'Ubuntu',
+            'Cantarell',
+            'Fira Sans',
+            'Droid Sans',
+            'Helvetica Neue',
+            'sans-serif',
+          ].join(','),
+          fontSize: '0.9375rem',
+          textTransform: 'capitalize',
+          lineHeight: '1.375rem',
+          height: '38px',
+          maxWidth: 'max-content',
+        },
+      },
+      variants: [
+        {
+          props: { size: 'medium' },
+          style: {
+            padding: '8px 12px',
+          },
+        },
+        {
+          props: { variant: 'contained' },
+          style: {
+            '&, &:hover, &:active': {
+              boxShadow: 'none',
+            },
+
+            '&:disabled': {
+              color: theme.palette.greys.level3,
+              backgroundColor: theme.palette.greys.level1,
+            },
+          },
+        },
+        {
+          props: { variant: 'contained', color: 'primary' },
+          style: {
+            color: theme.palette.primary.contrastText,
+            backgroundColor: theme.palette.primary.main,
+
+            '&:hover, &:active': {
+              backgroundColor: theme.palette.primary.dark,
+              color: theme.palette.secondary.light,
+            },
+          },
+        },
+        {
+          props: { variant: 'contained', color: 'error' },
+          style: {
+            '&, &:active': {
+              color: theme.palette.error.main,
+              backgroundColor: theme.palette.error.light,
+            },
+
+            '&:hover': {
+              backgroundColor: theme.palette.error.main,
+              color: theme.palette.error.contrastText,
+            },
+          },
+        },
+        {
+          props: { variant: 'contained', color: 'success' },
+          style: {
+            '&, &:active': {
+              color: theme.palette.success.dark,
+              backgroundColor: theme.palette.success.light,
+            },
+
+            '&:hover': {
+              backgroundColor: theme.palette.success.dark,
+              color: theme.palette.success.contrastText,
+            },
+          },
+        },
+        {
+          props: { variant: 'contained', color: 'warning' },
+          style: {
+            '&, &:active': {
+              color: theme.palette.warning.dark,
+              backgroundColor: theme.palette.warning.light,
+            },
+
+            '&:hover': {
+              color: theme.palette.warning.contrastText,
+              backgroundColor: theme.palette.warning.main,
+            },
+          },
+        },
+        {
+          props: { variant: 'outlined' },
+          style: {
+            '&:disabled': {
+              color: theme.palette.greys.level3,
+            },
+          },
+        },
+        {
+          props: { variant: 'outlined', color: 'primary' },
+          style: {
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.primary.main,
+            border: 'none',
+
+            '&:hover, &:active': {
+              backgroundColor: theme.palette.secondary.dark,
+              border: 'none',
+              color: theme.palette.primary.dark,
+            },
+
+            '&:disabled': {
+              backgroundColor: theme.palette.greys.level1,
+              border: 'none',
+            },
+          },
+        },
+        {
+          props: { variant: 'outlined', color: 'error' },
+          style: {
+            borderColor: theme.palette.error.main,
+            color: theme.palette.error.main,
+
+            '&:hover, &:active': {
+              backgroundColor: theme.palette.error.secondary,
+            },
+          },
+        },
+        {
+          props: { variant: 'outlined', color: 'success' },
+          style: {
+            color: theme.palette.success.dark,
+            borderColor: theme.palette.success.main,
+
+            '&:hover, &:active': {
+              backgroundColor: theme.palette.success.light,
+            },
+          },
+        },
+        {
+          props: { variant: 'outlined', color: 'warning' },
+          style: {
+            color: theme.palette.warning.main,
+            borderColor: theme.palette.warning.main,
+
+            '&:hover, &:active': {
+              backgroundColor: theme.palette.warning.light,
+            },
+          },
+        },
+      ],
     },
   },
 });
