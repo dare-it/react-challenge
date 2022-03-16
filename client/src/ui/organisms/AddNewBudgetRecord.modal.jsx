@@ -46,7 +46,7 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
   const { data } = useQuery('categoriesData', () =>
     CategoryService.findAll(true),
   );
-  const mutation = useMutation(
+  const addBudgetRecordMutation = useMutation(
     (requestBody) => BudgetService.create({ requestBody }),
     {
       onSuccess: () => {
@@ -56,12 +56,12 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
     },
   );
   const onSubmit = (data) => {
-    const output = {
+    const result = {
       amountInCents: data.amount * 100,
       categoryId: data.select,
     };
     setOpenModal(false);
-    mutation.mutate(output);
+    addBudgetRecordMutation.mutate(result);
     reset();
   };
   const handleChange = (event) => {
@@ -94,8 +94,9 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel>Kategoria</InputLabel>
+              <InputLabel id="demo-simple-select-label">Kategoria</InputLabel>
               <Select
+                labelId="demo-simple-select-label"
                 name="select"
                 value={category}
                 label="Kategoria"

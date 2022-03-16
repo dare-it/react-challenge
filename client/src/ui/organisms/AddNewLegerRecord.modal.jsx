@@ -49,19 +49,19 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
   });
   const queryClient = useQueryClient();
   const { data } = useQuery('categoriesData', () => CategoryService.findAll());
-  const mutation = useMutation(
+  const addLedgerRecordMutation = useMutation(
     (requestBody) => LedgerService.create({ requestBody }),
     { onSuccess: () => queryClient.invalidateQueries('ledgerData') },
   );
   const onSubmit = (data) => {
-    const output = {
+    const result= {
       mode: type,
       amountInCents: data.amount * 100,
       categoryId: data.select,
       title: data.name,
     };
     setOpenModal(false);
-    mutation.mutate(output);
+    addLedgerRecordMutation.mutate(result);
     reset();
   };
 
@@ -69,9 +69,9 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     reset();
     handleClose();
   };
- const handleChange =(event)=>{
-   setCategory(event.target.value)
- }
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <Modal
       handleClose={handleCancel}
@@ -115,8 +115,9 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
               rules={{ required: true }}
               render={({ field }) => (
                 <FormControl fullWidth>
-                  <InputLabel>Kategoria</InputLabel>
+                  <InputLabel id="demo-simple-select-label">Kategoria</InputLabel>
                   <Select
+                    labelId="demo-simple-select-label"
                     name="select"
                     value={category}
                     label="Kategoria"
