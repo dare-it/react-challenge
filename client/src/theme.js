@@ -7,34 +7,59 @@ let theme = createTheme({
   palette: {
     text: {
       primary: '#333',
+      errorMessage: 'rgba(51, 51, 51, 0.5)',
+      disabled: '#33333340',
     },
     type: 'light',
     primary: {
       main: '#334ACC',
       dark: '#223289',
       light: '#e6f0fd',
+      disabled: '#33333312',
       contrastText: '#fff',
+      hoverText: '#E8EAF6',
+      activeText: '#E8EAF6',
     },
     secondary: {
       main: '#E8EAF6',
       dark: '#C5CAE9',
       light: '#e6f0fd',
-      contrastText: '#fff',
+      disabled: '#33333312',
+      contrastText: '#334ACC',
+      hoverText: '#223289',
     },
     error: {
-      main: '#FF5D5D',
-      light: '#FCECE6',
-      contrastText: '#fff',
+      main: '#FCECE6',
+      dark: '#FF5D5D',
+      disabled: '#33333312',
+      contrastText: '#FF5D5D',
+      hoverText: '#fff',
+      outlined: {
+        main: '#fff',
+        dark: '#FDE8E0',
+      },
     },
     success: {
-      main: '#00A980',
-      light: '#DBEBDB',
-      contrastText: '#fff',
+      main: '#DBEBDB',
+      dark: '#00A980',
+      disabled: '#33333312',
+      contrastText: '#00A980',
+      hoverText: '#fff',
+      outlined: {
+        main: '#fff',
+        dark: '#DBEBDB',
+      },
     },
     warning: {
-      main: '#FFA726',
-      light: '#FFF5D2',
-      contrastText: '#fff',
+      main: '#FFF5D2',
+      dark: '#FFA726',
+      disabled: '#33333312',
+      contrastText: '#B28C09',
+      hoverText: '#fff',
+      outlined: {
+        main: '#fff',
+        dark: '#FFF5D2',
+      },
     },
     background: {
       default: '#F8F8F8',
@@ -44,6 +69,7 @@ let theme = createTheme({
 
 theme = createTheme(theme, {
   typography: {
+    fontFamily: `"Inter", sans-serif`,
     fontSize: 16,
     fontWeightLight: 300,
     h1: {
@@ -80,6 +106,124 @@ theme = createTheme(theme, {
         root: {
           backgroundColor: '#fff',
           color: '#333',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
+          fontWeight: '600',
+          padding: '6px 12px',
+          textTransform: 'capitalize',
+          '&:hover,&:active': {
+            boxShadow: 'none',
+          },
+          '&.Mui-disabled': {
+            color: theme.palette.text.disabled,
+          },
+          '&.MuiButton-outlined': {
+            borderSize: '1px',
+            borderStyle: 'solid',
+          },
+        },
+        containedPrimary: {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.primary.dark,
+            color: theme.palette.primary.hoverText,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.primary.disabled,
+          },
+        },
+        outlinedPrimary: {
+          backgroundColor: theme.palette.secondary.main,
+          color: theme.palette.secondary.contrastText,
+          border: '0',
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.secondary.hoverText,
+            border: '0',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.primary.disabled,
+            border: '0',
+          },
+        },
+        containedError: {
+          backgroundColor: theme.palette.error.main,
+          color: theme.palette.error.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.error.dark,
+            color: theme.palette.error.hoverText,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.error.disabled,
+          },
+        },
+        outlinedError: {
+          backgroundColor: theme.palette.error.outlined.main,
+          borderColor: theme.palette.error.dark,
+          color: theme.palette.error.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.error.outlined.dark,
+            borderColor: 'inherit',
+            color: theme.palette.error.contrastText,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.error.outlined.main,
+            borderColor: theme.palette.error.disabled,
+          },
+        },
+        containedSuccess: {
+          backgroundColor: theme.palette.success.main,
+          color: theme.palette.success.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.success.dark,
+            color: theme.palette.success.hoverText,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.success.disabled,
+          },
+        },
+        outlinedSuccess: {
+          backgroundColor: theme.palette.success.outlined.main,
+          borderColor: theme.palette.success.outlined.dark,
+          color: theme.palette.success.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.success.outlined.dark,
+            borderColor: 'inherit',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.success.outlined.main,
+            borderColor: theme.palette.success.disabled,
+          },
+        },
+        containedWarning: {
+          backgroundColor: theme.palette.warning.main,
+          color: theme.palette.warning.contrastText,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.warning.dark,
+            color: theme.palette.warning.hoverText,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.warning.disabled,
+          },
+        },
+        outlinedWarning: {
+          backgroundColor: theme.palette.warning.outlined.main,
+          borderColor: theme.palette.warning.dark,
+          color: theme.palette.warning.dark,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.warning.outlined.dark,
+            borderColor: 'inherit',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.warning.outlined.main,
+            borderColor: theme.palette.warning.disabled,
+          },
         },
       },
     },
