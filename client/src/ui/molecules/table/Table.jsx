@@ -14,7 +14,6 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const handleSelectAllClick = (event) => {
     setSelected(event.target.checked ? rows.map((n) => getUniqueId(n)) : []);
   };
@@ -64,7 +63,6 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
                 const uniqueId = getUniqueId(row);
                 const isItemSelected = selected.includes(uniqueId);
                 const labelId = `enhanced-table-checkbox-${index}`;
-
                 return (
                   <TableRow
                     hover
@@ -86,7 +84,6 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
                     </TableCell>
                     {headCells.map((head) => {
                       const renderedRow = head.renderCell(row) || '';
-
                       return (
                         <TableCell key={head.id} align="left">
                           {renderedRow}

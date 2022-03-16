@@ -12,7 +12,6 @@ export const ListItemLink = (props) => {
       )),
     [to],
   );
-
   return (
     <ListItemButton
       selected={selectedPathname === to}
