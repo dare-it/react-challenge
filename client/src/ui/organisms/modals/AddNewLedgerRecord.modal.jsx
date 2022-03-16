@@ -127,13 +127,13 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
         </FormControl>
       )}
       <Button variant="outlined" text="Anuluj" onClick={handleClose} />
-        <Button
-          variant="contained"
-          text="Zapisz"
-          type="submit"
-          disabled={!!Object.keys(errors).length}
-          form="form"
-        />
+      <Button
+        variant="contained"
+        text="Zapisz"
+        type="submit"
+        disabled={!!Object.keys(errors).length}
+        form="form"
+      />
     </form>
   );
 

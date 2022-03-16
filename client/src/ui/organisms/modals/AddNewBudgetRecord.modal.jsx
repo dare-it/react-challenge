@@ -112,13 +112,13 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
         </FormHelperText>
       </FormControl>
       <Button variant="outlined" text="Anuluj" onClick={handleClose} />
-        <Button
-          variant="contained"
-          text="Zapisz"
-          type="submit"
-          disabled={!!Object.keys(errors).length}
-          form="form"
-        />
+      <Button
+        variant="contained"
+        text="Zapisz"
+        type="submit"
+        disabled={!!Object.keys(errors).length}
+        form="form"
+      />
     </form>
   );
   return (
