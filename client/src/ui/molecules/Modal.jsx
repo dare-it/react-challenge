@@ -21,17 +21,6 @@ const Modal = ({
         <ActionHeader variant="h4" title={header} />
       </DialogTitle>
       <DialogContent sx={{ height: '300px' }}>{children}</DialogContent>
-      <DialogActions>
-        <Button variant="outlined" text="Anuluj" onClick={handleClose} />
-        <Button
-          variant="contained"
-          text="Zapisz"
-          onClick={handleAccept}
-          type="submit"
-          disabled={disableSaveButton}
-          form="form"
-        />
-      </DialogActions>
     </MuiModal>
   );
 };

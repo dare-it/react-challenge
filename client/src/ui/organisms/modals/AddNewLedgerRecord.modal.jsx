@@ -15,6 +15,7 @@ import { CategoryService, LedgerService } from 'api';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { CategoryCell } from 'ui';
 import { formatDollarsToCents } from 'utils';
+import { Button } from 'ui/atoms/Button';
 
 const AddNewLedgerRecordModal = ({ type, ...props }) => {
   const queryClient = useQueryClient();
@@ -107,7 +108,11 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
             name="categoryId"
             control={control}
             render={({ field }) => (
-              <Select labelId="select-category-label" {...field}>
+              <Select
+                labelId="select-category-label"
+                label="Wybierz kategorię"
+                {...field}
+              >
                 {categoryList?.map((category) => (
                   <MenuItem key={category.id} value={category.id}>
                     <CategoryCell color={category.color} name={category.name} />
@@ -121,6 +126,14 @@ const AddNewLedgerRecordModal = ({ type, ...props }) => {
           </FormHelperText>
         </FormControl>
       )}
+      <Button variant="outlined" text="Anuluj" onClick={handleClose} />
+        <Button
+          variant="contained"
+          text="Zapisz"
+          type="submit"
+          disabled={!!Object.keys(errors).length}
+          form="form"
+        />
     </form>
   );
 

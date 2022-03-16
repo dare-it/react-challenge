@@ -15,6 +15,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { budgetValidation } from 'utils/schemas';
 import { CategoryCell } from 'ui';
 import { formatDollarsToCents } from 'utils';
+import { Button } from 'ui/atoms/Button';
 
 const AddNewBudgetRecordModal = ({ type, ...props }) => {
   const queryClient = useQueryClient();
@@ -93,7 +94,11 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
           name="categoryId"
           control={control}
           render={({ field }) => (
-            <Select labelId="select-category-label" {...field}>
+            <Select
+              labelId="select-category-label"
+              label="Wybierz kategorię"
+              {...field}
+            >
               {categoryList?.map((category) => (
                 <MenuItem key={`category---${category.id}`} value={category.id}>
                   <CategoryCell color={category.color} name={category.name} />
@@ -106,6 +111,14 @@ const AddNewBudgetRecordModal = ({ type, ...props }) => {
           {errors.categoryId && errors.categoryId.message}
         </FormHelperText>
       </FormControl>
+      <Button variant="outlined" text="Anuluj" onClick={handleClose} />
+        <Button
+          variant="contained"
+          text="Zapisz"
+          type="submit"
+          disabled={!!Object.keys(errors).length}
+          form="form"
+        />
     </form>
   );
   return (
