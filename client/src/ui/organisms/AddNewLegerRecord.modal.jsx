@@ -54,7 +54,7 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     { onSuccess: () => queryClient.invalidateQueries('ledgerData') },
   );
   const onSubmit = (data) => {
-    const result= {
+    const result = {
       mode: type,
       amountInCents: data.amount * 100,
       categoryId: data.select,
@@ -115,7 +115,9 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
               rules={{ required: true }}
               render={({ field }) => (
                 <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Kategoria</InputLabel>
+                  <InputLabel id="demo-simple-select-label">
+                    Kategoria
+                  </InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     name="select"
@@ -124,7 +126,7 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
                     onChange={handleChange}
                     {...field}
                   >
-                    {data.map((category) => (
+                    {data?.map((category) => (
                       <MenuItem value={category.id} key={category.id}>
                         <CategoryCell
                           color={category?.color}
