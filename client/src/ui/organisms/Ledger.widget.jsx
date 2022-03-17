@@ -68,7 +68,7 @@ export const LedgerWidget = () => {
           <Grid 
             item 
             xs={12}>
-            <ContentManagement headers={headers} queryName={LEDGER_QUERY} getDataEndpoint={LedgerService.findAll} removeDataEndpoint={LedgerService.remove} />
+            <ContentManagement headers={headers} queryName={[LEDGER_QUERY]} getDataEndpoint={LedgerService.findAll} removeDataEndpoint={LedgerService.remove} />
           </Grid>
         </Grid>
         <AddNewLedgerRecord open={open} onClose={closeModal} mode={mode}/>
