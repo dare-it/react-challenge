@@ -1,25 +1,20 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import TextField from '@mui/material/TextField';
-import { CategoryCell, Modal } from 'ui';
+import { CategorySelect, Modal } from 'ui';
 import { INCOME, EXPENSE } from 'ledgerKeys';
 import { LedgerService, CategoryService } from 'api';
 import { useMutation, useQueryClient, useQuery } from 'react-query';
-import {
-  formatDollarsToCents,
-  matchTwoDecimalPlaces,
-  checkAmountError,
-} from 'utils';
-import { LEDGER_QUERY, CATEGORIES_QUERY } from 'queryKeys';
-import { MenuItem, Box } from '@mui/material';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { formatDollarsToCents, matchTwoDecimalPlaces } from 'utils';
+import { LEDGER_QUERY, CATEGORIES_QUERY, SUMMARY_QUERY } from 'queryKeys';
+import { Box } from '@mui/material';
 
 export const AddNewLedgerRecord = (props) => {
   const {
     handleSubmit,
     control,
     reset,
-    formState: { errors, isDirty, isValid },
+    formState: { isDirty, isValid },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -32,12 +27,14 @@ export const AddNewLedgerRecord = (props) => {
   const { data } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
   const queryClient = useQueryClient();
   const mutation = useMutation((data) => LedgerService.create(data), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(LEDGER_QUERY);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(LEDGER_QUERY);
+      await queryClient.invalidateQueries(SUMMARY_QUERY);
+      await onClose();
     },
   });
 
-  const onSubmit = async ({ name, amount, categoryId = null }) => {
+  const onSubmit = ({ name, amount, categoryId = null }) => {
     const amountInCents = formatDollarsToCents(amount.replace(',', '.'));
     const title = name.trim();
 
@@ -48,14 +45,7 @@ export const AddNewLedgerRecord = (props) => {
       mode: props.mode,
     };
 
-    try {
-      await mutation.mutateAsync({ requestBody: requestBody });
-      reset();
-      props.onClose();
-    } catch (error) {
-      // TODO: add information about error for user
-      console.log(error);
-    }
+    mutation.mutate({ requestBody: requestBody });
   };
 
   const onClose = () => {
@@ -72,6 +62,9 @@ export const AddNewLedgerRecord = (props) => {
       disabled={!isDirty || !isValid}
     >
       <Box
+        component="form"
+        noValidate
+        autoComplete="off"
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -97,7 +90,14 @@ export const AddNewLedgerRecord = (props) => {
         <Controller
           name={'amount'}
           control={control}
-          rules={{ required: true, min: 0.01, max: 1000000.01 }}
+          rules={{
+            required: { value: true, message: 'Kwota nie może być pusta' },
+            min: { value: 0.01, message: 'Kwota musi być większa niż 0' },
+            max: {
+              value: 1000000.01,
+              message: 'Kwota nie może być większa niż 1000000',
+            },
+          }}
           render={({ field: { onChange, value }, fieldState: { error } }) => (
             <TextField
               type="number"
@@ -106,7 +106,7 @@ export const AddNewLedgerRecord = (props) => {
               label={'Kwota'}
               variant="outlined"
               error={!!error}
-              helperText={error ? checkAmountError(errors) : null}
+              helperText={error ? error.message : null}
               sx={{
                 marginTop: '32px',
               }}
@@ -117,38 +117,15 @@ export const AddNewLedgerRecord = (props) => {
           <Controller
             name={'categoryId'}
             control={control}
-            render={({ field: { onChange, value } }) => (
-              <TextField
-                select
+            rules={{ required: true }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <CategorySelect
                 onChange={onChange}
+                label="Kategoria"
                 value={value}
-                label={'Kategoria'}
-                SelectProps={{
-                  IconComponent: () => (
-                    <KeyboardArrowDownIcon
-                      sx={(theme) => ({
-                        color: theme.palette.primary.main,
-                        position: 'absolute',
-                        right: '18px',
-                      })}
-                    />
-                  ),
-                }}
-                sx={{
-                  marginTop: '32px',
-                }}
-              >
-                {data?.map((category) => {
-                  return (
-                    <MenuItem value={category.id} key={category.id}>
-                      <CategoryCell
-                        color={category.color}
-                        name={category.name}
-                      />
-                    </MenuItem>
-                  );
-                })}
-              </TextField>
+                data={data}
+                error={error}
+              />
             )}
           />
         )}

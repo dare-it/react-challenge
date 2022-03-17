@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 import { LedgerService } from 'api';
 import { theme } from 'theme'
 import { Box } from '@mui/material';
-import { LEDGER_QUERY } from 'queryKeys';
+import { BUDGET_QUERY, LEDGER_QUERY, SUMMARY_QUERY } from 'queryKeys';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { INCOME, EXPENSE } from 'ledgerKeys'
@@ -68,7 +68,7 @@ export const LedgerWidget = () => {
           <Grid 
             item 
             xs={12}>
-            <ContentManagement headers={headers} queryName={[LEDGER_QUERY]} getDataEndpoint={LedgerService.findAll} removeDataEndpoint={LedgerService.remove} />
+            <ContentManagement headers={headers} queryName={[LEDGER_QUERY, SUMMARY_QUERY, BUDGET_QUERY]} getDataEndpoint={LedgerService.findAll} removeDataEndpoint={LedgerService.remove} />
           </Grid>
         </Grid>
         <AddNewLedgerRecord open={open} onClose={closeModal} mode={mode}/>

@@ -15,7 +15,7 @@ import { Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { BudgetService, CategoryService } from 'api';
 import { theme } from 'theme';
-import { BUDGET_QUERY, CATEGORIES_QUERY } from 'queryKeys';
+import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
 import { useModal } from '../hooks/useModal';
 import { useQuery } from 'react-query';
 
@@ -68,7 +68,7 @@ const headers = [
 export const BudgetPage = () => {
   const [open, handleOpen, handleClose] = useModal();
 
-  const {data} = useQuery(CATEGORIES_QUERY,  () => CategoryService.findAll(true) )
+  const {data} = useQuery(PARTIAL_CATEGORIES_QUERY,  () => CategoryService.findAll(true) )
 
   return (
     <Page title="Budżet">
@@ -101,7 +101,7 @@ export const BudgetPage = () => {
           <Grid item xs={12}>
             <ContentManagement
               headers={headers}
-              queryName={[BUDGET_QUERY, CATEGORIES_QUERY]}
+              queryName={[BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY]}
               getDataEndpoint={BudgetService.findAll}
               removeDataEndpoint={BudgetService.remove}
             />
