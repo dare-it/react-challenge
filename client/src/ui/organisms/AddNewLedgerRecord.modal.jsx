@@ -1,81 +1,163 @@
 import React from 'react';
+import { Box, TextField } from '@mui/material';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as PropTypes from 'prop-types';
-import { Modal } from 'ui/molecules/Modal';
-import { ModalForm } from 'ui/molecules/ModalForm';
-import { Select } from 'ui/atoms/Select';
-import TextField from '@mui/material/TextField';
-import { useForm, FormProvider, Controller } from 'react-hook-form';
-import FormField from 'ui/molecules/FormField';
-import { FormControl, FormHelperText, useFormControl } from '@mui/material';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { useForm, Controller } from 'react-hook-form';
 
-export const AddNewLedgerRecord = ({ type, open, onClose }) => {
-  //const form = useForm(/*{defaultValues:{nazwa:''}}*/);
-  const { handleSubmit, register } = useForm();
+import { CategoryService, LedgerService } from 'api';
+import { Modal, CategoryField, Loader, Error, NoContent } from 'ui';
+import { formatDollarsToCents } from 'utils';
+import { LEDGER_QUERY, CATEGORIES_QUERY, BUDGET_QUERY } from 'queryKeys';
 
-  {
-    /*} const [name, setName] = React.useState('');
-   const handleChange = (event) => {
-     setName(event.target.value);
-   };
-
-   function MyFormHelperText() {
-    const value = useFormControl() || {};
-  
-    const helperText = React.useMemo(() => {
-      console.log(value.filled);
-      console.log(value);
-      
-        if (value.filled == false && value.required == false && value.filled!== '/^[A-Za-z]+$/i') {
-            return 'Nazwa nie może pyć puste';
-        }
-  
-      return '';
-    }, [value.filled]);
-  
-    return <FormHelperText>{helperText}</FormHelperText>;
-  }
-*/
-  }
-
-  if (type === 'INCOME') {
-    return (
-      <Modal
-        open={open}
-        onClose={onClose}
-        modalTitle="Dodaj wpływ"
-        description="Description"
-      >
-        <form onSubmit={handleSubmit((data) => console.log(data))}>
-          <FormField
-            component={TextField}
-            name="nazwa"
-            label={'Nazwa'}
-            rules={{ required: 'Nazwa nie może być pusta' }}
-            ref={register}
-          ></FormField>
-        </form>
-      </Modal>
-    );
-  }
-  if (type === 'EXPENSE') {
-    return (
-      <Modal
-        open={open}
-        onClose={onClose}
-        modalTitle="Dodaj wydatek"
-        description="Description"
-      >
-        <TextField fullWidth label="Nazwa"></TextField>
-        <TextField fullWidth label="Kwota"></TextField>
-        <Select />
-      </Modal>
-    );
-  }
+const translationKeys = {
+  income: 'wpływ',
+  expense: 'wydatek',
 };
 
-AddNewLedgerRecord.propTypes = {
-  type: PropTypes.oneOf(['INCOME', 'EXPENSE']),
+export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
+  const queryClient = useQueryClient();
+  const { handleSubmit, control, formState, reset } = useForm({
+    mode: 'onChange',
+  });
+  const {
+    isLoading,
+    error,
+    data: categories,
+  } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
+
+  const mutation = useMutation(
+    (requestBody) => LedgerService.create({ requestBody }),
+    {
+      onSuccess: async () => {
+        await queryClient.refetchQueries([LEDGER_QUERY]);
+        await queryClient.refetchQueries([BUDGET_QUERY]);
+        handleClose();
+      },
+    },
+  );
+
+  const onSubmit = async (formData) => {
+    if (!formState.isValid) return;
+
+    mutation.mutate({
+      title: formData.title,
+      amountInCents: formatDollarsToCents(formData.amount),
+      mode: type,
+      categoryId: formData.categoryId,
+    });
+    reset();
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
+
+  return (
+    <Modal
+      open={open}
+      onClose={handleClose}
+      onSubmit={handleSubmit(onSubmit)}
+      canSubmit={formState.isValid}
+      title={`Dodaj ${translationKeys[type.toLowerCase()]}`}
+    >
+      {isLoading && <Loader />}
+      {error && <Error error={error} />}
+      {!isLoading && !error && !categories?.length ? (
+        <NoContent />
+      ) : (
+        <Box component="form" autoComplete="off" noValidate>
+          <Controller
+            control={control}
+            name="title"
+            defaultValue=""
+            type="text"
+            rules={{
+              validate: (field) => {
+                if (!field.toString().trim()) {
+                  return 'Nazwa nie może być pusta';
+                }
+              },
+            }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                margin={'normal'}
+                fullWidth
+                label="Nazwa"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
+          <Controller
+            name="amount"
+            control={control}
+            defaultValue=""
+            rules={{
+              setValueAs: (value) => value.trim(),
+              required: {
+                value: true,
+                message: 'Kwota nie może być pusta',
+              },
+              min: {
+                value: 0,
+                message: 'Kwota musi być większa niż 0',
+              },
+              max: {
+                value: 1000000,
+                message: 'Kwota nie może być większa niż 1000000',
+              },
+            }}
+            render={({ field: { onChange, value }, fieldState: { error } }) => (
+              <TextField
+                margin={'normal'}
+                fullWidth
+                type="number"
+                label="Kwota"
+                value={value}
+                onChange={onChange}
+                error={!!error}
+                helperText={error ? error.message : null}
+              />
+            )}
+          />
+          {type === 'EXPENSE' && (
+            <Controller
+              name="categoryId"
+              control={control}
+              defaultValue=""
+              render={({
+                field: { onChange, value },
+                fieldState: { error },
+              }) => (
+                <CategoryField
+                  margin={'normal'}
+                  fullWidth
+                  categories={categories}
+                  value={value}
+                  onChange={onChange}
+                  error={!!error}
+                  helperText={error ? error.message : null}
+                />
+              )}
+              rules={{
+                required: {
+                  value: true,
+                  message: 'Wybierz kategorię',
+                },
+              }}
+            />
+          )}
+        </Box>
+      )}
+    </Modal>
+  );
+};
+
+AddNewLedgerRecordModal.propTypes = {
   open: PropTypes.bool,
   onClose: PropTypes.func,
+  type: PropTypes.string,
 };

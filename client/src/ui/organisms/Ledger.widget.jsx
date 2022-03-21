@@ -1,26 +1,31 @@
 import React, { useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+
 import {
   ActionHeader,
-  Card,
   Button,
   Table,
-  CategoryCell,
   LocalizedDate,
+  CategoryCell,
+  AddNewLedgerRecordModal,
   Money,
-  Loader,
   Error,
+  Loader,
   NoContent,
+  Card,
 } from 'ui';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { useQuery, useQueryClient, useMutation } from 'react-query';
-import { LEDGER_QUERY } from 'queryKeys';
 import { LedgerService } from 'api';
-import { theme } from '../../theme.js';
-import { AddNewLedgerRecord } from './AddNewLedgerRecord.modal.jsx';
+import { BUDGET_QUERY, LEDGER_QUERY } from 'queryKeys';
 
 export const LedgerWidget = () => {
+  const [modalVisible, toggleModal] = useState(false);
+  const [modalType, setModalType] = useState('');
+
   const queryClient = useQueryClient();
+
   const { isLoading, error, data } = useQuery(LEDGER_QUERY, () =>
     LedgerService.findAll(),
   );
@@ -28,134 +33,100 @@ export const LedgerWidget = () => {
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: async () => {
       await queryClient.refetchQueries([LEDGER_QUERY]);
+      await queryClient.refetchQueries([BUDGET_QUERY]);
     },
   });
 
-  const deleteRecords = (ids) => mutation.mutate(ids);
-
-  const tableDefinition = [
-    {
-      id: 'name',
-      label: 'Nazwa',
-      renderCell: (row) => <CategoryCell name={row.title} />,
-    },
-
-    {
-      id: 'category',
-      label: 'Kategoria',
-      renderCell: (row) => (
-        <CategoryCell color={row.category?.color} name={row.category?.name} />
-      ),
-    },
-
-    {
-      id: 'createdAt',
-      label: 'Data',
-      renderCell: (row) => <LocalizedDate date={row.createdAt} />,
-    },
-
-    {
-      id: 'amount',
-      label: 'Kwota',
-      renderCell: (row) => {
-        if (row.mode === 'INCOME')
-          return (
-            <div style={{ color: theme.palette.success.dark }}>
-              {' '}
-              +<Money inCents={row.amountInCents} />
-            </div>
-          );
-        if (row.mode === 'EXPENSE')
-          return (
-            <div style={{ color: theme.palette.error.main }}>
-              {' '}
-              -<Money inCents={row.amountInCents} />
-            </div>
-          );
-      },
-    },
-  ];
-
-  const [openExpense, setOpenE] = useState(false);
-  const handleOpenE = () => {
-    setOpenE(true);
+  const openModal = (modalType) => {
+    toggleModal(true);
+    setModalType(modalType);
   };
 
-  const [openIncome, setOpenI] = useState(false);
-  const handleOpenI = () => {
-    setOpenI(true);
+  const deleteRecords = (ids) => {
+    mutation.mutate(ids);
   };
-
-  const handleCloseI = () => {
-    setOpenI(false);
-  };
-
-  const handleCloseE = () => {
-    setOpenE(false);
-  };
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <Error error={error} />;
-  }
-
-  if (!data?.length) {
-    return <NoContent />;
-  }
 
   return (
     <Card
-      sx={{ minHight: '80vh', hight: '100%' }}
+      sx={{ minHeight: '80vh', height: '100%' }}
       title={
         <ActionHeader
           variant={'h1'}
           title="Portfel"
           renderActions={() => (
-            <div>
+            <Box>
               <Button
-                onClick={handleOpenI}
-                variant="outlined"
-                color="primary"
-                startIcon={<AddIcon />}
+                startIcon={<AddOutlinedIcon />}
+                onClick={() => openModal('INCOME')}
+                sx={{ marginRight: '8px' }}
               >
                 Wpłać
               </Button>
-              {openIncome ? (
-                <AddNewLedgerRecord
-                  open={openIncome}
-                  onClose={handleCloseI}
-                  type="INCOME"
-                />
-              ) : null}
               <Button
-                onClick={handleOpenE}
-                variant="outlined"
-                color="primary"
-                startIcon={<RemoveIcon />}
+                startIcon={<RemoveOutlinedIcon />}
+                onClick={() => openModal('EXPENSE')}
               >
                 Wypłać
               </Button>
-              {openExpense ? (
-                <AddNewLedgerRecord
-                  open={openExpense}
-                  onClose={handleCloseE}
-                  type="EXPENSE"
-                />
-              ) : null}
-            </div>
+            </Box>
           )}
         />
       }
     >
-      <Table
-        rows={data}
-        headCells={tableDefinition}
-        getUniqueId={(row) => row.id}
-        deleteRecords={deleteRecords}
+      {isLoading && <Loader />}
+      {error && <Error error={error} />}
+      {!isLoading && !error && !data?.length && <NoContent />}
+      {!isLoading && !error && !!data?.length && (
+        <Table
+          rows={data}
+          headCells={headCells}
+          getUniqueId={(row) => row.id}
+          deleteRecords={deleteRecords}
+        />
+      )}
+      <AddNewLedgerRecordModal
+        open={modalVisible}
+        onClose={() => toggleModal(false)}
+        type={modalType}
       />
     </Card>
   );
 };
+
+const headCells = [
+  {
+    id: 'title',
+    label: 'Nazwa',
+    renderCell: (row) => row.title,
+  },
+  {
+    id: 'categoryName',
+    label: 'Kategoria',
+    renderCell: (row) => {
+      if (!row.mode === 'INCOME') return 'Wpływ';
+
+      return (
+        <CategoryCell name={row.category?.name} color={row.category?.color} />
+      );
+    },
+  },
+  {
+    id: 'createdAt',
+    label: 'Data',
+    renderCell: (row) => <LocalizedDate date={row.createdAt} />,
+  },
+  {
+    id: 'amountInCents',
+    label: 'Kwota',
+    renderCell: (row) =>
+      row.mode === 'EXPENSE' ? (
+        <Typography color={'error.main'} variant={'p'}>
+          -<Money inCents={row.amountInCents} />
+        </Typography>
+      ) : (
+        <Typography color={'success.main'} variant={'p'}>
+          +<Money inCents={row.amountInCents} />
+        </Typography>
+      ),
+  },
+];

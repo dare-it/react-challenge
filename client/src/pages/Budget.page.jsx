@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
-
-import {
-  ActionHeader,
-  Card,
-  Page,
-  Button,
-  Money,
-  LocalizedDate,
-  Error,
-  Loader,
-  CategoryCell,
-} from 'ui';
+import { ActionHeader, Button, Card, Page, AddNewBudgetRecordModal } from 'ui';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Grid } from '@mui/material';
 import { Table } from 'ui';
 import { BudgetService } from '../api/services/BudgetService.js';
@@ -109,14 +99,7 @@ const BudgetTable = () => {
 };
 
 export const BudgetPage = () => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <Page title="Budżet">
@@ -126,28 +109,24 @@ export const BudgetPage = () => {
             variant={'h1'}
             title="Twój budżet"
             renderActions={() => (
-              <>
-                <Button
-                  onClick={handleOpen}
-                  variant="contained"
-                  color="primary"
-                  startIcon={<AddIcon />}
-                >
-                  Zdefiniuj budżet
-                </Button>
-                {open ? (
-                  <AddNewBudgetRecord open={open} onClose={handleClose} />
-                ) : null}
-              </>
+              <Button
+                variant={'contained'}
+                onClick={() => setModalVisible(true)}
+                startIcon={<AddOutlinedIcon />}
+              >
+                Zdefiniuj budżet
+              </Button>
             )}
           />
         }
       >
         <Grid container>
           <Grid item xs={12}>
-            <QueryClientProvider client={queryClient}>
-              <BudgetTable />
-            </QueryClientProvider>
+            <BudgetTableWidget />
+            <AddNewBudgetRecordModal
+              open={modalVisible}
+              onClose={() => setModalVisible(false)}
+            />
           </Grid>
         </Grid>
       </Card>
