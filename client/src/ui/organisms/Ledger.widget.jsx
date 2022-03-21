@@ -15,6 +15,7 @@ export const LedgerWidget = () => {
     LedgerService.findAll(),
     
   );
+  
 
   const mutation = useMutation((ids) => LedgerService.remove({ids}), {
     onSuccess: async () => {

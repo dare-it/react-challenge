@@ -6,7 +6,7 @@ import { theme } from 'theme';
 
 const queryClient = new QueryClient();
 
-const App = () => {
+const App = () => {  
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
