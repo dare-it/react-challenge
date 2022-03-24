@@ -48,33 +48,79 @@ const All = () => (
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'} onClick={() => {alert('clicked');}}>Button</Button>
-      <Button variant={'contained'} color={'error'}>Button</Button>
-      <Button variant={'contained'} color={'success'}>Button</Button>
-      <Button variant={'contained'} color={'warning'}>Button</Button>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        onClick={() => {
+          alert('clicked');
+        }}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'error'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'success'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'warning'}>
+        Button
+      </Button>
     </Grid>
     <Grid container sx={{ mt: 2 }}>
-      <Button variant={'contained'} color={'primary'} endIcon={<ChevronRightIcon />}>Button</Button>
-      <Button variant={'contained'} color={'primary'} startIcon={<AddIcon />}>Button</Button>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        endIcon={<ChevronRightIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'primary'} startIcon={<AddIcon />}>
+        Button
+      </Button>
     </Grid>
     <Grid container sx={{ mt: 2 }}>
-      <Button variant={'contained'} color={'primary'} startIcon={<ChevronRightIcon />} />
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        startIcon={<ChevronRightIcon />}
+      />
     </Grid>
     <Grid container sx={{ mt: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Outlined</Typography>
       </Grid>
-      <Button variant={'outlined'} color={'primary'}>Button</Button>
-      <Button variant={'outlined'} color={'error'}>Button</Button>
-      <Button variant={'outlined'} color={'success'}>Button</Button>
-      <Button variant={'outlined'} color={'warning'}>Button</Button>
+      <Button variant={'outlined'} color={'primary'}>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'error'}>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'success'}>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'warning'}>
+        Button
+      </Button>
     </Grid>
     <Grid container sx={{ mt: 2 }}>
-      <Button variant={'outlined'} color={'warning'} endIcon={<ChevronRightIcon />}>Button</Button>
-      <Button variant={'outlined'} color={'warning'} startIcon={<AddIcon />}>Button</Button>
+      <Button
+        variant={'outlined'}
+        color={'warning'}
+        endIcon={<ChevronRightIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'warning'} startIcon={<AddIcon />}>
+        Button
+      </Button>
     </Grid>
     <Grid container sx={{ mt: 2 }}>
-      <Button variant={'outlined'} color={'warning'} startIcon={<ChevronRightIcon />}/>
+      <Button
+        variant={'outlined'}
+        color={'warning'}
+        startIcon={<ChevronRightIcon />}
+      />
     </Grid>
   </>
 );

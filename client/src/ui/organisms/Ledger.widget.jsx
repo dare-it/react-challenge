@@ -43,11 +43,6 @@ export const LedgerWidget = () => {
     setOpen(true);
   };
 
-  const onSubmit = () => {
-    setOpen(false);
-    alert('zapisano');
-  };
-
   const headCells = [
     {
       id: 0,
@@ -93,8 +88,7 @@ export const LedgerWidget = () => {
     <>
       <AddNewLedgerRecord
         open={open}
-        onSubmit={onSubmit}
-        onClose={() => setOpen(false)}
+        close={() => setOpen(false)}
         type={type}
       />
       <Card

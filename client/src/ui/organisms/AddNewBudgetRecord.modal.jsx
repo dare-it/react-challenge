@@ -1,20 +1,84 @@
-import { Modal } from 'ui';
+import { useForm, FormProvider } from 'react-hook-form';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { CATEGORIES_QUERY, BUDGET_QUERY } from 'queryKeys';
+import { CategoryService, BudgetService } from 'api';
+import { formatDollarsToCents } from 'utils';
+import { Modal, FormTextField, Select } from 'ui';
 
-export const AddNewBudgetRecord = ({
-  open,
-  onClose,
-  onSubmit,
-  ...props
-}) => {
+export const AddNewBudgetRecord = ({ open, close }) => {
+  const queryClient = useQueryClient();
+  const methods = useForm({
+    defaultValues: {
+      amountInCents: '',
+      categoryId: '',
+    },
+    mode: 'onChange',
+  });
+
+  const {
+    handleSubmit,
+    formState: { isValid },
+    reset,
+  } = methods;
+
+  const { data } = useQuery(CATEGORIES_QUERY, (unlinkedToBudget) =>
+    CategoryService.findAll(unlinkedToBudget),
+  );
+
+  const { mutateAsync } = useMutation(BudgetService.create, {
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(BUDGET_QUERY);
+      await queryClient.invalidateQueries(CATEGORIES_QUERY);
+      onClose();
+    },
+  });
+
+  const onSubmit = async (inputData) => {
+    await mutateAsync({
+      requestBody: {
+        amountInCents: Number(formatDollarsToCents(inputData.amountInCents)),
+        categoryId: inputData.categoryId,
+      },
+    });
+  };
+
+  const onClose = () => {
+    reset();
+    close();
+  };
 
   return (
     <Modal
       title="Zdefiniuj budżet"
       open={open}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit(onSubmit)}
       onClose={onClose}
+      disabled={!isValid}
     >
-      {props.children}
+      <FormProvider {...methods}>
+        <form>
+          <FormTextField
+            type="number"
+            name="amountInCents"
+            label="Kwota"
+            rules={{
+              required: {
+                value: true,
+                message: 'Kwota nie może być pusta',
+              },
+              max: {
+                value: 1000000,
+                message: 'Kwota nie może być większa niż 1000000',
+              },
+              min: {
+                value: 1,
+                message: 'Kwota musi być większa niż 0',
+              },
+            }}
+          />
+          <Select options={data} name="categoryId" label="Kategoria" />
+        </form>
+      </FormProvider>
     </Modal>
   );
 };
