@@ -29,6 +29,7 @@ export const AddNewBudgetRecord = ({ open, close }) => {
     onSuccess: async () => {
       await queryClient.invalidateQueries(BUDGET_QUERY);
       await queryClient.invalidateQueries(CATEGORIES_QUERY);
+      onClose();
     },
   });
 
@@ -39,8 +40,6 @@ export const AddNewBudgetRecord = ({ open, close }) => {
         categoryId: inputData.categoryId,
       },
     });
-    reset();
-    close();
   };
 
   const onClose = () => {

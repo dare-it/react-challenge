@@ -23,8 +23,14 @@ export const Select = ({ options, name, label }) => {
             message: 'Wybierz kategorie',
           },
         }}
-        render={({ field: { onChange, value } }) => (
-          <MuiSelect value={value} label={label} onChange={onChange}>
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <MuiSelect
+            value={value}
+            label={label}
+            onChange={onChange}
+            error={!!error}
+            helperText={error ? error.message : null}
+          >
             {options?.map((option) => {
               return (
                 <MenuItem value={option.id} key={option.id}>

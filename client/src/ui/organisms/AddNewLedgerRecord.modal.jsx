@@ -31,6 +31,7 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
   const { mutateAsync } = useMutation(LedgerService.create, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(LEDGER_QUERY);
+      onClose();
     },
   });
 
@@ -43,8 +44,6 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
         title: inputData.title,
       },
     });
-    reset();
-    close();
   };
 
   const onClose = () => {
@@ -67,13 +66,10 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
             name="title"
             label="Nazwa"
             rules={{
-              required: {
-                value: true,
-                message: 'Nazwa nie może być pusta',
-              },
-              pattern: {
-                value: /[a-zA-Z]+/,
-                message: 'Nazwa nie może być pusta',
+              validate: (field) => {
+                if (!field.toString().trim()) {
+                  return 'Nazwa nie może być pusta';
+                }
               },
             }}
           />
@@ -82,6 +78,7 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
             name="amountInCents"
             label="Kwota"
             rules={{
+              setValueAs: (value) => value.trim(),
               required: {
                 value: true,
                 message: 'Kwota nie może być pusta',
