@@ -10,26 +10,34 @@ import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
 import AddIcon from '@mui/icons-material/Add';
-import {  useContext} from 'react';
+import { useContext } from 'react';
 import { AddNewBudgetRecordModal } from '../ui/organisms/AddNewBudgetRecord.modal';
 import RootContext from '../context/context';
 
-
 export const BudgetPage = () => {
   const context = useContext(RootContext);
-  const {setOpenModal, openModal}=context
+  const { setOpenModal, openModal } = context;
 
-  const handleOpenModal =()=>{
-    setOpenModal(true)
-  }
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
   return (
-    <Page title='Budżet'>
+    <Page title="Budżet">
       <Card
         title={
           <ActionHeader
             variant={'h1'}
-            title='Budżet'
-            renderActions={() => <Button variant='contained' color='primary' startIcon={<AddIcon/>} onClick={handleOpenModal}>Zdefiniuj budżet </Button>}
+            title="Budżet"
+            renderActions={() => (
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddIcon />}
+                onClick={handleOpenModal}
+              >
+                Zdefiniuj budżet{' '}
+              </Button>
+            )}
           />
         }
       >
@@ -39,9 +47,14 @@ export const BudgetPage = () => {
           </Grid>
         </Grid>
       </Card>
-      <AddNewBudgetRecordModal title="Zdefiniuj budżet" open={openModal} handleClose={()=>setOpenModal(false)}>content</AddNewBudgetRecordModal>
+      <AddNewBudgetRecordModal
+        title="Zdefiniuj budżet"
+        open={openModal}
+        handleClose={() => setOpenModal(false)}
+      >
+        content
+      </AddNewBudgetRecordModal>
     </Page>
-
   );
 };
 const columns = [
@@ -65,7 +78,12 @@ const columns = [
   {
     id: 'currentSpendingPercent',
     label: 'Status',
-    renderCell: (row) => row.currentSpendingPercent > 100 ? 'Przekroczone' : row.currentSpendingPercent === 100 ? 'Wykorzystany' : 'W normie',
+    renderCell: (row) =>
+      row.currentSpendingPercent > 100
+        ? 'Przekroczone'
+        : row.currentSpendingPercent === 100
+        ? 'Wykorzystany'
+        : 'W normie',
   },
   {
     id: 'createdAt',
@@ -75,19 +93,27 @@ const columns = [
 ];
 
 const BudgetTable = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery('budgetData', () =>
     BudgetService.findAll(),
   );
 
-  const mutation = useMutation((ids) => BudgetService.remove({ ids }), { onSuccess: () => queryClient.invalidateQueries('budgetData') });
+  const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
+    onSuccess: () => {
+      queryClient.invalidateQueries('budgetData');
+      queryClient.invalidateQueries('categoriesData');
+    },
+  });
 
   if (isLoading) return <Loader />;
   if (error) return <Error />;
   if (data.length === 0) return <NoContent />;
   return (
-    <Table rows={data} headCells={columns} getUniqueId={(row) => row.id}
-           deleteRecords={(selected) => mutation.mutate(selected)} />
+    <Table
+      rows={data}
+      headCells={columns}
+      getUniqueId={(row) => row.id}
+      deleteRecords={(selected) => mutation.mutate(selected)}
+    />
   );
 };
-

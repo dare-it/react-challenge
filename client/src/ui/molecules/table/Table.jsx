@@ -10,8 +10,6 @@ import Checkbox from '@mui/material/Checkbox';
 import { EnhancedTableHead } from './components/EnhancedTableHead';
 import { EnhancedTableToolbar } from './components/EnhancedTableToolbar';
 
-
-
 export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
