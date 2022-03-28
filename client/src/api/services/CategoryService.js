@@ -63,11 +63,10 @@ export class CategoryService {
         path: `/category`,
         body: { ids },
       });
-    } else {
-      return request({
-        method: 'DELETE',
-        path: `/category/${ids[0]}`,
-      });
     }
+    return request({
+      method: 'DELETE',
+      path: `/category/${ids[0]}`,
+    });
   }
 }

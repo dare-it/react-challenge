@@ -1,9 +1,8 @@
-import * as React from 'react';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
 
 export const EnhancedTableToolbar = ({ selected, onDelete }) => {
   const numSelected = selected.length;
@@ -24,7 +23,7 @@ export const EnhancedTableToolbar = ({ selected, onDelete }) => {
         variant="subtitle1"
         component="p"
       >
-        Wybrano: {numSelected}
+        Wybrano: <strong>{numSelected}</strong>
       </Typography>
       <Tooltip title="Delete">
         <IconButton onClick={onDelete}>

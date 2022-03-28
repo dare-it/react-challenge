@@ -1,3 +1,5 @@
+export { blockInvalidNumberChars } from './blockInvalidNumberChars';
+export { capitalizeFirstLetter } from './capitalizeFirstLetter';
 export { getBrowserLocales } from './getBrowserLocale';
-export { formatDollarsToCents, formatCentsToDollars } from './money';
 export { getRandomColor } from './getRandomColor';
+export { formatCentsToDollars, formatDollarsToCents } from './money';
