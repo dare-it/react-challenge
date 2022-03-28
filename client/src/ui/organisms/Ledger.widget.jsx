@@ -20,6 +20,7 @@ import RootContext from '../../context/context';
 import { AddNewLedgerRecordModal } from './AddNewLegerRecord.modal';
 import { useContext } from 'react';
 
+
 export const LedgerWidget = () => {
   const context = useContext(RootContext);
   const { setModalType, setOpenModal, modalType, openModal } = context;
@@ -32,12 +33,12 @@ export const LedgerWidget = () => {
       title={
         <ActionHeader
           variant={'h1'}
-          title="Portfel"
+          title='Portfel'
           renderActions={() => (
             <Box>
               <Button
-                variant="outlined"
-                color="primary"
+                variant='outlined'
+                color='primary'
                 startIcon={<AddIcon />}
                 sx={{ m: 2 }}
                 onClick={() => handleOpenModal('INCOME')}
@@ -45,8 +46,8 @@ export const LedgerWidget = () => {
                 Wpłać
               </Button>
               <Button
-                variant="outlined"
-                color="primary"
+                variant='outlined'
+                color='primary'
                 startIcon={<RemoveIcon />}
                 onClick={() => handleOpenModal('EXPENSE')}
               >
@@ -110,7 +111,9 @@ const LedgerTable = () => {
   );
 
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
-    onSuccess: () => queryClient.invalidateQueries('ledgerData'),
+    onSuccess: () => {
+      queryClient.invalidateQueries('ledgerData');
+    },
   });
   if (isLoading) return <Loader />;
   if (error) return <Error />;
