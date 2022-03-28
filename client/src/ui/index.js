@@ -13,11 +13,18 @@ export { Card } from './atoms/Card';
 // molecules
 export { CategoryCell } from './molecules/CategoryCell';
 export { Table } from './molecules/table/Table';
+export { Modal } from './molecules/Modal';
+export { CategorySelect } from './molecules/CategorySelect';
 
 // organisms
 export { AppBar } from './organisms/AppBar';
 export { MainMenu } from './organisms/Menu';
 export { LedgerWidget } from './organisms/Ledger.widget';
+export { ContentManagement } from './organisms/ContentManagement';
+export { AddNewBudgetRecord } from './organisms/AddNewBudgetRecord.modal';
+export { AddNewLedgerRecord } from './organisms/AddNewLedgerRecord.modal';
+export { Balance } from './organisms/Balance.widget';
+export { Expenses } from './organisms/Expenses.widget';
 
 // templates
 export { Page } from './templates/Page';
