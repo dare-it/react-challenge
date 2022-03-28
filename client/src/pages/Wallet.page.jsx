@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { LedgerWidget, Page } from 'ui';
-import { Chart } from '../ui/organisms/SummaryService.chart';
+import { ChartBudgetService } from '../ui/organisms/BudgetService.chart';
+import { ChartSummaryService } from '../ui/organisms/SummaryService.chart';
 
 export const WalletPage = () => (
   <Page title={'Portfel'}>
@@ -10,11 +11,11 @@ export const WalletPage = () => (
         <LedgerWidget />
       </Grid>
       <Grid container item xs={12} md={4} spacing={3}>
-        <Grid item xs={12}>
-          <Chart />
+        <Grid item xs={12} data-test-id={'wallet-top-sidebar'}>
+          <ChartSummaryService />
         </Grid>
         <Grid item xs={12} data-test-id={'wallet-bottom-sidebar'}>
-          {/*  TODO in task 5 */}
+          <ChartBudgetService />
         </Grid>
       </Grid>
     </Grid>

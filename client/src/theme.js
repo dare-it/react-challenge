@@ -79,6 +79,10 @@ theme = createTheme(theme, {
     p: {
       color: `rgba(${theme.palette.text.secondary},0.5)`,
     },
+    subtitle1: {
+      fontSize: '0.9rem',
+      color: `rgba(${theme.palette.text.secondary},0.5)`,
+    },
   },
   components: {
     MuiAppBar: {

@@ -102,6 +102,7 @@ const BudgetTable = () => {
     onSuccess: () => {
       queryClient.invalidateQueries('budgetData');
       queryClient.invalidateQueries('categoriesData');
+      queryClient.invalidateQueries('chartBudgetData');
     },
   });
 

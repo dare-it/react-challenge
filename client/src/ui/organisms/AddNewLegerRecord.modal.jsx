@@ -54,7 +54,8 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries('ledgerData');
-        queryClient.invalidateQueries('chartData');
+        queryClient.invalidateQueries('chartServiceData');
+        queryClient.invalidateQueries('chartBudgetData');
       },
     },
   );

@@ -12,16 +12,13 @@ export const StyledChartSection = styled.div`
 export const StyledBalanceContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 `;
 export const StyledChartContainer = styled.div`
   width: 60%;
   margin: 0 auto;
 `;
 
-export const StyledParagraphBalance = styled.p`
-  font-size: 0.9rem;
-  margin-top: -15px;
-`;
 export const StyledLegendContainer = styled.ul`
   display: flex;
   flex-direction: column;
@@ -40,4 +37,10 @@ export const StyledListElement = styled.li`
     display: inline-block;
     margin-right: 10px;
   }
+`;
+
+export const StyledNoResults = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 `;

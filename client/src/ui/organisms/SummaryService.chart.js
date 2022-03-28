@@ -4,25 +4,25 @@ import { useQuery } from 'react-query';
 import { SummaryService } from '../../api';
 import { Loader } from '../atoms/Loader';
 import { Error } from '../atoms/Error';
-import { NoContent } from '../atoms/NoContent';
 import {
   StyledChartSection,
   StyledBalanceContainer,
   StyledChartContainer,
-  StyledParagraphBalance,
   StyledLegendContainer,
   StyledListElement,
+  StyledNoResults,
 } from '../../styles/SummaryService.styles';
+import Typography from '@mui/material/Typography';
+import * as React from 'react';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export function Chart() {
-  const { isLoading, error, data } = useQuery('chartData', () =>
+export function ChartSummaryService() {
+  const { isLoading, error, data } = useQuery('chartServiceData', () =>
     SummaryService.findAll(),
   );
   if (isLoading) return <Loader />;
   if (error) return <Error />;
-  if (data.length === 0) return <NoContent />;
 
   const resultChart = (dataChart) =>
     dataChart.reduce(
@@ -65,13 +65,17 @@ export function Chart() {
     <StyledChartSection>
       <div>
         <StyledBalanceContainer>
-          <h3>Saldo</h3>
-          <h3>{data.balance / 100} PLN</h3>
+          <Typography variant="h4">Saldo</Typography>
+          <Typography variant="h3">{data.balance / 100} PLN</Typography>
         </StyledBalanceContainer>
-        <StyledParagraphBalance>Pozostala kwota</StyledParagraphBalance>
+        <Typography variant="subtitle1">Pozostała kwota</Typography>
       </div>
       <StyledChartContainer>
-        <Doughnut options={options} data={resultChart(data.spending)} />
+        {data.spending.length === 0 ? (
+          <StyledNoResults>Brak wyników</StyledNoResults>
+        ) : (
+          <Doughnut options={options} data={resultChart(data.spending)} />
+        )}
       </StyledChartContainer>
       <StyledLegendContainer>
         {data.spending &&
