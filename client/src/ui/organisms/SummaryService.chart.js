@@ -24,24 +24,41 @@ export function Chart() {
   if (error) return <Error />;
   if (data.length === 0) return <NoContent />;
 
-  const resultChart = (dataChart) => dataChart.reduce((result, current) => {
-    if (result.datasets[0].data.length === 0) {
-      return {
-        datasets: [{ data: [current.amountInCents / 100], backgroundColor: [current.categoryColor], borderWidth: 0 }],
-        labels: [current.categoryName],
-      };
-    } else {
-      return {
-        datasets: [{
-          data: [...result.datasets[0].data, (current.amountInCents / 100)],
-          backgroundColor: [...result.datasets[0].backgroundColor, current.categoryColor],
-          borderWidth: 0,
-        }],
-        labels: [...result.labels, current.categoryName],
-      };
-    }
-
-  }, { datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }], labels: [] });
+  const resultChart = (dataChart) =>
+    dataChart.reduce(
+      (result, current) => {
+        if (result.datasets[0].data.length === 0) {
+          return {
+            datasets: [
+              {
+                data: [current.amountInCents / 100],
+                backgroundColor: [current.categoryColor],
+                borderWidth: 0,
+              },
+            ],
+            labels: [current.categoryName],
+          };
+        } else {
+          return {
+            datasets: [
+              {
+                data: [...result.datasets[0].data, current.amountInCents / 100],
+                backgroundColor: [
+                  ...result.datasets[0].backgroundColor,
+                  current.categoryColor,
+                ],
+                borderWidth: 0,
+              },
+            ],
+            labels: [...result.labels, current.categoryName],
+          };
+        }
+      },
+      {
+        datasets: [{ data: [], backgroundColor: [], borderWidth: 0 }],
+        labels: [],
+      },
+    );
 
   const options = { plugins: { legend: { display: false } } };
   return (
@@ -57,15 +74,18 @@ export function Chart() {
         <Doughnut options={options} data={resultChart(data.spending)} />
       </StyledChartContainer>
       <StyledLegendContainer>
-        {data.spending && data.spending.map(element => {
-          return (
-            <StyledListElement key={element.categoryId}
-                               color={element.categoryColor}>{element.categoryName}</StyledListElement>
-          );
-        })
-        }
+        {data.spending &&
+          data.spending.map((element) => {
+            return (
+              <StyledListElement
+                key={element.categoryId}
+                color={element.categoryColor}
+              >
+                {element.categoryName}
+              </StyledListElement>
+            );
+          })}
       </StyledLegendContainer>
     </StyledChartSection>
   );
 }
-

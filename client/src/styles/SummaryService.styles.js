@@ -5,7 +5,8 @@ export const StyledChartSection = styled.div`
   background-color: ${theme.palette.background.main};
   padding: 30px;
   border-radius: 5px;
-  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+  box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+    0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
 `;
 
 export const StyledBalanceContainer = styled.div`
@@ -30,13 +31,13 @@ export const StyledLegendContainer = styled.ul`
 export const StyledListElement = styled.li`
   list-style: none;
   font-size: 16px;
-  &::before{
+  &::before {
     content: '';
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: ${({color})=>color};
+    background-color: ${({ color }) => color};
     display: inline-block;
     margin-right: 10px;
   }
-`
+`;

@@ -13,7 +13,7 @@ export const WalletPage = () => (
         <Grid item xs={12}>
           <Chart />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} data-test-id={'wallet-bottom-sidebar'}>
           {/*  TODO in task 5 */}
         </Grid>
       </Grid>

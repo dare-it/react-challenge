@@ -85,7 +85,7 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name='name'
+          name="name"
           control={control}
           rules={{ required: true, minLength: 1 }}
           render={({ field: { onChange, onBlur, value } }) => (
@@ -93,21 +93,21 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
               value={value}
               onBlur={onBlur}
               onChange={onChange}
-              label='Nazwa'
+              label="Nazwa"
             />
           )}
         />
         <p>{errors.name?.message}</p>
         <Controller
-          name='amount'
+          name="amount"
           control={control}
           rules={{ required: true, min: 0.01, max: 1000000 }}
           render={({ field }) => (
             <TextField
               {...field}
-              type='number'
+              type="number"
               inputProps={{ inputMode: 'numeric' }}
-              label='Kwota'
+              label="Kwota"
             />
           )}
         />
@@ -115,19 +115,19 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
         {type === 'EXPENSE' && (
           <>
             <Controller
-              name='select'
+              name="select"
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
                 <FormControl fullWidth>
-                  <InputLabel id='demo-simple-select-label'>
+                  <InputLabel id="demo-simple-select-label">
                     Kategoria
                   </InputLabel>
                   <Select
-                    labelId='demo-simple-select-label'
-                    name='select'
+                    labelId="demo-simple-select-label"
+                    name="select"
                     value={category}
-                    label='Kategoria'
+                    label="Kategoria"
                     onChange={handleChange}
                     {...field}
                   >
@@ -148,17 +148,17 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
         )}
         <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
-            variant='outlined'
-            color='primary'
+            variant="outlined"
+            color="primary"
             sx={{ m: 2 }}
             onClick={(props) => handleCancel(props)}
           >
             Anuluj
           </Button>
           <Button
-            variant='contained'
-            color='primary'
-            type='submit'
+            variant="contained"
+            color="primary"
+            type="submit"
             disabled={!formState.isValid}
           >
             Zapisz
