@@ -1,15 +1,26 @@
 import React, { useState } from 'react';
-import { ActionHeader, Button, Card, Page, AddNewBudgetRecordModal } from 'ui';
+import {
+  ActionHeader,
+  Button,
+  Card,
+  Page,
+  AddNewBudgetRecordModal,
+  Loader,
+  Error,
+  LocalizedDate,
+  Money,
+} from 'ui';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Grid } from '@mui/material';
-import { Table } from 'ui';
+import { Table, CategoryCell } from 'ui';
 import { BudgetService } from '../api/services/BudgetService.js';
 import { useQuery, useMutation } from 'react-query';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import AddIcon from '@mui/icons-material/Add';
 import { NoContent } from 'ui/atoms/NoContent.jsx';
-import { AddNewBudgetRecord } from 'ui/organisms/AddNewBudgetRecord.modal.jsx';
+import {BudgetTableWidget} from 'ui/organisms/BudgetTable.widget.jsx';
 
+/*
 function createHeader({ id, disablePadding, label }) {
   return { id, disablePadding, label, renderCell: (params) => params[id] };
 }
@@ -96,7 +107,7 @@ const BudgetTable = () => {
       deleteRecords={deleteRecords}
     ></Table>
   );
-};
+}; */
 
 export const BudgetPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -123,10 +134,10 @@ export const BudgetPage = () => {
         <Grid container>
           <Grid item xs={12}>
             <BudgetTableWidget />
-            <AddNewBudgetRecordModal
+           <AddNewBudgetRecordModal
               open={modalVisible}
               onClose={() => setModalVisible(false)}
-            />
+          /> 
           </Grid>
         </Grid>
       </Card>
