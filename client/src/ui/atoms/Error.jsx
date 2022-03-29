@@ -1,39 +1,41 @@
 import { Box, Typography } from '@mui/material';
-import unknownError from '../../assets/unknown_error.png';
+import ErrorImage from 'assets/unknown_error.png';
 
 export const Error = ({ error }) => {
-  const styles = {
-    text: {
-      color: "#333",
-      fontSize: "19.2px"
-    },
-    image: {
-      width: "202px",
-      height: "202px"
-    },
-  }
-
-  const content =<>
-    <img style = {styles.image}src={unknownError} alt="no content" />
-    <div style = {styles.text}>Wystąpił nieoczekiwany błąd</div>
-  </>
-  
-
   return (
     <Box
       sx={{
-        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'column',
       }}
     >
-      {
-        error?.message?.includes('Network Error') ? (
-          <Typography>Uruchom Server!</Typography>
-        ) : content
-      }
+      {error?.message?.includes('Network Error') ? (
+        <Typography>Uruchom Server!</Typography>
+      ) : (
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
+        >
+          <img
+            alt=""
+            src={ErrorImage}
+            style={{
+              height: '100%',
+              weight: '100%',
+              maxHeight: '248px',
+              maxWidth: '248px',
+            }}
+          />
+          <Typography sx={{ color: '#33333350' }}>
+            Wystąpił nieoczekiwany błąd
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };
