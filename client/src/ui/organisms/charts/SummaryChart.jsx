@@ -66,9 +66,13 @@ const SummaryChart = () => {
       </Box>
       {data.spending.length !== 0 ? (
         <>
-        <Typography variant="subtitle1">Pozostała kwota</Typography>
-        <Doughnut data={prepareDataChart(data)}  options={config} plugins={plugins}/>
-        <Box id="legend-container" sx={{ marginTop: '20px' }} />
+          <Typography variant="subtitle1">Pozostała kwota</Typography>
+          <Doughnut
+            data={prepareDataChart(data)}
+            options={config}
+            plugins={plugins}
+          />
+          <Box id="legend-container" sx={{ marginTop: '20px' }} />
         </>
       ) : (
         <Typography variant="body1">Brak wyników</Typography>

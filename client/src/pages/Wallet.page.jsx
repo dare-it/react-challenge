@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { LedgerWidget, Page } from 'ui';
-import SummaryChart from 'ui/organisms/SummaryChart';
+import SummaryChart from 'ui/organisms/charts/SummaryChart';
+import BudgetChart from 'ui/organisms/charts/BudgetChart';
 
 export const WalletPage = () => (
   <Page title={'Portfel'}>
@@ -14,7 +15,7 @@ export const WalletPage = () => (
           <SummaryChart />
         </Grid>
         <Grid item xs={12} data-test-id={'wallet-bottom-sidebar'}>
-          {/*  TODO in task 5 */}
+          <BudgetChart />
         </Grid>
       </Grid>
     </Grid>
