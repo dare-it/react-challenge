@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -37,51 +39,149 @@ export default {
   },
 };
 
+const handleClick = () => alert('Button clicked');
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template = ({ label, ...args }) => <Button {...args}>{label}</Button>;
-const All = () => (
+
+const generateButtons = (color) => (
   <>
-    <Grid container>
+    <Grid container justifyContent="space-evenly" sx={{ mb: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
-        Button
-      </Button>
-      <Button variant={'contained'} color={'error'}>
-        Button
-      </Button>
-      <Button variant={'contained'} color={'success'}>
-        Button
-      </Button>
-      <Button variant={'contained'} color={'warning'}>
-        Button
-      </Button>
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Button"
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Add item"
+        startIcon={<AddIcon />}
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Next item"
+        endIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        centerIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+      />
     </Grid>
-    <Grid container sx={{ mt: 5 }}>
+    <Grid container justifyContent="space-evenly" sx={{ mb: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Outlined</Typography>
       </Grid>
-      <Button variant={'outlined'} color={'primary'}>
-        Button
-      </Button>
-      <Button variant={'outlined'} color={'error'}>
-        Button
-      </Button>
-      <Button variant={'outlined'} color={'success'}>
-        Button
-      </Button>
-      <Button variant={'outlined'} color={'warning'}>
-        Button
-      </Button>
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Button"
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Add item"
+        startIcon={<AddIcon />}
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Next item"
+        endIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        centerIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+      />
+    </Grid>
+    <Grid container justifyContent="space-evenly" sx={{ mb: 3 }}>
+      <Grid item xs={12} sx={{ mb: 2 }}>
+        <Typography variant={'subheading'}>Disabled</Typography>
+      </Grid>
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Button"
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Add item"
+        startIcon={<AddIcon />}
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        text="Next item"
+        endIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'contained'}
+        centerIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+        disabled
+      />
+    </Grid>
+    <Grid container justifyContent="space-evenly">
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Button"
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Add item"
+        startIcon={<AddIcon />}
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        text="Next item"
+        endIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+        disabled
+      />
+      <Button
+        color={color}
+        variant={'outlined'}
+        centerIcon={<ChevronRightIcon />}
+        onClick={handleClick}
+        disabled
+      />
     </Grid>
   </>
 );
 
-export const Playground = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Playground.args = {
-  label: 'Button',
-};
+const PrimaryButtons = () => generateButtons('primary');
+const ErrorButtons = () => generateButtons('error');
+const SuccessButtons = () => generateButtons('success');
+const WarningButtons = () => generateButtons('warning');
 
-export const AllStories = All.bind({});
+export const PrimaryButton = PrimaryButtons.bind({});
+export const ErrorButton = ErrorButtons.bind({});
+export const SuccessButton = SuccessButtons.bind({});
+export const WarningButton = WarningButtons.bind({});
