@@ -1,8 +1,7 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import { Layout } from 'ui';
 import { WalletPage } from 'pages/Wallet.page';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Layout } from 'ui';
+
 import { BudgetPage } from './Budget.page';
 import { NoMatchPage } from './NoMatch.page';
 
