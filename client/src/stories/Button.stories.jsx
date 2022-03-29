@@ -2,6 +2,11 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+const Icons = { AddIcon, ChevronLeftIcon };
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -48,13 +53,77 @@ const All = () => (
       <Button variant={'contained'} color={'primary'}>
         Button
       </Button>
+      <Button variant={'contained'} color={'primary'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'primary'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'contained'} color={'primary'} disabled={true}>
+        Button
+      </Button>
       <Button variant={'contained'} color={'error'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'error'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'contained'}
+        color={'error'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'error'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'contained'} color={'error'} disabled={true}>
         Button
       </Button>
       <Button variant={'contained'} color={'success'}>
         Button
       </Button>
+      <Button variant={'contained'} color={'success'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'contained'}
+        color={'success'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'success'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'contained'} color={'success'} disabled={true}>
+        Button
+      </Button>
       <Button variant={'contained'} color={'warning'}>
+        Button
+      </Button>
+      <Button variant={'contained'} color={'warning'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'contained'}
+        color={'warning'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'warning'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'contained'} color={'warning'} disabled={true}>
         Button
       </Button>
     </Grid>
@@ -65,13 +134,77 @@ const All = () => (
       <Button variant={'outlined'} color={'primary'}>
         Button
       </Button>
+      <Button variant={'outlined'} color={'primary'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'outlined'}
+        color={'primary'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'primary'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'outlined'} color={'primary'} disabled={true}>
+        Button
+      </Button>
       <Button variant={'outlined'} color={'error'}>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'error'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'outlined'}
+        color={'error'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'error'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'outlined'} color={'error'} disabled={true}>
         Button
       </Button>
       <Button variant={'outlined'} color={'success'}>
         Button
       </Button>
+      <Button variant={'outlined'} color={'success'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'outlined'}
+        color={'success'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'success'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'outlined'} color={'success'} disabled={true}>
+        Button
+      </Button>
       <Button variant={'outlined'} color={'warning'}>
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'warning'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+      <Button
+        variant={'outlined'}
+        color={'warning'}
+        endIcon={<ChevronLeftIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'warning'}>
+        <ChevronRightIcon />
+      </Button>
+      <Button variant={'outlined'} color={'warning'} disabled={true}>
         Button
       </Button>
     </Grid>
