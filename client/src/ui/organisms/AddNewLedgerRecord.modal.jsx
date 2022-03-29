@@ -1,6 +1,11 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { CATEGORIES_QUERY, LEDGER_QUERY } from 'queryKeys';
+import {
+  CATEGORIES_QUERY,
+  LEDGER_QUERY,
+  SUMMARY_QUERY,
+  BUDGET_QUERY,
+} from 'queryKeys';
 import { CategoryService, LedgerService } from 'api';
 import { formatDollarsToCents } from 'utils';
 import { Modal, FormTextField, Select } from 'ui';
@@ -31,6 +36,8 @@ export const AddNewLedgerRecord = ({ open, close, type }) => {
   const { mutateAsync } = useMutation(LedgerService.create, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(LEDGER_QUERY);
+      await queryClient.invalidateQueries(BUDGET_QUERY);
+      await queryClient.invalidateQueries(SUMMARY_QUERY);
       onClose();
     },
   });
