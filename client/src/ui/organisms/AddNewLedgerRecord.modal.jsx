@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, TextField } from '@mui/material';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
 import * as PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -13,10 +13,17 @@ import {
   BUDGET_QUERY,
   SUMMARY_QUERY,
 } from 'queryKeys';
+import { useMutationWithFeedback } from 'hooks';
 
 const translationKeys = {
-  income: 'wpływ',
-  expense: 'wydatek',
+  income: {
+    title: 'wpływ',
+    successMessage: 'Wpływ został dodany',
+  },
+  expense: {
+    title: 'wydatek',
+    successMessage: 'Wydatek został zapisany',
+  },
 };
 
 export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
@@ -24,32 +31,33 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
   const { handleSubmit, control, formState, reset } = useForm({
     mode: 'onChange',
   });
+
   const {
     isLoading,
     error,
     data: categories,
   } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
 
-  const mutation = useMutation(
-    (requestBody) => LedgerService.create({ requestBody }),
-    {
-      onSuccess: async () => {
-        await queryClient.refetchQueries([LEDGER_QUERY]);
-        await queryClient.refetchQueries([BUDGET_QUERY]);
-        await queryClient.refetchQueries([SUMMARY_QUERY]);
-        handleClose();
-      },
+  const { mutate: saveRecord } = useMutationWithFeedback(LedgerService.create, {
+    successMessage: translationKeys?.[type.toLowerCase()]?.successMessage,
+    onSuccess: async () => {
+      await queryClient.refetchQueries([LEDGER_QUERY]);
+      await queryClient.refetchQueries([BUDGET_QUERY]);
+      await queryClient.refetchQueries([SUMMARY_QUERY]);
+      handleClose();
     },
-  );
+  });
 
   const onSubmit = async (formData) => {
     if (!formState.isValid) return;
 
-    mutation.mutate({
-      title: formData.title,
-      amountInCents: formatDollarsToCents(formData.amount),
-      mode: type,
-      categoryId: formData.categoryId,
+    saveRecord({
+      requestBody: {
+        title: formData.title,
+        amountInCents: formatDollarsToCents(formData.amount),
+        mode: type,
+        categoryId: formData.categoryId,
+      },
     });
     reset();
   };
@@ -65,7 +73,7 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
       onClose={handleClose}
       onSubmit={handleSubmit(onSubmit)}
       canSubmit={formState.isValid}
-      title={`Dodaj ${translationKeys[type.toLowerCase()]}`}
+      title={`Dodaj ${translationKeys?.[type.toLowerCase()]?.title}`}
     >
       {isLoading && <Loader />}
       {error && <Error error={error} />}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import { Doughnut } from 'react-chartjs-2';
 import { Box, Grid, Typography } from '@mui/material';
 
@@ -7,6 +6,7 @@ import { CategoryCell, Money, Card, Error, Loader } from 'ui';
 import { SummaryService } from 'api';
 import { formatCentsToDollars } from 'utils';
 import { SUMMARY_QUERY } from 'queryKeys';
+import { useQuery } from 'react-query';
 
 export const SummaryChartWidget = () => {
   const { isLoading, error, data } = useQuery(

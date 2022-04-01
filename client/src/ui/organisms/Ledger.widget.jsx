@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
+
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
@@ -19,6 +20,7 @@ import {
 } from 'ui';
 import { LedgerService } from 'api';
 import { BUDGET_QUERY, LEDGER_QUERY, SUMMARY_QUERY } from 'queryKeys';
+import { useMutationWithFeedback } from 'hooks';
 
 export const LedgerWidget = () => {
   const [modalVisible, toggleModal] = useState(false);
@@ -30,13 +32,17 @@ export const LedgerWidget = () => {
     LedgerService.findAll(),
   );
 
-  const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
-    onSuccess: async () => {
-      await queryClient.refetchQueries([LEDGER_QUERY]);
-      await queryClient.refetchQueries([BUDGET_QUERY]);
-      await queryClient.refetchQueries([SUMMARY_QUERY]);
+  const { mutate: deleteRecordsMutation } = useMutationWithFeedback(
+    LedgerService.remove,
+    {
+      successMessage: 'Element został usunięty',
+      onSuccess: async () => {
+        await queryClient.refetchQueries([LEDGER_QUERY]);
+        await queryClient.refetchQueries([BUDGET_QUERY]);
+        await queryClient.refetchQueries([SUMMARY_QUERY]);
+      },
     },
-  });
+  );
 
   const openModal = (modalType) => {
     toggleModal(true);
@@ -44,7 +50,7 @@ export const LedgerWidget = () => {
   };
 
   const deleteRecords = (ids) => {
-    mutation.mutate(ids);
+    deleteRecordsMutation({ ids });
   };
 
   return (

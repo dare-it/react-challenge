@@ -1,30 +1,37 @@
-import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
-import { BudgetService } from 'api';
-import { Loader } from 'ui/atoms/Loader';
-import { Error } from 'ui/atoms/Error';
-import { NoContent } from 'ui/atoms/NoContent';
-import { Table } from 'ui/molecules/table/Table';
 import React from 'react';
-import { CategoryCell } from 'ui/molecules/CategoryCell';
-import { Money } from 'ui/atoms/Money';
-import { LocalizedDate } from 'ui/atoms/LocalizedDate';
+import { useQuery, useQueryClient } from 'react-query';
+
+import { BudgetService } from 'api';
+import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
+import {
+  Loader,
+  Error,
+  NoContent,
+  Table,
+  CategoryCell,
+  Money,
+  LocalizedDate,
+} from 'ui';
+import { useMutationWithFeedback } from 'hooks';
 
 export const BudgetTableWidget = () => {
   const queryClient = useQueryClient();
-
   const { isLoading, error, data } = useQuery(BUDGET_QUERY, () =>
     BudgetService.findAll(),
   );
 
-  const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
-    onSuccess: async () => {
-      await queryClient.refetchQueries([BUDGET_QUERY]);
-      await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
+  const { mutate: deleteRecordsMutation } = useMutationWithFeedback(
+    BudgetService.remove,
+    {
+      successMessage: 'Element został usunięty',
+      onSuccess: async () => {
+        await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
+        await queryClient.refetchQueries([BUDGET_QUERY]);
+      },
     },
-  });
+  );
 
-  const deleteRecords = (ids) => mutation.mutate(ids);
+  const deleteRecords = (ids) => deleteRecordsMutation({ ids });
 
   const tableDefinition = [
     {

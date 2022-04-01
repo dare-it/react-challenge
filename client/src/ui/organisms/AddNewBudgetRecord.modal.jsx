@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, TextField } from '@mui/material';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
 import * as PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -8,6 +8,7 @@ import { CategoryService, BudgetService } from 'api';
 import { Modal, CategoryField, Loader, Error } from 'ui';
 import { formatDollarsToCents } from 'utils';
 import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
+import { useMutationWithFeedback } from 'hooks';
 
 export const AddNewBudgetRecordModal = ({ open, onClose }) => {
   const queryClient = useQueryClient();
@@ -22,9 +23,10 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
     data: categories,
   } = useQuery(PARTIAL_CATEGORIES_QUERY, () => CategoryService.findAll(true));
 
-  const mutation = useMutation(
+  const { mutate: saveRecordMutation } = useMutationWithFeedback(
     (requestBody) => BudgetService.create({ requestBody }),
     {
+      successMessage: 'Budżet został zdefiniowany',
       onSuccess: async () => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
@@ -34,7 +36,7 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
   );
 
   const onSubmit = (formData) => {
-    mutation.mutate({
+    saveRecordMutation({
       amountInCents: formatDollarsToCents(formData.amount),
       categoryId: formData.categoryId,
     });
