@@ -51,7 +51,13 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
   const { data } = useQuery('categoriesData', () => CategoryService.findAll());
   const addLedgerRecordMutation = useMutation(
     (requestBody) => LedgerService.create({ requestBody }),
-    { onSuccess: () => queryClient.invalidateQueries('ledgerData') },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('ledgerData');
+        queryClient.invalidateQueries('chartServiceData');
+        queryClient.invalidateQueries('chartBudgetData');
+      },
+    },
   );
   const onSubmit = (data) => {
     const result = {
