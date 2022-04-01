@@ -7,6 +7,7 @@ let theme = createTheme({
   palette: {
     text: {
       primary: '#333',
+      secondary: '51,51,51',
     },
     type: 'light',
     primary: {
@@ -28,6 +29,7 @@ let theme = createTheme({
     },
     success: {
       main: '#00A980',
+      dark: '#B28C09',
       light: '#DBEBDB',
       contrastText: '#fff',
     },
@@ -38,6 +40,7 @@ let theme = createTheme({
     },
     background: {
       default: '#F8F8F8',
+      main: '#fff',
     },
   },
 });
@@ -73,6 +76,13 @@ theme = createTheme(theme, {
     body1: {
       fontSize: '1.2rem',
     },
+    p: {
+      color: `rgba(${theme.palette.text.secondary},0.5)`,
+    },
+    subtitle1: {
+      fontSize: '0.9rem',
+      color: `rgba(${theme.palette.text.secondary},0.5)`,
+    },
   },
   components: {
     MuiAppBar: {
@@ -80,6 +90,124 @@ theme = createTheme(theme, {
         root: {
           backgroundColor: '#fff',
           color: '#333',
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          boxShadow: 'none',
+          fontFamily: 'Inter, sans-serif',
+          minWidth: 0,
+          minHeight: 0,
+          cursor: 'pointer',
+          padding: '6px 12px',
+          '&:hover,&:active': {
+            boxShadow: 'none',
+          },
+          '&.Mui-disabled': {
+            backgroundColor: `rgba(${theme.palette.text.secondary}, 0.07)`,
+          },
+        },
+        startIcon: {
+          '*:nth-of-type(1)': {
+            fontSize: '15px',
+          },
+        },
+        endIcon: {
+          paddingTop: '6px',
+          paddingBottom: '6px',
+          marginRight: '0',
+          marginLeft: '0',
+          '*:nth-of-type(1)': {
+            fontSize: '11px',
+          },
+        },
+        outlined: {
+          '&.Mui-disabled': {
+            backgroundColor: theme.palette.background.main,
+          },
+        },
+        containedPrimary: {
+          fontWeight: 500,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.primary.dark,
+          },
+        },
+        containedError: {
+          fontWeight: 500,
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.main,
+          '&:hover': {
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.error.contrastText,
+          },
+          '&:active': {
+            backgroundColor: theme.palette.error.light,
+            color: theme.palette.error.main,
+          },
+        },
+        containedSuccess: {
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.main,
+          fontWeight: 600,
+          '&:hover': {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
+          },
+          '&:active': {
+            backgroundColor: theme.palette.success.light,
+            color: theme.palette.success.main,
+          },
+        },
+        containedWarning: {
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.dark,
+          fontWeight: 600,
+          '&:hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+          },
+          '&:active': {
+            backgroundColor: theme.palette.warning.light,
+            color: theme.palette.warning.dark,
+          },
+        },
+        outlinedPrimary: {
+          fontWeight: 500,
+          backgroundColor: theme.palette.secondary.main,
+          border: 'none',
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.dark,
+            border: 'none',
+          },
+          '&:disabled': {
+            backgroundColor: `rgba(${theme.palette.text.secondary}, 0.07)`,
+            border: 'none',
+          },
+        },
+        outlinedError: {
+          fontWeight: 500,
+          border: `1px solid ${theme.palette.error.main}`,
+          '&:hover,&:active': {
+            backgroundColor: theme.palette.error.light,
+          },
+        },
+        outlinedSuccess: {
+          fontWeight: 600,
+          border: `1px solid ${theme.palette.success.main}`,
+          '&:hover, &:active': {
+            backgroundColor: theme.palette.success.light,
+          },
+        },
+        outlinedWarning: {
+          fontWeight: 600,
+          border: `1px solid ${theme.palette.warning.main}`,
+          '&:hover, &:active': {
+            backgroundColor: theme.palette.warning.light,
+          },
         },
       },
     },
