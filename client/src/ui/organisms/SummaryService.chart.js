@@ -20,18 +20,21 @@ import { formatCentsToDollars } from '../../utils';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function ChartSummaryService() {
-  const { isLoading, error, data } = useQuery('chartServiceData', () =>
-      SummaryService.findAll(),
+  const { isLoading, error, data } = useQuery(
+    'chartServiceData',
+    () => SummaryService.findAll(),
     {
       select: useCallback((response) => {
-        const { colors, labels, data } = response.spending.reduce((result, current) => ({
+        const { colors, labels, data } = response.spending.reduce(
+          (result, current) => ({
             colors: [...(result.colors || []), current.categoryColor],
             labels: [...(result.labels || []), current.categoryName],
             data: [
               ...(result.data || []),
               formatCentsToDollars(current.amountInCents),
             ],
-          }), {},
+          }),
+          {},
         );
         return {
           chartData: {
@@ -41,14 +44,13 @@ export function ChartSummaryService() {
                 data: data,
                 backgroundColor: colors,
                 borderWidth: 0,
-
               },
             ],
           },
           exists: !!response.spending.length,
-          summary: response
+          summary: response,
         };
-      },[]),
+      }, []),
     },
   );
   if (isLoading) return <Loader />;
@@ -58,13 +60,13 @@ export function ChartSummaryService() {
     <StyledChartSection>
       <div>
         <StyledBalanceContainer>
-          <Typography variant='h4'>Saldo</Typography>
-          <Typography variant='h3'>{data.summary.balance / 100} PLN</Typography>
+          <Typography variant="h4">Saldo</Typography>
+          <Typography variant="h3">{data.summary.balance / 100} PLN</Typography>
         </StyledBalanceContainer>
-        <Typography variant='subtitle1'>Pozostała kwota</Typography>
+        <Typography variant="subtitle1">Pozostała kwota</Typography>
       </div>
       <StyledChartContainer>
-        {!data && !data.exists ? (
+        {!data || !data.exists || (data.summary.spending.length === 0) ? (
           <StyledNoResults>Brak wyników</StyledNoResults>
         ) : (
           <Doughnut options={options} data={data?.chartData} />

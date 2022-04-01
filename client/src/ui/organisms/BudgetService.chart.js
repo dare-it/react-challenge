@@ -31,14 +31,13 @@ ChartJS.register(
 );
 
 export function ChartBudgetService() {
-  const { isLoading, error, data } = useQuery('chartBudgetData', () =>
-      BudgetService.findAll(),
+  const { isLoading, error, data } = useQuery(
+    'chartBudgetData',
+    () => BudgetService.findAll(),
     {
       select: useCallback((response) => {
         const data = response.map(
-          ({
-             currentSpendingPercent,
-           }) => currentSpendingPercent,
+          ({ currentSpendingPercent }) => currentSpendingPercent,
         );
         return {
           chartData: {
@@ -69,22 +68,19 @@ export function ChartBudgetService() {
       },
     },
   };
-console.log(data)
   return (
     <StyledChartSection>
       <div>
         <StyledBalanceContainer>
-          <Typography variant='h4'>Budżet</Typography>
+          <Typography variant="h4">Budżet</Typography>
         </StyledBalanceContainer>
-        <Typography variant='subtitle1'>Podsumowanie wydatków</Typography>
+        <Typography variant="subtitle1">Podsumowanie wydatków</Typography>
       </div>
-      {(!data && !data.hasData)
-        ?
-        (
-          <StyledNoResults>Brak wyników</StyledNoResults>
-        ) : (
-          <Bar options={options} data={data?.chartData} />
-        )}
+      {!data || !data.hasData || data.chartData.datasets[0].data.every(e=>e===0) ?(
+        <StyledNoResults>Brak wyników</StyledNoResults>
+      ) : (
+        <Bar options={options} data={data?.chartData} />
+      )}
     </StyledChartSection>
   );
 }
