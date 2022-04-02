@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
-import { ActionHeader, Button, Card, Page, AddNewBudgetRecordModal } from 'ui';
+import {
+  ActionHeader,
+  Button,
+  Card,
+  Page,
+  AddNewBudgetRecordModal,
+} from 'ui';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Grid } from '@mui/material';
-import { BudgetTableWidget } from 'ui/organisms/BudgetTable.widget';
+import { BudgetTableWidget } from 'ui/organisms/BudgetTable.widget.jsx';
 
 export const BudgetPage = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -13,7 +19,7 @@ export const BudgetPage = () => {
         title={
           <ActionHeader
             variant={'h1'}
-            title="Budżet"
+            title="Twój budżet"
             renderActions={() => (
               <Button
                 variant={'contained'}
@@ -27,6 +33,7 @@ export const BudgetPage = () => {
         }
       >
         <Grid container>
+          <Grid item xs={12}></Grid>
           <Grid item xs={12}>
             <BudgetTableWidget />
             <AddNewBudgetRecordModal

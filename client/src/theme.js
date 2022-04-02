@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material';
-
 let theme = createTheme({
   shape: {
     borderRadius: 4,
