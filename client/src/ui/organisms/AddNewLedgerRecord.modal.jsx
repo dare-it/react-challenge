@@ -1,169 +1,184 @@
-import React from 'react';
-import { Box, TextField } from '@mui/material';
+import React, { useCallback, useContext } from 'react';
+import { Modal } from '../molecules/modal/Modal';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import * as PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
+import { CardActions, InputLabel, TextField } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { LedgerService, CategoryService } from '../../api';
+import { CategoryCell } from '../molecules/CategoryCell';
+import MenuItem from '@mui/material/MenuItem';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import RootContext from '../../context/context';
+import { Button } from '../atoms/Button';
+import { useSnackbar } from 'notistack';
 
-import { CategoryService, LedgerService } from 'api';
-import { Modal, CategoryField, Loader, Error, NoContent } from 'ui';
-import { formatDollarsToCents } from 'utils';
-import {
-  LEDGER_QUERY,
-  CATEGORIES_QUERY,
-  BUDGET_QUERY,
-  SUMMARY_QUERY,
-} from 'queryKeys';
+export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
+  const context = useContext(RootContext);
+  const { setOpenModal, category, setCategory } = context;
 
-const translationKeys = {
-  income: 'wpływ',
-  expense: 'wydatek',
-};
-
-export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
-  const queryClient = useQueryClient();
-  const { handleSubmit, control, formState, reset } = useForm({
-    mode: 'onChange',
+  const schema = yup.object().shape({
+    name: yup
+      .string()
+      .trim('Nazwa nie może być pusta')
+      .required('Nazwa nie może być pusta'),
+    amount: yup
+      .number()
+      .typeError('Kwota musi być numerem')
+      .required('Kwota nie może być pusta')
+      .min(0.01, 'Kwota musi być większa niż 0')
+      .max(1000000, 'Kwota nie może być większa niż 1000000')
+      .positive('Kwota musi być większa niż 0'),
   });
-  const {
-    isLoading,
-    error,
-    data: categories,
-  } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
 
-  const mutation = useMutation(
+  const {
+    control,
+    handleSubmit,
+    formState,
+    formState: { errors },
+    reset,
+  } = useForm({
+    defaultValues: {
+      name: '',
+      amount: '',
+      select: '',
+    },
+    mode: 'all',
+    shouldUnregister: false,
+    resolver: yupResolver(schema),
+  });
+  const queryClient = useQueryClient();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = useCallback((message, variant) => () => {
+    enqueueSnackbar(message, { variant: variant, anchorOrigin: { horizontal: 'right', vertical: 'bottom' } });
+  }, [enqueueSnackbar]);
+
+  const { data } = useQuery('categoriesData', () => CategoryService.findAll());
+  const addLedgerRecordMutation = useMutation(
     (requestBody) => LedgerService.create({ requestBody }),
     {
-      onSuccess: async () => {
-        await queryClient.refetchQueries([LEDGER_QUERY]);
-        await queryClient.refetchQueries([BUDGET_QUERY]);
-        await queryClient.refetchQueries([SUMMARY_QUERY]);
-        handleClose();
+      onSuccess: () => {
+        type === 'INCOME' ?
+          (handleClick('Wpływ został dodany', 'success'))()
+          : (handleClick('Wydatek został zapisany', 'success'))();
+        queryClient.invalidateQueries('ledgerData');
+        queryClient.invalidateQueries('chartServiceData');
+        queryClient.invalidateQueries('chartBudgetData');
+      },
+      onError: () => {
+        (handleClick('Wystąpił nieoczekiwany błąd', 'error'))();
       },
     },
   );
-
-  const onSubmit = async (formData) => {
-    if (!formState.isValid) return;
-
-    mutation.mutate({
-      title: formData.title,
-      amountInCents: formatDollarsToCents(formData.amount),
+  const onSubmit = (data) => {
+    const result = {
       mode: type,
-      categoryId: formData.categoryId,
-    });
+      amountInCents: data.amount * 100,
+      categoryId: data.select,
+      title: data.name,
+    };
+    setOpenModal(false);
+    addLedgerRecordMutation.mutate(result);
     reset();
   };
 
-  const handleClose = () => {
+  const handleCancel = () => {
     reset();
-    onClose();
+    handleClose();
   };
-
+  const handleChange = (event) => {
+    setCategory(event.target.value);
+  };
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
-      onSubmit={handleSubmit(onSubmit)}
-      canSubmit={formState.isValid}
-      title={`Dodaj ${translationKeys[type.toLowerCase()]}`}
+      handleClose={handleCancel}
+      {...props}
+      title={type === 'INCOME' ? 'Dodaj wpływ' : 'Dodaj wydatek'}
     >
-      {isLoading && <Loader />}
-      {error && <Error error={error} />}
-      {!isLoading && !error && !categories?.length ? (
-        <NoContent />
-      ) : (
-        <Box component="form" autoComplete="off" noValidate>
-          <Controller
-            control={control}
-            name="title"
-            defaultValue=""
-            type="text"
-            rules={{
-              validate: (field) => {
-                if (!field.toString().trim()) {
-                  return 'Nazwa nie może być pusta';
-                }
-              },
-            }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                margin={'normal'}
-                fullWidth
-                label="Nazwa"
-                value={value}
-                onChange={onChange}
-                error={!!error}
-                helperText={error ? error.message : null}
-              />
-            )}
-          />
-          <Controller
-            name="amount"
-            control={control}
-            defaultValue=""
-            rules={{
-              setValueAs: (value) => value.trim(),
-              required: {
-                value: true,
-                message: 'Kwota nie może być pusta',
-              },
-              min: {
-                value: 0,
-                message: 'Kwota musi być większa niż 0',
-              },
-              max: {
-                value: 1000000,
-                message: 'Kwota nie może być większa niż 1000000',
-              },
-            }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
-              <TextField
-                margin={'normal'}
-                fullWidth
-                type="number"
-                label="Kwota"
-                value={value}
-                onChange={onChange}
-                error={!!error}
-                helperText={error ? error.message : null}
-              />
-            )}
-          />
-          {type === 'EXPENSE' && (
-            <Controller
-              name="categoryId"
-              control={control}
-              defaultValue=""
-              render={({
-                field: { onChange, value },
-                fieldState: { error },
-              }) => (
-                <CategoryField
-                  margin={'normal'}
-                  fullWidth
-                  categories={categories}
-                  value={value}
-                  onChange={onChange}
-                  error={!!error}
-                  helperText={error ? error.message : null}
-                />
-              )}
-              rules={{
-                required: {
-                  value: true,
-                  message: 'Wybierz kategorię',
-                },
-              }}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name='name'
+          control={control}
+          rules={{ required: true, minLength: 1 }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <TextField
+              value={value}
+              onBlur={onBlur}
+              onChange={onChange}
+              label='Nazwa'
             />
           )}
-        </Box>
-      )}
+        />
+        <p>{errors.name?.message}</p>
+        <Controller
+          name='amount'
+          control={control}
+          rules={{ required: true, min: 0.01, max: 1000000 }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              type='number'
+              inputProps={{ inputMode: 'numeric' }}
+              label='Kwota'
+            />
+          )}
+        />
+        <p>{errors.amount?.message}</p>
+        {type === 'EXPENSE' && (
+          <>
+            <Controller
+              name='select'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <FormControl fullWidth>
+                  <InputLabel id='demo-simple-select-label'>
+                    Kategoria
+                  </InputLabel>
+                  <Select
+                    labelId='demo-simple-select-label'
+                    name='select'
+                    value={category}
+                    label='Kategoria'
+                    onChange={handleChange}
+                    {...field}
+                  >
+                    {data?.map((category) => (
+                      <MenuItem value={category.id} key={category.id}>
+                        <CategoryCell
+                          color={category?.color}
+                          name={category?.name}
+                        />
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              )}
+            />
+            <p>{errors.select?.message}</p>
+          </>
+        )}
+        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Button
+            variant='outlined'
+            color='primary'
+            sx={{ m: 2 }}
+            onClick={(props) => handleCancel(props)}
+          >
+            Anuluj
+          </Button>
+          <Button
+            variant='contained'
+            color='primary'
+            type='submit'
+            disabled={!formState.isValid}
+          >
+            Zapisz
+          </Button>
+        </CardActions>
+      </form>
     </Modal>
   );
-};
-
-AddNewLedgerRecordModal.propTypes = {
-  open: PropTypes.bool,
-  onClose: PropTypes.func,
-  type: PropTypes.string,
 };

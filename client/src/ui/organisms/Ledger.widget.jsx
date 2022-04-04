@@ -17,8 +17,9 @@ import { Button } from '../atoms/Button';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import RootContext from '../../context/context';
-import { AddNewLedgerRecordModal } from './AddNewLegerRecord.modal';
-import { useContext } from 'react';
+import { AddNewLedgerRecordModal } from './AddNewLedgerRecord.modal';
+import { useCallback, useContext } from 'react';
+import { useSnackbar } from 'notistack';
 
 export const LedgerWidget = () => {
   const context = useContext(RootContext);
@@ -32,12 +33,12 @@ export const LedgerWidget = () => {
       title={
         <ActionHeader
           variant={'h1'}
-          title='Portfel'
+          title="Portfel"
           renderActions={() => (
             <Box>
               <Button
-                variant='outlined'
-                color='primary'
+                variant="outlined"
+                color="primary"
                 startIcon={<AddIcon />}
                 sx={{ m: 2 }}
                 onClick={() => handleOpenModal('INCOME')}
@@ -45,8 +46,8 @@ export const LedgerWidget = () => {
                 Wpłać
               </Button>
               <Button
-                variant='outlined'
-                color='primary'
+                variant="outlined"
+                color="primary"
                 startIcon={<RemoveIcon />}
                 onClick={() => handleOpenModal('EXPENSE')}
               >
@@ -108,13 +109,22 @@ const LedgerTable = () => {
   const { isLoading, error, data } = useQuery('ledgerData', () =>
     LedgerService.findAll(),
   );
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = useCallback((message, variant) => () => {
+    enqueueSnackbar(message, { variant: variant, anchorOrigin:{horizontal: "right", vertical: "bottom"}});
+  }, [enqueueSnackbar]);
 
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: () => {
+      (handleClick("Element został usunięty", "success"))()
       queryClient.invalidateQueries('ledgerData');
       queryClient.invalidateQueries('chartServiceData');
       queryClient.invalidateQueries('chartBudgetData');
     },
+    onError:()=>{
+      (handleClick("Wystąpił nieoczekiwany błąd", "error"))()
+    }
   });
   if (isLoading) return <Loader />;
   if (error) return <Error />;

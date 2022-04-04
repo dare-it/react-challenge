@@ -4,6 +4,7 @@ import Router from './pages/routing';
 import { theme } from 'theme';
 import { useState } from 'react';
 import RootContext from './context/context';
+import { SnackbarProvider } from 'notistack';
 
 const queryClient = new QueryClient();
 
@@ -25,8 +26,10 @@ const App = () => {
     >
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <CssBaseline />
-          <Router />
+          <SnackbarProvider maxSnack={3}>
+            <CssBaseline />
+            <Router />
+          </SnackbarProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </RootContext.Provider>

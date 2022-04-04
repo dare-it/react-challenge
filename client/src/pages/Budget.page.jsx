@@ -10,9 +10,11 @@ import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
 import AddIcon from '@mui/icons-material/Add';
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import { AddNewBudgetRecordModal } from '../ui/organisms/AddNewBudgetRecord.modal';
 import RootContext from '../context/context';
+import { useSnackbar } from 'notistack';
+
 
 export const BudgetPage = () => {
   const context = useContext(RootContext);
@@ -82,8 +84,8 @@ const columns = [
       row.currentSpendingPercent > 100
         ? 'Przekroczone'
         : row.currentSpendingPercent === 100
-          ? 'Wykorzystany'
-          : 'W normie',
+        ? 'Wykorzystany'
+        : 'W normie',
   },
   {
     id: 'createdAt',
@@ -97,13 +99,22 @@ const BudgetTable = () => {
   const { isLoading, error, data } = useQuery('budgetData', () =>
     BudgetService.findAll(),
   );
+  const { enqueueSnackbar } = useSnackbar();
+
+  const handleClick = useCallback((message, variant) => () => {
+    enqueueSnackbar(message, { variant: variant, anchorOrigin:{horizontal: "right", vertical: "bottom"}});
+  }, [enqueueSnackbar]);
 
   const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
     onSuccess: () => {
+      (handleClick("Element został usunięty", "success"))()
       queryClient.invalidateQueries('budgetData');
       queryClient.invalidateQueries('categoriesData');
       queryClient.invalidateQueries('chartBudgetData');
     },
+    onError:()=>{
+      (handleClick("Wystąpił nieoczekiwany błąd", "error"))()
+    }
   });
 
   if (isLoading) return <Loader />;
