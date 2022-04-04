@@ -11,10 +11,14 @@ export { NoContent } from './atoms/NoContent';
 export { Card } from './atoms/Card';
 
 // molecules
+export { CategoryField } from './molecules/CategoryField';
 export { CategoryCell } from './molecules/CategoryCell';
 export { Table } from './molecules/table/Table';
+export { Modal } from './molecules/Modal';
 
 // organisms
+export { AddNewBudgetRecordModal } from './organisms/AddNewBudgetRecord.modal';
+export { AddNewLedgerRecordModal } from './organisms/AddNewLedgerRecord.modal';
 export { AppBar } from './organisms/AppBar';
 export { MainMenu } from './organisms/Menu';
 export { LedgerWidget } from './organisms/Ledger.widget';
