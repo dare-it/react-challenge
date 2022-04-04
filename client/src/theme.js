@@ -242,4 +242,4 @@ theme = createTheme(theme, {
   },
 });
 
-export { theme }
+export { theme };
