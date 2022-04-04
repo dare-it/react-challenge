@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Modal } from '../molecules/modal/Modal';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useForm, Controller } from 'react-hook-form';
@@ -18,10 +18,6 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
   const context = useContext(RootContext);
   const { setOpenModal, setCategory, category } = context;
   const { enqueueSnackbar } = useSnackbar();
-
-  const handleClick = useCallback((message, variant) => () => {
-    enqueueSnackbar(message, { variant: variant, anchorOrigin:{horizontal: "right", vertical: "bottom"}});
-  }, [enqueueSnackbar]);
 
   const schema = yup.object().shape({
     amount: yup
@@ -56,13 +52,13 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
     (requestBody) => BudgetService.create({ requestBody }),
     {
       onSuccess: () => {
-        (handleClick("Budżet został zdefiniowany", "success"))()
+        enqueueSnackbar('Budżet został zdefiniowany', {variant:'success'})
         queryClient.invalidateQueries('budgetData');
         queryClient.invalidateQueries('categoriesData');
       },
-      onError:()=>{
-        (handleClick("Wystąpił nieoczekiwany błąd", "error"))()
-      }
+      onError: () => {
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+      },
     },
   );
   const onSubmit = (data) => {

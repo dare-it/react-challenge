@@ -10,11 +10,10 @@ import { NoContent } from '../ui/atoms/NoContent';
 import { Money } from '../ui/atoms/Money';
 import { LocalizedDate } from '../ui/atoms/LocalizedDate';
 import AddIcon from '@mui/icons-material/Add';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { AddNewBudgetRecordModal } from '../ui/organisms/AddNewBudgetRecord.modal';
 import RootContext from '../context/context';
 import { useSnackbar } from 'notistack';
-
 
 export const BudgetPage = () => {
   const context = useContext(RootContext);
@@ -24,16 +23,16 @@ export const BudgetPage = () => {
     setOpenModal(true);
   };
   return (
-    <Page title="Budżet">
+    <Page title='Budżet'>
       <Card
         title={
           <ActionHeader
             variant={'h1'}
-            title="Budżet"
+            title='Budżet'
             renderActions={() => (
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 startIcon={<AddIcon />}
                 onClick={handleOpenModal}
               >
@@ -50,7 +49,7 @@ export const BudgetPage = () => {
         </Grid>
       </Card>
       <AddNewBudgetRecordModal
-        title="Zdefiniuj budżet"
+        title='Zdefiniuj budżet'
         open={openModal}
         handleClose={() => setOpenModal(false)}
       >
@@ -84,8 +83,8 @@ const columns = [
       row.currentSpendingPercent > 100
         ? 'Przekroczone'
         : row.currentSpendingPercent === 100
-        ? 'Wykorzystany'
-        : 'W normie',
+          ? 'Wykorzystany'
+          : 'W normie',
   },
   {
     id: 'createdAt',
@@ -101,20 +100,16 @@ const BudgetTable = () => {
   );
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleClick = useCallback((message, variant) => () => {
-    enqueueSnackbar(message, { variant: variant, anchorOrigin:{horizontal: "right", vertical: "bottom"}});
-  }, [enqueueSnackbar]);
-
   const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
     onSuccess: () => {
-      (handleClick("Element został usunięty", "success"))()
+      enqueueSnackbar('Element został usunięty', {variant:'success'});
       queryClient.invalidateQueries('budgetData');
       queryClient.invalidateQueries('categoriesData');
       queryClient.invalidateQueries('chartBudgetData');
     },
-    onError:()=>{
-      (handleClick("Wystąpił nieoczekiwany błąd", "error"))()
-    }
+    onError: () => {
+      enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+    },
   });
 
   if (isLoading) return <Loader />;

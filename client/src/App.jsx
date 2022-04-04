@@ -26,7 +26,10 @@ const App = () => {
     >
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <SnackbarProvider maxSnack={3}>
+          <SnackbarProvider maxSnack={3} anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}>
             <CssBaseline />
             <Router />
           </SnackbarProvider>

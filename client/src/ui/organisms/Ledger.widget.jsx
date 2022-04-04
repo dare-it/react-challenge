@@ -18,7 +18,7 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import RootContext from '../../context/context';
 import { AddNewLedgerRecordModal } from './AddNewLedgerRecord.modal';
-import { useCallback, useContext } from 'react';
+import { useContext } from 'react';
 import { useSnackbar } from 'notistack';
 
 export const LedgerWidget = () => {
@@ -111,20 +111,16 @@ const LedgerTable = () => {
   );
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleClick = useCallback((message, variant) => () => {
-    enqueueSnackbar(message, { variant: variant, anchorOrigin:{horizontal: "right", vertical: "bottom"}});
-  }, [enqueueSnackbar]);
-
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: () => {
-      (handleClick("Element został usunięty", "success"))()
+      enqueueSnackbar('Element został usunięty', {variant:'success'});
       queryClient.invalidateQueries('ledgerData');
       queryClient.invalidateQueries('chartServiceData');
       queryClient.invalidateQueries('chartBudgetData');
     },
-    onError:()=>{
-      (handleClick("Wystąpił nieoczekiwany błąd", "error"))()
-    }
+    onError: () => {
+      enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+    },
   });
   if (isLoading) return <Loader />;
   if (error) return <Error />;
