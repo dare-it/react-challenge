@@ -1,128 +1,132 @@
-import React from 'react';
-import { ActionHeader, Card,  Page } from 'ui';
-import { Box, Grid } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography } from '@mui/material';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import RemoveIcon from '@mui/icons-material/Remove';
-import {Button} from "../atoms/Button";
-import {Table} from "../../ui/molecules/table/Table"
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { LEDGER_QUERY } from 'queryKeys';
-import { LedgerService } from '../../api/services/LedgerService';
-import { Loader } from 'ui/atoms/Loader';
-import { Error } from 'ui/atoms/Error';
-import { NoContent } from 'ui/atoms/NoContent';
-import { ColorBox } from "../../ui/atoms/ColorBox";
-import { LocalizedDate } from "../../ui/atoms/LocalizedDate";
-import { Money } from "../../ui/atoms/Money";
-import { Modal } from "../molecules/Modal"
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 
-
-const headCell = [
-  {
-    id: '1',
-    label: 'Nazwa',
-    renderCell: (row) => <p>{row.title}</p>
-  },
-  {
-    id: '2',
-    label: 'Kategoria',
-    renderCell: (row) => <Box sx={{display:'flex',  alignItems: 'center'}} >
-                          <ColorBox  color={row.category?.color}></ColorBox>
-                          <p>{row.category?.name}</p></Box>
-  },
-  {
-    id: '3',
-    label: 'Data',
-    renderCell: (row) => <LocalizedDate date={ row.createdAt }></LocalizedDate> 
-  },
-  {
-    id: '4',
-    label: 'Kwota',
-    renderCell: (row) =>{
-      if(row.mode==="EXPENSE") return <Box sx={{color:'red'}}>-<Money inCents={ row.amountInCents }></Money></Box>
-      if(row.mode==="INCOME") return <Box sx={{color:'#00A980'}}>+<Money inCents={ row.amountInCents }></Money></Box>
-    }  
-  }
-]
+import {
+  ActionHeader,
+  Button,
+  Table,
+  LocalizedDate,
+  CategoryCell,
+  AddNewLedgerRecordModal,
+  Money,
+  Error,
+  Loader,
+  NoContent,
+  Card,
+} from 'ui';
+import { LedgerService } from 'api';
+import { BUDGET_QUERY, LEDGER_QUERY } from 'queryKeys';
 
 export const LedgerWidget = () => {
-  const [openAdd, setAddOpen] = React.useState(false);
-  const handleAddOpen = () => setAddOpen(true);
-  const handleAddClose = () => setAddOpen(false);
+  const [modalVisible, toggleModal] = useState(false);
+  const [modalType, setModalType] = useState('');
 
-  const [openRemove, setRemoveOpen] = React.useState(false);
-  const handleRemoveOpen = () => setRemoveOpen(true);
-  const handleRemoveClose = () => setRemoveOpen(false);
+  const queryClient = useQueryClient();
 
-  const queryClient =useQueryClient();
-  const {isLoading, error, data } = useQuery([LEDGER_QUERY], () => LedgerService.findAll())
-  const mutation = useMutation((ids) => LedgerService.remove({ids}),
-  {
+  const { isLoading, error, data } = useQuery(LEDGER_QUERY, () =>
+    LedgerService.findAll(),
+  );
+
+  const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: async () => {
-      await queryClient.invalidateQueries([LEDGER_QUERY])
-    }
-  }
-)
-const deleteRecords = (ids) => mutation.mutate(ids);
+      await queryClient.refetchQueries([LEDGER_QUERY]);
+      await queryClient.refetchQueries([BUDGET_QUERY]);
+    },
+  });
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const openModal = (modalType) => {
+    toggleModal(true);
+    setModalType(modalType);
+  };
 
-  if (error) {
-    return <Error error={error} />;
-  }
-
-  if (!data?.length) {
-    return <NoContent />;
-  }
+  const deleteRecords = (ids) => {
+    mutation.mutate(ids);
+  };
 
   return (
-    <Page title="Portfel">
-      <Modal open={openAdd} title={'Dodaj wpływ'} handleClose={handleAddClose}></Modal>
-      <Modal open={openRemove} title={'Dodaj wydatek'} handleClose={handleRemoveClose}></Modal>
-      <Card
-        title={
-          <ActionHeader
-            variant={'h1'}
-            title="Portfel"
-            renderActions={() => 
+    <Card
+      sx={{ minHeight: '80vh', height: '100%' }}
+      title={
+        <ActionHeader
+          variant={'h1'}
+          title="Portfel"
+          renderActions={() => (
             <Box>
-              <Button 
-                sx={{
-                  marginRight: '15px'
-                }}
-                variant={'outlined'} 
-                color={'primary'} 
-                startIcon={ <AddOutlinedIcon /> }
-                onClick={handleAddOpen}>
-                  Wpłać
-              </Button>
-              <Button 
-                
-                variant={'outlined'} 
-                color={'primary'} 
-                startIcon={ <RemoveIcon />}
-                onClick={handleRemoveOpen}>
-                  Wypłać
-              </Button>
-            </Box>}
-          />
-        }
-      > 
-      <Grid container>
-          <Grid item xs={12}>
-            <Table 
-              headCells={headCell}           
-              rows={data}
-              getUniqueId={(row) => row.id} 
-              deleteRecords={deleteRecords}
+              <Button
+                startIcon={<AddOutlinedIcon />}
+                onClick={() => openModal('INCOME')}
+                sx={{ marginRight: '8px' }}
               >
-            </Table> 
-          </Grid>
-        </Grid>  
-      </Card>
-    </Page>
-
+                Wpłać
+              </Button>
+              <Button
+                startIcon={<RemoveOutlinedIcon />}
+                onClick={() => openModal('EXPENSE')}
+              >
+                Wypłać
+              </Button>
+            </Box>
+          )}
+        />
+      }
+    >
+      {isLoading && <Loader />}
+      {error && <Error error={error} />}
+      {!isLoading && !error && !data?.length && <NoContent />}
+      {!isLoading && !error && !!data?.length && (
+        <Table
+          rows={data}
+          headCells={headCells}
+          getUniqueId={(row) => row.id}
+          deleteRecords={deleteRecords}
+        />
+      )}
+      <AddNewLedgerRecordModal
+        open={modalVisible}
+        onClose={() => toggleModal(false)}
+        type={modalType}
+      />
+    </Card>
   );
 };
+
+const headCells = [
+  {
+    id: 'title',
+    label: 'Nazwa',
+    renderCell: (row) => row.title,
+  },
+  {
+    id: 'categoryName',
+    label: 'Kategoria',
+    renderCell: (row) => {
+      if (!row.mode === 'INCOME') return 'Wpływ';
+
+      return (
+        <CategoryCell name={row.category?.name} color={row.category?.color} />
+      );
+    },
+  },
+  {
+    id: 'createdAt',
+    label: 'Data',
+    renderCell: (row) => <LocalizedDate date={row.createdAt} />,
+  },
+  {
+    id: 'amountInCents',
+    label: 'Kwota',
+    renderCell: (row) =>
+      row.mode === 'EXPENSE' ? (
+        <Typography color={'error.main'} variant={'p'}>
+          -<Money inCents={row.amountInCents} />
+        </Typography>
+      ) : (
+        <Typography color={'success.main'} variant={'p'}>
+          +<Money inCents={row.amountInCents} />
+        </Typography>
+      ),
+  },
+];

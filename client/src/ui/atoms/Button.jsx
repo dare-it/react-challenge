@@ -12,20 +12,20 @@ const useStyles = makeStyles((theme) => ({
     borderRadus: '4px',
     padding: '8px 12px',
     boxShadow: 'none',
-    "&.MuiButton-containedPrimary": {
+    '&.MuiButton-containedPrimary': {
       color: '#fff',
       background: '#334ACC',
       boxShadow: 'none',
       '&:hover': {
         backgroundColor: '#223289',
-        opacity: '100%'
+        opacity: '100%',
       },
       '&:active': {
         backgroundColor: '#223289',
       },
     },
-   
-    "&.MuiButton-outlinedPrimary": {
+
+    '&.MuiButton-outlinedPrimary': {
       color: '#334ACC',
       background: '#E8EAF6',
       border: 'none',
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {
         color: '#223289',
         backgroundColor: '#C5CAE9',
-        opacity: '100%'
+        opacity: '100%',
       },
       '&:active': {
         color: '#223289',
@@ -41,15 +41,15 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-containedError": {
+    '&.MuiButton-containedError': {
       color: '#FF5D5D',
       background: '#FCECE6',
       border: 'none',
       boxShadow: 'none',
       '&:hover': {
-        color:'#fff',
+        color: '#fff',
         backgroundColor: '#FF5D5D',
-        opacity: '100%'
+        opacity: '100%',
       },
       '&:active': {
         color: '#FF5D5D',
@@ -57,14 +57,14 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-outlinedError": {
+    '&.MuiButton-outlinedError': {
       color: '#FF5D5D',
       background: '#fff',
       border: '1px solid #FF5D5D',
       '&:hover': {
         color: '#FF5D5D',
         backgroundColor: '#FCECE6',
-        opacity: '100%'
+        opacity: '100%',
       },
       '&:active': {
         color: '#FF5D5D',
@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-containedSuccess": {
+    '&.MuiButton-containedSuccess': {
       color: '#00A980',
       background: '#DBEBDB',
       border: 'none',
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-outlinedSuccess": {
+    '&.MuiButton-outlinedSuccess': {
       color: '#00A980',
       background: '#FFF',
       border: '1px solid #66BB6A',
@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-containedWarning": {
+    '&.MuiButton-containedWarning': {
       color: '#B28C09',
       background: '#FFF5D2',
       border: 'none',
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
 
-    "&.MuiButton-outlinedWarning": {
+    '&.MuiButton-outlinedWarning': {
       color: '#FFA726',
       background: '#FFF',
       border: '1px solid #FFA726',
@@ -137,5 +137,9 @@ const useStyles = makeStyles((theme) => ({
 
 export function Button({ children, ...props }) {
   const classes = useStyles(props);
-  return <MuiButton className={classes.root} {...props}>{children}</MuiButton>;
+  return (
+    <MuiButton className={classes.root} {...props}>
+      {children}
+    </MuiButton>
+  );
 }

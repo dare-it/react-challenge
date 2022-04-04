@@ -1,8 +1,6 @@
 import React from 'react';
 import { NoContent } from '../ui';
 
-
-
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Zadanie 1/NoContent',

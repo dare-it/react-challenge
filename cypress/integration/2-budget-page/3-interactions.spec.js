@@ -17,7 +17,7 @@ context('Table data interactions', () => {
     checkAll.click();
     const deleteBtn = cy.get('[data-testid="DeleteIcon"]');
     deleteBtn.click();
-    // cy.get('#budżet').contains('Brak danych do wyświetlenia').should('exist');
+    cy.get('#budżet').contains('Brak danych').should('exist');
   });
 
   it('should allow to delete many category records', () => {
