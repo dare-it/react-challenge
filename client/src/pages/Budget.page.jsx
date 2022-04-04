@@ -23,16 +23,16 @@ export const BudgetPage = () => {
     setOpenModal(true);
   };
   return (
-    <Page title='Budżet'>
+    <Page title="Budżet">
       <Card
         title={
           <ActionHeader
             variant={'h1'}
-            title='Budżet'
+            title="Budżet"
             renderActions={() => (
               <Button
-                variant='contained'
-                color='primary'
+                variant="contained"
+                color="primary"
                 startIcon={<AddIcon />}
                 onClick={handleOpenModal}
               >
@@ -49,7 +49,7 @@ export const BudgetPage = () => {
         </Grid>
       </Card>
       <AddNewBudgetRecordModal
-        title='Zdefiniuj budżet'
+        title="Zdefiniuj budżet"
         open={openModal}
         handleClose={() => setOpenModal(false)}
       >
@@ -83,8 +83,8 @@ const columns = [
       row.currentSpendingPercent > 100
         ? 'Przekroczone'
         : row.currentSpendingPercent === 100
-          ? 'Wykorzystany'
-          : 'W normie',
+        ? 'Wykorzystany'
+        : 'W normie',
   },
   {
     id: 'createdAt',
@@ -102,13 +102,13 @@ const BudgetTable = () => {
 
   const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
     onSuccess: () => {
-      enqueueSnackbar('Element został usunięty', {variant:'success'});
+      enqueueSnackbar('Element został usunięty', { variant: 'success' });
       queryClient.invalidateQueries('budgetData');
       queryClient.invalidateQueries('categoriesData');
       queryClient.invalidateQueries('chartBudgetData');
     },
     onError: () => {
-      enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+      enqueueSnackbar('Wystąpił nieoczekiwany błąd', { variant: 'error' });
     },
   });
 

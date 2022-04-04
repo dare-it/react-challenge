@@ -52,12 +52,12 @@ export const AddNewBudgetRecordModal = ({ handleClose, ...props }) => {
     (requestBody) => BudgetService.create({ requestBody }),
     {
       onSuccess: () => {
-        enqueueSnackbar('Budżet został zdefiniowany', {variant:'success'})
+        enqueueSnackbar('Budżet został zdefiniowany', { variant: 'success' });
         queryClient.invalidateQueries('budgetData');
         queryClient.invalidateQueries('categoriesData');
       },
       onError: () => {
-        enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd', { variant: 'error' });
       },
     },
   );

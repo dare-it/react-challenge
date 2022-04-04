@@ -113,13 +113,13 @@ const LedgerTable = () => {
 
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: () => {
-      enqueueSnackbar('Element został usunięty', {variant:'success'});
+      enqueueSnackbar('Element został usunięty', { variant: 'success' });
       queryClient.invalidateQueries('ledgerData');
       queryClient.invalidateQueries('chartServiceData');
       queryClient.invalidateQueries('chartBudgetData');
     },
     onError: () => {
-      enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+      enqueueSnackbar('Wystąpił nieoczekiwany błąd', { variant: 'error' });
     },
   });
   if (isLoading) return <Loader />;

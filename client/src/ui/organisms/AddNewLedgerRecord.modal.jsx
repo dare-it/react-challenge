@@ -57,14 +57,14 @@ export const AddNewLedgerRecordModal = ({ type, handleClose, ...props }) => {
     {
       onSuccess: () => {
         type === 'INCOME'
-          ?  enqueueSnackbar('Wpływ został dodany', {variant:'success'})
-          :  enqueueSnackbar('Wydatek został zapisany', {variant:'success'});
+          ? enqueueSnackbar('Wpływ został dodany', { variant: 'success' })
+          : enqueueSnackbar('Wydatek został zapisany', { variant: 'success' });
         queryClient.invalidateQueries('ledgerData');
         queryClient.invalidateQueries('chartServiceData');
         queryClient.invalidateQueries('chartBudgetData');
       },
       onError: () => {
-        enqueueSnackbar('Wystąpił nieoczekiwany błąd', {variant:'error'});
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd', { variant: 'error' });
       },
     },
   );

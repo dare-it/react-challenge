@@ -2,9 +2,8 @@ import { Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Bar } from 'react-chartjs-2';
-
 import { BudgetService } from 'api';
-import { Card, Loader, Error, NoContent } from 'ui';
+import { Card, Loader, Error } from 'ui';
 import { BUDGET_QUERY } from 'queryKeys';
 
 export const BudgetChartWidget = () => {
