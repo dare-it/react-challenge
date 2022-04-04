@@ -27,20 +27,18 @@ const routing = [
 ];
 
 const Routing = () => (
-
-  <Router>    
-      <Layout routing={routing}>
-        <Switch>
-          {routing.map((config) => (
-            <Route
-              key={config.path}
-              path={config.path}
-              component={config.component}
-            />
-          ))}
-        </Switch>
-      </Layout>   
+  <Router>
+    <Layout routing={routing}>
+      <Switch>
+        {routing.map((config) => (
+          <Route
+            key={config.path}
+            path={config.path}
+            component={config.component}
+          />
+        ))}
+      </Switch>
+    </Layout>
   </Router>
-
 );
 export default Routing;

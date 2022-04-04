@@ -153,6 +153,7 @@ theme = createTheme(theme, {
         },
       },
     },
+
     MuiButton: {
       defaultProps: {
         variant: 'outlined',
@@ -241,4 +242,4 @@ theme = createTheme(theme, {
   },
 });
 
-export { theme };
+export { theme }
