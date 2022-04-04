@@ -82,8 +82,8 @@ const columns = [
       row.currentSpendingPercent > 100
         ? 'Przekroczone'
         : row.currentSpendingPercent === 100
-        ? 'Wykorzystany'
-        : 'W normie',
+          ? 'Wykorzystany'
+          : 'W normie',
   },
   {
     id: 'createdAt',

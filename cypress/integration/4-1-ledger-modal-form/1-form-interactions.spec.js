@@ -7,7 +7,11 @@ context('Form content - on "Wpłać" button click', () => {
   });
 
   it('should do a network request for full categories', () => {
+<<<<<<< HEAD
     cy.visit('/');
+=======
+    cy.visit('/budget');
+>>>>>>> upstream/task-6-tests
     cy.wait('@category')
       .its('request.url')
       .should('not.include', '/category?unlinkedToBudget=true');

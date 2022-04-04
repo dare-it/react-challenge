@@ -1,7 +1,7 @@
+import { QueryClientProvider, QueryClient } from 'react-query';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import Router from './pages/routing';
 import { theme } from 'theme';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState } from 'react';
 import RootContext from './context/context';
 
