@@ -10,9 +10,11 @@
     "@mui/styles": "^5.3.0",
     "axios": "^0.24.0",
     "chart.js": "^3.7.1",
-    "cypress": "^9.1.0",
-    "prettier": "2.5.1",
-    "react-chartjs-2": "^4.0.1"
+    "clsx": "^1.1.1",
+    "clx": "^1.0.0",
+    "cypress": "^9.5.3",
+    "mui-image": "^1.0.4",
+    "prettier": "2.5.1"
   },
   "scripts": {
     "postinstall": "run-p -l install:server install:client",

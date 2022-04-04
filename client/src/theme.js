@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material';
+
 let theme = createTheme({
   shape: {
     borderRadius: 4,
@@ -82,6 +83,7 @@ theme = createTheme(theme, {
         },
       },
     },
+
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -102,6 +104,15 @@ theme = createTheme(theme, {
             fontWeight: '500',
             fontSize: '14px',
           },
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        containedPrimary: {},
+        '&:hover': {
+          backgroundColor: 'red',
+          opacity: '100%',
         },
       },
     },
@@ -153,7 +164,6 @@ theme = createTheme(theme, {
         },
       },
     },
-
     MuiButton: {
       defaultProps: {
         variant: 'outlined',
