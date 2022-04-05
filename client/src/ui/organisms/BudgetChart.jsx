@@ -24,15 +24,15 @@ export const BudgetChart = () => {
 
   if (isLoading) return <Loader></Loader>;
   if (isError) return <Error error={error}></Error>;
-  
+
   console.log(data);
   let expensesEmpty = true;
-  data.forEach((element)=> {
-     if( element.currentSpending !==0 ) {
-         expensesEmpty = false;
-     }
-  })
- 
+  data.forEach((element) => {
+    if (element.currentSpending !== 0) {
+      expensesEmpty = false;
+    }
+  });
+
   ChartJS.register(
     CategoryScale,
     LinearScale,
@@ -75,18 +75,15 @@ export const BudgetChart = () => {
 
   return (
     <Card
-      title= {
-        <ActionHeader
-        variant={'h4'}
-        title="Budżet"
-        />
-      }
+      title={<ActionHeader variant={'h4'} title="Budżet" />}
       subheader="Podsumowanie wydatków"
       sx={{ widht: '495px', height: '367px' }}
     >
-        {
-        (expensesEmpty===true)?('Brak wyników'):<Bar options={options} data={dataChart} />  
-        } 
+      {expensesEmpty === true ? (
+        'Brak wyników'
+      ) : (
+        <Bar options={options} data={dataChart} />
+      )}
     </Card>
   );
 };

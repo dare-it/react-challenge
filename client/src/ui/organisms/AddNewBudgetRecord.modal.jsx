@@ -7,7 +7,10 @@ import { Controller, useForm } from 'react-hook-form';
 import { CategoryService, BudgetService } from 'api';
 import { Modal, CategoryField, Loader, Error } from 'ui';
 import { formatDollarsToCents } from 'utils';
-import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
+import {
+  BUDGET_QUERY,
+  PARTIAL_CATEGORIES_QUERY,
+} from 'queryKeys';
 
 export const AddNewBudgetRecordModal = ({ open, onClose }) => {
   const queryClient = useQueryClient();
@@ -28,6 +31,7 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
       onSuccess: async () => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
+        
         handleClose();
       },
     },
