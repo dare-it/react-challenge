@@ -141,7 +141,16 @@ theme = createTheme(theme, {
     MuiToolbar: {
       styleOverrides: {
         root: {
-          borderRadius: 0,
+          borderRadius: theme.shape.borderRadius,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFD',
+          },
         },
       },
     },

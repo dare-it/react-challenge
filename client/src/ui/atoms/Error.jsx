@@ -3,8 +3,7 @@ import errorImg from '../../assets/unknown_error.png';
 
 export const Error = ({ error }) => {
   return (
-    <Box 
-  
+    <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
@@ -13,19 +12,22 @@ export const Error = ({ error }) => {
         typography: {
           color: 'rgba(51, 51, 51, 0.5)',
           ml: '0px',
-          mt: '202px'                 
+          mt: '202px',
         },
-        
       }}
     >
-    <img src= {errorImg} alt = "unknown error" />
-    
+      <img src={errorImg} alt="unknown error" />
+
       {
         error?.message?.includes('Network Error') ? (
-          <Typography width= '261px' height='29px' >Wystąpił nieoczekiwany błąd</Typography>
-       ):'Wystąpił nieoczekiwany błąd' //  TODO in TASK 1
+          <Typography width="261px" height="29px">
+            Wystąpił nieoczekiwany błąd
+          </Typography>
+        ) : (
+          'Wystąpił nieoczekiwany błąd'
+        ) //  TODO in TASK 1
       }
-     {/* {error?.message?.includes('Network Error') ? (
+      {/* {error?.message?.includes('Network Error') ? (
         <Typography>Uruchom Server!</Typography>
       ) : (
         <Box
