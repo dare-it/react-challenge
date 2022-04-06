@@ -12,33 +12,29 @@ ChartJS.register(...registerables);
 ChartJS.defaults.plugins.legend.display = false;
 
 export const BalanceChart = () => {
-  const {
-    isLoading,
-    isError,
-    data: chartData,
-  } = useQuery(SUMMARY_QUERY, SummaryService.findAll, {
-    select: useCallback((data) => {
-      return {
-        labels: data.spending.map((el) => el.categoryName),
-        datasets: [
-          {
-            data: data.spending.map((el) =>
-              formatCentsToDollars(el.amountInCents),
-            ),
-            backgroundColor: data.spending.map((el) => el.categoryColor),
+  const { isLoading, isError, data } = useQuery(
+    SUMMARY_QUERY,
+    SummaryService.findAll,
+    {
+      select: useCallback((data) => {
+        return {
+          chartData: {
+            labels: data.spending.map((el) => el.categoryName),
+            datasets: [
+              {
+                data: data.spending.map((el) =>
+                  formatCentsToDollars(el.amountInCents),
+                ),
+                backgroundColor: data.spending.map((el) => el.categoryColor),
+              },
+            ],
           },
-        ],
-      };
-    }, []),
-  });
-
-  const { data: balance } = useQuery(SUMMARY_QUERY, SummaryService.findAll, {
-    select: useCallback((data) => data.balance, []),
-  });
-
-  const { data: legendData } = useQuery(SUMMARY_QUERY, SummaryService.findAll, {
-    select: useCallback((data) => data.spending, []),
-  });
+          balance: data.balance,
+          legendData: data.spending,
+        };
+      }, []),
+    },
+  );
 
   return (
     <Card sx={{ paddingBottom: '0' }}>
@@ -52,22 +48,22 @@ export const BalanceChart = () => {
         >
           <Typography variant="h4">Saldo</Typography>
           <Typography variant="h3">
-            <Money inCents={balance} />
+            <Money inCents={data?.balance} />
           </Typography>
         </Box>
         <Typography variant="subtitle1">Pozostała kwota</Typography>
         <Box sx={{ margin: '40px auto', maxWidth: '200px' }}>
           {isLoading && <Loader />}
           {isError && <Error />}
-          {!isLoading && !isError && balance === 0 && (
+          {!isLoading && !isError && data?.balance === 0 && (
             <Typography variant="body1">Brak wyników</Typography>
           )}
-          {!isLoading && !isError && balance !== 0 && (
-            <Doughnut data={chartData} />
+          {!isLoading && !isError && data?.balance !== 0 && (
+            <Doughnut data={data?.chartData} />
           )}
         </Box>
         <Box>
-          {legendData?.map((el) => (
+          {data?.legendData.map((el) => (
             <CategoryCell
               key={el.categoryName}
               color={el.categoryColor}
