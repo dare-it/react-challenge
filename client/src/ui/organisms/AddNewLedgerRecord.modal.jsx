@@ -3,11 +3,18 @@ import { Box, TextField } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
+
 
 import { CategoryService, LedgerService } from 'api';
 import { Modal, CategoryField, Loader, Error, NoContent } from 'ui';
 import { formatDollarsToCents } from 'utils';
-import { LEDGER_QUERY, CATEGORIES_QUERY, BUDGET_QUERY } from 'queryKeys';
+import {
+  LEDGER_QUERY,
+  CATEGORIES_QUERY,
+  BUDGET_QUERY,
+  SUMMARY_QUERY,
+} from 'queryKeys';
 
 const translationKeys = {
   income: 'wpływ',
@@ -16,6 +23,8 @@ const translationKeys = {
 
 export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
   const queryClient = useQueryClient();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const { handleSubmit, control, formState, reset } = useForm({
     mode: 'onChange',
   });
@@ -30,9 +39,13 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
     {
       onSuccess: async () => {
         await queryClient.refetchQueries([LEDGER_QUERY]);
+        enqueueSnackbar('Wpływ został zdefiniowany.', { variant: "success" });
         await queryClient.refetchQueries([BUDGET_QUERY]);
+        enqueueSnackbar('Wydatek został zdefiniowany.', { variant: "success" });
+        await queryClient.refetchQueries([SUMMARY_QUERY]);
         handleClose();
-      },
+     },
+      onError: () => enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: "error" })
     },
   );
 

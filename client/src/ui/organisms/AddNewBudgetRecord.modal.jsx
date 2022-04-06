@@ -3,6 +3,7 @@ import { Box, TextField } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import * as PropTypes from 'prop-types';
 import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 
 import { CategoryService, BudgetService } from 'api';
 import { Modal, CategoryField, Loader, Error } from 'ui';
@@ -11,6 +12,7 @@ import { BUDGET_QUERY, PARTIAL_CATEGORIES_QUERY } from 'queryKeys';
 
 export const AddNewBudgetRecordModal = ({ open, onClose }) => {
   const queryClient = useQueryClient();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { handleSubmit, control, formState, reset } = useForm({
     mode: 'onChange',
@@ -24,12 +26,14 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
 
   const mutation = useMutation(
     (requestBody) => BudgetService.create({ requestBody }),
-    {
+    { 
       onSuccess: async () => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
+        enqueueSnackbar('Budżet został zdefiniowany.', { variant: "success" });
         handleClose();
       },
+      onError: () => enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: "error" })
     },
   );
 
