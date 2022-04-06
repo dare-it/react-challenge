@@ -32,7 +32,7 @@ export const BudgetChart = () => {
     },
   );
 
-  const isAllZero = data?.datasets[0].data.every((item) => item === 0);
+  const isDataEmpty = data?.datasets[0].data.every((item) => item === 0);
 
   return (
     <Card sx={{ paddingBottom: '0' }}>
@@ -42,10 +42,10 @@ export const BudgetChart = () => {
         <Box sx={{ marginTop: '20px' }}>
           {isLoading && <Loader />}
           {isError && <Error />}
-          {!isLoading && !isError && isAllZero && (
+          {!isLoading && !isError && isDataEmpty && (
             <Typography variant="body1">Brak wyników</Typography>
           )}
-          {!isLoading && !isError && !isAllZero && (
+          {!isLoading && !isError && !isDataEmpty && (
             <Bar data={data} options={options} />
           )}
         </Box>
