@@ -40,7 +40,7 @@ export const BudgetTableWidget = () => {
       renderCell: (row) => <Money inCents={row.amountInCents} />,
     },
     {
-      id: 'current-amount',
+      id: 'currentSpending',
       label: 'Obecna kwota',
       renderCell: (row) => <Money inCents={row.currentSpending} />,
     },

@@ -23,11 +23,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
 
     cy.get('.MuiModal-root').contains('Zapisz').click();
     cy.get('.MuiModal-root').should('not.be.visible');
-<<<<<<< HEAD
     cy.wait(200);
-=======
->>>>>>> upstream/task-6-tests
-
     cy.get('tbody').children('.MuiTableRow-root').contains('Ubezpieczenia');
   });
 

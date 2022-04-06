@@ -7,11 +7,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
     // delete a row
     cy.get('tbody').find('input[type="checkbox"]').first().click();
     cy.get('[data-testid="DeleteIcon"]').click();
-<<<<<<< HEAD
     cy.wait(200);
-
-=======
->>>>>>> upstream/task-6-tests
     cy.get('tbody').children('.MuiTableRow-root').should('have.length', 6);
 
     // open budget modal
@@ -29,11 +25,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
     const row = cy.get('thead').children('.MuiTableRow-root').first();
     row.find('input[type="checkbox"]').click();
     cy.get('[data-testid="DeleteIcon"]').click();
-<<<<<<< HEAD
     cy.wait(200);
-=======
->>>>>>> upstream/task-6-tests
-
     // open budget modal
     cy.contains('Zdefiniuj budżet').click();
 
@@ -55,11 +47,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
     // delete a row
     cy.get('tbody').find('input[type="checkbox"]').first().click();
     cy.get('[data-testid="DeleteIcon"]').click();
-<<<<<<< HEAD
     cy.wait(200);
-
-=======
->>>>>>> upstream/task-6-tests
     cy.get('tbody').children('.MuiTableRow-root').should('have.length', 6);
 
     // open budget modal
@@ -83,11 +71,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
 
     cy.get('.MuiModal-root').contains('Zapisz').click();
     cy.get('.MuiModal-root').should('not.be.visible');
-<<<<<<< HEAD
     cy.wait(200);
-=======
->>>>>>> upstream/task-6-tests
-
     cy.get('tbody').children('.MuiTableRow-root').contains('Ubezpieczenia');
 
     cy.contains('Zdefiniuj budżet').click();

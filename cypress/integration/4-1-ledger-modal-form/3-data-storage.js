@@ -22,11 +22,7 @@ context('Data storage- on "Wpłać" button click', () => {
 
     cy.get('.MuiModal-root').contains('Zapisz').click();
     cy.get('.MuiModal-root').should('not.be.visible');
-<<<<<<< HEAD
     cy.wait(200);
-=======
-
->>>>>>> upstream/task-6-tests
     cy.get('tbody').children('.MuiTableRow-root').eq(0).contains('Test');
     cy.get('tbody').children('.MuiTableRow-root').eq(0).contains('1000000');
     cy.get('tbody')
@@ -68,11 +64,7 @@ context('Data storage- on "Wypłać" button click', () => {
 
     cy.get('.MuiModal-root').contains('Zapisz').click();
     cy.get('.MuiModal-root').should('not.be.visible');
-<<<<<<< HEAD
     cy.wait(200);
-=======
-
->>>>>>> upstream/task-6-tests
     cy.get('tbody').children('.MuiTableRow-root').eq(0).contains('Test');
     cy.get('tbody').children('.MuiTableRow-root').eq(0).contains('-1000000');
     cy.get('tbody').children('.MuiTableRow-root').eq(0).contains('Różne');

@@ -89,7 +89,7 @@ const columns = [
     renderCell: (row) => <LocalizedDate date={row.createdAt} />,
   },
   {
-    id: 'currentSpendingPercent',
+    id: 'amountInCents',
     label: 'Kwota',
     renderCell: (row) =>
       row.mode === 'INCOME' ? (
