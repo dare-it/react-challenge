@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { LEDGER_QUERY } from 'queryKeys';
-import { LedgerService } from 'api';
+import { Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { Box } from '@mui/material';
+import { LEDGER_QUERY, SUMMARY_QUERY, BUDGET_QUERY } from 'queryKeys';
+import { LedgerService } from 'api';
 import {
   ActionHeader,
   Card,
@@ -31,8 +31,10 @@ export const LedgerWidget = () => {
   );
 
   const { mutate } = useMutation(LedgerService.remove, {
-    onSuccess: () => {
-      return queryClient.invalidateQueries(LEDGER_QUERY);
+    onSuccess: async () => {
+      await queryClient.invalidateQueries(LEDGER_QUERY);
+      await queryClient.invalidateQueries(SUMMARY_QUERY);
+      await queryClient.invalidateQueries(BUDGET_QUERY);
     },
   });
 

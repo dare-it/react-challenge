@@ -23,6 +23,8 @@ export { MainMenu } from './organisms/Menu';
 export { LedgerWidget } from './organisms/Ledger.widget';
 export { AddNewLedgerRecord } from './organisms/AddNewLedgerRecord.modal';
 export { AddNewBudgetRecord } from './organisms/AddNewBudgetRecord.modal';
+export { BalanceChart } from './organisms/BalanceChart';
+export { BudgetChart } from './organisms/BudgetChart';
 
 // templates
 export { Page } from './templates/Page';
