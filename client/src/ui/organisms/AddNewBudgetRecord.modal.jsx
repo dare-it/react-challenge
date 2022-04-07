@@ -27,10 +27,12 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
   const mutation = useMutation(
     (requestBody) => BudgetService.create({ requestBody }),
     {
-      onSuccess: async () => {
+      onSuccess: async (data) => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
-        enqueueSnackbar('Budżet został zdefiniowany', { variant: 'success' });
+        if(data){
+          enqueueSnackbar('Budżet został zdefiniowany', { variant: 'success' });
+        }           
         handleClose();
       },
       onError: () =>

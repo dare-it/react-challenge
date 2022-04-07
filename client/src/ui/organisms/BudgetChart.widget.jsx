@@ -40,12 +40,13 @@ export const BudgetChartWidget = () => {
     <Card
       title={<Typography variant={'h4'}>Budżet</Typography>}
       subheader={'Podsumowanie wydatków'}
+      data-test-id='wallet-bottom-sidebar'
     >
       {isLoading && <Loader />}
       {!isLoading && error && <Error error={error} />}
-      {!isLoading && !error && (!data || !data.hasData) && (
-        <Typography>Brak wyników</Typography>
-      )}
+      {!isLoading && !error && (!data || !data.exists) && (
+          <Typography>Brak wyników</Typography>
+        )}
       {!error && !isLoading && data && data.hasData && (
         <Grid
           container
