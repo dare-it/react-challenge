@@ -40,9 +40,9 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([SUMMARY_QUERY]);
 
-        data.mode === 'INCOME' ?
-          enqueueSnackbar('Wpływ został dodany', { variant: 'success' }) :
-          enqueueSnackbar('Wydatek został zapisany', { variant: 'success' });
+        data.mode === 'INCOME'
+          ? enqueueSnackbar('Wpływ został dodany', { variant: 'success' })
+          : enqueueSnackbar('Wydatek został zapisany', { variant: 'success' });
 
         handleClose();
       },
