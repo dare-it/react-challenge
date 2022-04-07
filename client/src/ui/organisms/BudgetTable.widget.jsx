@@ -20,14 +20,15 @@ export const BudgetTableWidget = () => {
   );
 
   const mutation = useMutation((ids) => BudgetService.remove({ ids }), {
-    onSuccess: async () => {
-      await queryClient.refetchQueries([BUDGET_QUERY]).then(enqueueSnackbar('Element został usunięty.', { variant: 'success' }));
+    onSuccess: async (data) => {
+      await queryClient.refetchQueries([BUDGET_QUERY]);
       await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
-      
+      enqueueSnackbar('Element został usunięty', { variant: 'success' })
     },
     onError: () =>
-      enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
-  });
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
+    },
+  );
 
   const deleteRecords = (ids) => mutation.mutate(ids);
 

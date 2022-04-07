@@ -39,23 +39,17 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
         await queryClient.refetchQueries([LEDGER_QUERY]);
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([SUMMARY_QUERY]);
-        
-        if(data.mode === "INCOME") {
-          enqueueSnackbar('Wpływ został dodany', { variant: 'success' });
-        } else {
+
+        data.mode === 'INCOME' ?
+          enqueueSnackbar('Wpływ został dodany', { variant: 'success' }) :
           enqueueSnackbar('Wydatek został zapisany', { variant: 'success' });
-        }
-    
-       handleClose();
-       
+
+        handleClose();
       },
       onError: () =>
         enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
     },
-   );
-  
-
-
+  );
 
   const onSubmit = async (formData) => {
     if (!formState.isValid) return;
