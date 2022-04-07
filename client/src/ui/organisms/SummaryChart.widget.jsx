@@ -46,7 +46,7 @@ export const SummaryChartWidget = () => {
 
   return (
     <Card
-      data-test-id='wallet-top-sidebar'
+      data-test-id="wallet-top-sidebar"
       title={
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Typography variant={'h4'}>Saldo</Typography>

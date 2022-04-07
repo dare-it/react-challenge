@@ -30,9 +30,9 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
       onSuccess: async (data) => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
-        if(data){
+        if (data) {
           enqueueSnackbar('Budżet został zdefiniowany', { variant: 'success' });
-        }           
+        }
         handleClose();
       },
       onError: () =>

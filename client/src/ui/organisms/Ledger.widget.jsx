@@ -55,7 +55,7 @@ export const LedgerWidget = () => {
 
   return (
     <Card
-    data-test-id='wallet-top-sidebar'
+      data-test-id="wallet-top-sidebar"
       sx={{ minHeight: '80vh', height: '100%' }}
       title={
         <ActionHeader
