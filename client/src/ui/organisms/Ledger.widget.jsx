@@ -38,9 +38,10 @@ export const LedgerWidget = () => {
       await queryClient.refetchQueries([LEDGER_QUERY]);
       await queryClient.refetchQueries([BUDGET_QUERY]);
       await queryClient.refetchQueries([SUMMARY_QUERY]);
-      enqueueSnackbar('Element został usunięty.', { variant: "success" });
+      enqueueSnackbar('Element został usunięty.', { variant: 'success' });
     },
-    onError: () => enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: "error" })
+    onError: () =>
+      enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
   });
 
   const openModal = (modalType) => {

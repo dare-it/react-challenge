@@ -26,14 +26,15 @@ export const AddNewBudgetRecordModal = ({ open, onClose }) => {
 
   const mutation = useMutation(
     (requestBody) => BudgetService.create({ requestBody }),
-    { 
+    {
       onSuccess: async () => {
         await queryClient.refetchQueries([BUDGET_QUERY]);
         await queryClient.refetchQueries([PARTIAL_CATEGORIES_QUERY]);
-        enqueueSnackbar('Budżet został zdefiniowany.', { variant: "success" });
+        enqueueSnackbar('Budżet został zdefiniowany', { variant: 'success' });
         handleClose();
       },
-      onError: () => enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: "error" })
+      onError: () =>
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
     },
   );
 

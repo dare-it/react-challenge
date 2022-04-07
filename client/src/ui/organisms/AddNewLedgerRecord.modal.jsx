@@ -5,7 +5,6 @@ import * as PropTypes from 'prop-types';
 import { useForm, Controller } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 
-
 import { CategoryService, LedgerService } from 'api';
 import { Modal, CategoryField, Loader, Error, NoContent } from 'ui';
 import { formatDollarsToCents } from 'utils';
@@ -23,7 +22,7 @@ const translationKeys = {
 
 export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
   const queryClient = useQueryClient();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { handleSubmit, control, formState, reset } = useForm({
     mode: 'onChange',
@@ -33,21 +32,30 @@ export const AddNewLedgerRecordModal = ({ open, onClose, type }) => {
     error,
     data: categories,
   } = useQuery(CATEGORIES_QUERY, () => CategoryService.findAll());
-
   const mutation = useMutation(
     (requestBody) => LedgerService.create({ requestBody }),
     {
-      onSuccess: async () => {
+      onSuccess: async (data) => {
         await queryClient.refetchQueries([LEDGER_QUERY]);
-        enqueueSnackbar('Wpływ został zdefiniowany.', { variant: "success" });
         await queryClient.refetchQueries([BUDGET_QUERY]);
-        enqueueSnackbar('Wydatek został zdefiniowany.', { variant: "success" });
         await queryClient.refetchQueries([SUMMARY_QUERY]);
-        handleClose();
-     },
-      onError: () => enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: "error" })
+        
+        if(data.mode === "INCOME") {
+          enqueueSnackbar('Wpływ został dodany', { variant: 'success' });
+        } else {
+          enqueueSnackbar('Wydatek został zapisany', { variant: 'success' });
+        }
+    
+       handleClose();
+       
+      },
+      onError: () =>
+        enqueueSnackbar('Wystąpił nieoczekiwany błąd.', { variant: 'error' }),
     },
-  );
+   );
+  
+
+
 
   const onSubmit = async (formData) => {
     if (!formState.isValid) return;

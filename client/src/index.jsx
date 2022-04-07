@@ -13,13 +13,14 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <SnackbarProvider 
-    maxSnack={3}  
-    anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'right',
-  }}
-  TransitionComponent={Slide} >
+    <SnackbarProvider
+      maxSnack={3}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      TransitionComponent={Slide}
+    >
       <App />
     </SnackbarProvider>
   </React.StrictMode>,

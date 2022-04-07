@@ -1,11 +1,9 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { BudgetChartWidget, LedgerWidget, Page, SummaryChartWidget } from 'ui';
-// import SnackbarsProvider from '@mui/lab/SnackbarsProvider';
 
 export const WalletPage = () => (
   <>
-  {/* <SnackbarsProvider limit={3} autoHideDuration={6000}> */}
     <Page title={'Portfel'}>
       <Grid container spacing={{ xs: 3, md: 6 }}>
         <Grid item xs={12} md={8}>
@@ -21,6 +19,5 @@ export const WalletPage = () => (
         </Grid>
       </Grid>
     </Page>
-  {/* </SnackbarsProvider> */}
   </>
 );
