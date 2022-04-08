@@ -1,12 +1,14 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { CATEGORIES_QUERY, BUDGET_QUERY } from 'queryKeys';
+import { useShowSnackbar } from '../../hooks/useShowSnackbar';
 import { CategoryService, BudgetService } from 'api';
 import { formatDollarsToCents } from 'utils';
 import { Modal, FormTextField, Select } from 'ui';
 
 export const AddNewBudgetRecord = ({ open, close }) => {
   const queryClient = useQueryClient();
+  const showSnackbar = useShowSnackbar();
   const methods = useForm({
     defaultValues: {
       amountInCents: '',
@@ -25,16 +27,20 @@ export const AddNewBudgetRecord = ({ open, close }) => {
     CategoryService.findAll(unlinkedToBudget),
   );
 
-  const { mutateAsync } = useMutation(BudgetService.create, {
+  const { mutate } = useMutation(BudgetService.create, {
     onSuccess: async () => {
       await queryClient.invalidateQueries(BUDGET_QUERY);
       await queryClient.invalidateQueries(CATEGORIES_QUERY);
       onClose();
+      showSnackbar('Budżet został zdefiniowany', 'success');
+    },
+    onError: () => {
+      showSnackbar('Wystąpił nieoczekiwany błąd', 'error');
     },
   });
 
-  const onSubmit = async (inputData) => {
-    await mutateAsync({
+  const onSubmit = (inputData) => {
+    mutate({
       requestBody: {
         amountInCents: Number(formatDollarsToCents(inputData.amountInCents)),
         categoryId: inputData.categoryId,

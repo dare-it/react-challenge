@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import AddIcon from '@mui/icons-material/Add';
+import { Grid } from '@mui/material';
 import {
   ActionHeader,
   Card,
@@ -15,13 +16,14 @@ import {
   CategoryCell,
   AddNewBudgetRecord,
 } from 'ui';
-import { Grid } from '@mui/material';
 import { BudgetService } from '../api/services/BudgetService';
 import { BUDGET_QUERY, CATEGORIES_QUERY } from 'queryKeys';
+import { useShowSnackbar } from '../hooks/useShowSnackbar';
 
 export const BudgetPage = () => {
   const [open, setOpen] = React.useState(false);
   const queryClient = useQueryClient();
+  const showSnackbar = useShowSnackbar();
 
   const { isLoading, isError, data } = useQuery(
     BUDGET_QUERY,
@@ -32,6 +34,10 @@ export const BudgetPage = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries(BUDGET_QUERY);
       await queryClient.invalidateQueries(CATEGORIES_QUERY);
+      showSnackbar('Element został usunięty', 'success');
+    },
+    onError: () => {
+      showSnackbar('Wystąpił nieoczekiwany błąd', 'error');
     },
   });
 

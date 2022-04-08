@@ -1,9 +1,10 @@
-import React from 'react';
+import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { LEDGER_QUERY, SUMMARY_QUERY, BUDGET_QUERY } from 'queryKeys';
+import { useShowSnackbar } from '../../hooks/useShowSnackbar';
 import { LedgerService } from 'api';
 import {
   ActionHeader,
@@ -20,10 +21,11 @@ import {
 } from 'ui';
 
 export const LedgerWidget = () => {
-  const [open, setOpen] = React.useState(false);
-  const [type, setType] = React.useState('INCOME');
+  const [open, setOpen] = useState(false);
+  const [type, setType] = useState('INCOME');
 
   const queryClient = useQueryClient();
+  const showSnackbar = useShowSnackbar();
 
   const { isLoading, isError, data } = useQuery(
     LEDGER_QUERY,
@@ -35,6 +37,10 @@ export const LedgerWidget = () => {
       await queryClient.invalidateQueries(LEDGER_QUERY);
       await queryClient.invalidateQueries(SUMMARY_QUERY);
       await queryClient.invalidateQueries(BUDGET_QUERY);
+      showSnackbar('Element został usunięty', 'success');
+    },
+    onError: () => {
+      showSnackbar('Wystąpił nieoczekiwany błąd', 'error');
     },
   });
 
