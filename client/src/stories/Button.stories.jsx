@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Button } from '../ui';
 import { Grid, Typography } from '@mui/material';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AddIcon from '@mui/icons-material/Add';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -34,6 +36,7 @@ export default {
         type: 'boolean',
       },
     },
+    onClick: { action: 'clicked' },
   },
 };
 
@@ -45,7 +48,13 @@ const All = () => (
       <Grid item xs={12} sx={{ mb: 2 }}>
         <Typography variant={'subheading'}>Contained</Typography>
       </Grid>
-      <Button variant={'contained'} color={'primary'}>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        onClick={() => {
+          alert('clicked');
+        }}
+      >
         Button
       </Button>
       <Button variant={'contained'} color={'error'}>
@@ -57,6 +66,25 @@ const All = () => (
       <Button variant={'contained'} color={'warning'}>
         Button
       </Button>
+    </Grid>
+    <Grid container sx={{ mt: 2 }}>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        endIcon={<ChevronRightIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'contained'} color={'primary'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+    </Grid>
+    <Grid container sx={{ mt: 2 }}>
+      <Button
+        variant={'contained'}
+        color={'primary'}
+        startIcon={<ChevronRightIcon />}
+      />
     </Grid>
     <Grid container sx={{ mt: 5 }}>
       <Grid item xs={12} sx={{ mb: 2 }}>
@@ -74,6 +102,25 @@ const All = () => (
       <Button variant={'outlined'} color={'warning'}>
         Button
       </Button>
+    </Grid>
+    <Grid container sx={{ mt: 2 }}>
+      <Button
+        variant={'outlined'}
+        color={'warning'}
+        endIcon={<ChevronRightIcon />}
+      >
+        Button
+      </Button>
+      <Button variant={'outlined'} color={'warning'} startIcon={<AddIcon />}>
+        Button
+      </Button>
+    </Grid>
+    <Grid container sx={{ mt: 2 }}>
+      <Button
+        variant={'outlined'}
+        color={'warning'}
+        startIcon={<ChevronRightIcon />}
+      />
     </Grid>
   </>
 );
