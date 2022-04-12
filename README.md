@@ -1,95 +1,127 @@
-# Opis
-To repozytorium zawierające kod do Wyzwania React Dare IT.
-Informajce na temat zadań oraz tego jak rozpocząć pracę nad nimi będziesz otrzymywać mailowo.
+<div id="top"></div>
 
-# Pierwsze kroki
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://www.dareit.io">
+    <img src="docs/logo.png" alt="Logo" width="267" height="100">
+  </a>
 
-## 🧰 Instalacja pakietów NPM
+  <h3 align="center">Dare IT Budget App - Portfolio edition</h3>
 
-znajdując się w katalogu głównym repozytorium react-challenge, uruchom terminal a następnie wywołaj następującą komendę
+  <p align="center">
+    An awesome budget app inspired by Dare IT Portfolio Challenge
+</div>
 
-    npm i
+## ⭐ About The Project
+
+![Main project page](docs/charts.png)
+
+You look at Budget App that I have made during my Dare IT portfolio challege.
 
 
-✨ Terminal powinien wyglądać mniej więcej tak ✨
+My main challenge was getting to know new libraries and creating a working application from scratch based on provided boilerplate. Our great mentors prepared tasks that helped us create new functionalities and supported us during our 12-week programming journey.
 
-![Matrix terminal image](https://w0tt.files.wordpress.com/2011/06/matrix.gif?w=613&zoom=2)
+### My good moments
+- I learned how to use completely new libraries
+- I got along with chart library
+- I know how frontend and backend work together in larger apps
+- MUI is not as bad as I thought
+- I learned how to decide which tasks are most important when the deadline is approaching
+- Friendly support during development is essential
+
+### Built With :coffee: and...
+
+During the project, I had the opportunity to get to know many new libraries and improve my skills with using others.
+The most important one are:
+
+* [React.js](https://reactjs.org/)
+* [React Chartjs 2](https://react-chartjs-2.js.org/)
+* [React Hook Form](https://react-hook-form.com/)
+* [Material UI](https://mui.com/)
+* [React Query](https://react-query.tanstack.com/)
+* [Storybook](https://storybook.js.org/)
+* [Notistack](https://iamhosseindhv.com/notistack)
 
 
-a tak naprawdę tak 
+<p align="right">(<a href="#top">back to top</a>)</p>
 
+## 🏃 Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+You need node and npm on your system.
+
+```sh
+node -v
 ```
- adrianaolszak@Admins-MacBook-Pro > ~/WebstormProjects/non-work/dareit/react-challenge > npm i
-
-> challenge@1.0.0 postinstall /Users/adrianaolszak/WebstormProjects/non-work/dareit/challenge
-> run-p -l install:server install:client
-
-[install:client] 
-[install:client] > challenge@1.0.0 install:client /Users/adrianaolszak/WebstormProjects/non-work/dareit/challenge
-[install:client] > cd client && npm install
-[install:client] 
-[install:server] 
-[install:server] > challenge@1.0.0 install:server /Users/adrianaolszak/WebstormProjects/non-work/dareit/challenge
-[install:server] > cd server && npm install
-[install:server] 
-
+```sh
+npm install npm@latest -g
 ```
-⏳ instalacja może zająć trochę czasu ⏳
 
-Zwróć uwagę na `[install:client]` oraz `[install:server]`, jednocześnie przebiega instalacja dla dwóch aplikacji - client, to tam będą wykonywane zadania oraz server, który będzie zasilał apkę front-endową danymi.
-
-Jeżeli wszystko ukończyło się pomyślnie process w terminalu się zakończy.
-
-Jeżeli coś będzie nie tak konsola na pewno poinformuje Cię o tym dużym błędem ;)
-
-## 🏃 Uruchomienie aplikacji
-
-### 🔗 Client i Server zawsze razem
-
-Repozytorium jest skonstruowane w taki sposób aby aplikacja client oraz aplikacja server były uruchamiane jednocześnie. Jest to wymagane ponieważ jedno bez drugiego nie bedzie prawidłowo funkcjonować.
-
-🔵 Pamiętaj aby zainstalować pakiety npm! Opisane w poprzednim kroku
-
-Znajdująć się w katalogu głównym Twojego repozytorium uruchom terminal i wykonaj polecenie:
-
-     npm run start
+### Installation
 
 
-Komenda ta uruchomi 2 aplikacje które będą dostępne pod następującymi adresami:
-- client - aplikacja reactowa - http://localhost:3000
-- server - aplikacja backendowa - http://localhost:4320
-    - dokumentacja API jest dostępna pod adresem http://localhost:4320/swagger
+1. Clone the repo
+```sh
+git clone https://github.com/ireshka/react-challenge.git
+```
+2. Get into main project directory and install NPM packages (it may take some time, be patient!)
+```sh
+npm install
+```
 
-### Storybook
-Do niektórych zadań będziesz potrzebować dodatkowej aplikacji - Storybook, która umożliwi Ci pracę nad niektórymi zadaniami. Treść zadania będzie wskazywać na potrzebę jej użycia.
+### Start & develop app
+Start the app with provided npm script from main directory. It will start client & server parts of application at once.
+```sh
+npm run start
+```
 
-Storybook służy do pracy nad komponentami w izolacji. Jeżeli chcesz nanosić zmiany w wyglądzie lub funkcjonowaniu poszczególnych komponentów muszisz edytować odpowiadajce im pliki w katalogu `client/src/ui`.
-
-Aby uruchomić storybook należy wywołać następującą komendę znajdując się w katalogu głównym Twojego repozytorium:
-```bash
+For using storybook run provided npm script & search it on `http://localhost:6006`
+```sh
 npm run storybook
 ```
 
-Komenda ta uruchomi aplikację Storybook, która będzie dostępna pod adresem http://localhost:6006
+For opening cypress test
+```sh
+npm run cypress: open
+```
 
-## 🏃 Uruchomienie testów automatycznych
 
-Każde zadanie (wyłączając 1) będzie udostepnione z wachlarzem testów automatycznych typu e2e. Pozwala to nam na automatyczne sprawdzenie czy zadanie zostało wykonane poprawnie, a także służy Ci za informacje na temat Twojego progresu.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Testy Automatyczne możesz i jest to wskazane, uruchomić lokalnie. Ten sam zestaw testów będzie również uruchamiany po przesłaniu Twojego rozwiązania do serwisu GitHub.
+##  Functionalities
 
-Uruchamianie ich lokalnie pozwoli Ci sprawdzić czy zadanie zostało pomyślnie ukończone oraz ile jest jeszcze elemantów, które musisz poprawić.
+As a user you can play with the app and:
+- track your spendings and display your expenses and income in a table
+- look at your budget and spendings on charts
+- create a budget and track how much money you have left
+- notifications show you if everything is ok during adding/removing elements to budget or ledger
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-Aby uruchomić testy należy, uruchomić clienta i serwer (może być to ten sam proces który został uruchomiony w poprzednim zadaniu) tak jak do tej pory uruchomić komendę z poziomu katalogu głównego:
 
-    npm run cypress:open
+## Screenshots
 
-To polecenie uruchomi panel Cypress, w którym możesz uruchomić wszystkie lub wybrane testy.
+![Wallet view](docs/ledger.png)
+![Budget view](docs/budget.png)
+![Add new spending](docs/add.png)
 
-# FAQ
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-## Jak dodać nowy pakiet npm?
-Uruchom terminal, przejdź do katalogu `/client` oraz wpisz polecenie `npm i :nazwa-pakietu`
+## App future
 
-## Co zrobić jeśli mam problem który nie został opisany w tej sekcji?
-Skorzystaj z dotępnej społeczności na dareit.circle.so i napisz Post. Mentorki lub inni uczestnicy napewno Ci pomogą.
+So many ideas, so little time
+
+- [ ] app deployment - let it shine online
+- [ ] dark theme
+- [ ] authentication (user will use app on different devices)
+- [ ] rewrite with Typescript for future development
+- [ ] add a persistent database
+- [ ] multi-language support
+    - [x] Polish
+    - [ ] English
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>

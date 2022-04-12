@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "11.7.1",
     "@emotion/styled": "11.6.0",
+    "@fontsource/inter": "^4.5.4",
     "@fontsource/roboto": "4.5.1",
     "@mui/icons-material": "5.2.5",
     "@mui/material": "5.2.8",
@@ -13,10 +14,16 @@
     "@testing-library/react": "11.2.7",
     "@testing-library/user-event": "12.8.3",
     "axios": "0.24.0",
+    "chart.js": "^3.7.1",
     "form-data": "4.0.0",
+    "notistack": "^2.0.4",
+    "prop-types": "^15.8.1",
     "react": "17.0.2",
+    "react-chartjs-2": "^4.0.1",
     "react-dom": "17.0.2",
     "react-helmet": "6.1.0",
+    "react-hook-form": "^7.28.0",
+    "react-query": "^3.34.14",
     "react-router-dom": "5.3.0",
     "react-scripts": "4.0.3"
   },
@@ -29,8 +36,23 @@
     "@storybook/node-logger": "^6.4.12",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.4.12",
+    "@types/react": "^17.0.39",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.0.0",
+    "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-storybook": "^0.5.6",
+    "eslint-plugin-testing-library": "^5.0.4",
+    "eslint-plugin-unicorn": "^40.1.0",
     "prettier": "2.5.1",
-    "prop-types": "15.8.1",
     "puppeteer": "^13.1.0"
   },
   "resolutions": {
@@ -58,18 +80,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "eslintConfig": {
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
     ]
   }
 }

@@ -1,15 +1,20 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import React from 'react';
-import Router from './pages/routing';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import { theme } from 'theme';
 
-const App = () => {
-  return (
+import Router from './pages/routing';
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router />
     </ThemeProvider>
-  );
-};
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
+);
 
 export default App;
