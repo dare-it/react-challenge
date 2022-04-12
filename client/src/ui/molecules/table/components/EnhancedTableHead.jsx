@@ -14,7 +14,7 @@ export function EnhancedTableHead({
   headCells,
   order,
   orderBy,
-  onRequestSort
+  onRequestSort,
 }) {
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
@@ -35,7 +35,7 @@ export function EnhancedTableHead({
             key={headCell.id}
             align={'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
-            sortDirection={orderBy === headCell.id ? order :false}
+            sortDirection={orderBy === headCell.id ? order : false}
           >
             <TableSortLabel
               active={orderBy === headCell.id}

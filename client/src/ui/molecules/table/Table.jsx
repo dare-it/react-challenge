@@ -38,7 +38,6 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-
 export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -94,7 +93,7 @@ export const Table = ({ headCells, rows, getUniqueId, deleteRecords }) => {
             orderBy={orderBy}
           />
           <TableBody>
-            {stableSort(rows,getComparator(order,orderBy))
+            {stableSort(rows, getComparator(order, orderBy))
               .slice()
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {

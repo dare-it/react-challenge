@@ -14,7 +14,7 @@ export const WalletPage = () => (
         <Grid item xs={12} data-test-id={'wallet-top-sidebar'}>
           <ChartSummaryService />
         </Grid>
-        <Grid item xs={12}  data-test-id={'wallet-bottom-sidebar'}>
+        <Grid item xs={12} data-test-id={'wallet-bottom-sidebar'}>
           <ChartBudgetService />
         </Grid>
       </Grid>

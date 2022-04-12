@@ -28,7 +28,9 @@ const App = () => {
         <QueryClientProvider client={queryClient}>
           <SnackbarProvider
             maxSnack={3}
-            iconVariant={{ error: <ErrorOutlineIcon style={{ marginRight: '10px' }} /> }}
+            iconVariant={{
+              error: <ErrorOutlineIcon style={{ marginRight: '10px' }} />,
+            }}
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'right',
