@@ -8,6 +8,7 @@ context('Form content - on "Zdefiniuj budżet" button click', () => {
     cy.get('tbody').find('input[type="checkbox"]').first().click();
     cy.get('[data-testid="DeleteIcon"]').click();
     cy.wait(200);
+
     cy.get('tbody').children('.MuiTableRow-root').should('have.length', 6);
 
     // open budget modal
