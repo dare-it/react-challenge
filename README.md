@@ -9,12 +9,12 @@ Celem tego 3 miesięcznego wyzwania było nauczenie się korzystać z repozytori
 # Technologie 
 
 [React.js](https://reactjs.org/)<br>
-[MUI](https://mui.com/)
-[React Hook Form](https://react-hook-form.com/)
-[React Query](https://react-query.tanstack.com/)
-[React-chartjs](https://github.com/reactchartjs/react-chartjs-2)
-[notistack]()
-[Cypress]()
+[MUI](https://mui.com/)<br>
+[React Hook Form](https://react-hook-form.com/)<br>
+[React Query](https://react-query.tanstack.com/)<br>
+[React-chartjs](https://github.com/reactchartjs/react-chartjs-2)<br>
+[notistack]()<br>
+[Cypress]()<br>
 
 ### Instalacja pakietów NPM
 Znajdując się w katalogu głównym repozytorium react-challenge, uruchom terminal a następnie wywołaj następującą komendę:
