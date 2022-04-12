@@ -1,27 +1,29 @@
 import React, { useState } from 'react';
+import { Box, Typography } from '@mui/material';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Loader } from 'ui/atoms/Loader';
-import { Error } from 'ui/atoms/Error';
-import { NoContent } from 'ui/atoms/NoContent';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import {
+  ActionHeader,
+  Button,
+  Table,
+  LocalizedDate,
+  CategoryCell,
+  AddNewLedgerRecordModal,
+  Money,
+  Error,
+  Loader,
+  NoContent,
+  Card,
+} from 'ui';
 import { LedgerService } from 'api';
-import { LEDGER_QUERY } from 'queryKeys';
-import { Table } from 'ui/molecules/table/Table';
-import { CategoryCell } from 'ui/molecules/CategoryCell';
-import { Money } from 'ui/atoms/Money';
-import { LocalizedDate } from 'ui/atoms/LocalizedDate';
-import { ActionHeader, Card } from 'ui';
-import { Button } from 'ui/atoms/Button';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
-import { Box } from '@mui/material';
-import { AddNewLedgerRecord } from './AddNewLedgerRecord.modal';
-
+import { BUDGET_QUERY, LEDGER_QUERY, SUMMARY_QUERY } from 'queryKeys';
+import { useSnackBar } from 'hooks/useSnackBar';
 
 export const LedgerWidget = () => {
-
   const [modalVisible, toggleModal] = useState(false);
   const [modalType, setModalType] = useState('');
-
+  const showSnackbar = useSnackBar();
   const queryClient = useQueryClient();
 
   const { isLoading, error, data } = useQuery(LEDGER_QUERY, () =>
@@ -31,87 +33,105 @@ export const LedgerWidget = () => {
   const mutation = useMutation((ids) => LedgerService.remove({ ids }), {
     onSuccess: async () => {
       await queryClient.refetchQueries([LEDGER_QUERY]);
+      await queryClient.refetchQueries([BUDGET_QUERY]);
+      await queryClient.refetchQueries([SUMMARY_QUERY]);
+      showSnackbar('Element został usunięty', 'success');
+    },
+    onError: () => {
+      showSnackbar('Wystąpił nieoczekiwany błąd', 'error');
     },
   });
-
-  const deleteRecords = (ids) => mutation.mutate(ids);
 
   const openModal = (modalType) => {
     toggleModal(true);
     setModalType(modalType);
-  }
+  };
 
-  const tableDefinition = [
-    {
-      id: 'title',
-      label: 'Nazwa',
-      renderCell: (row) => (
-        <CategoryCell name={row.title} />
-      ),
-    },
-    {
-      id: 'category',
-      label: 'Kategoria',
-      renderCell: (row) => (
-        <CategoryCell color={row.category?.color} name={row.category?.name} />
-      ),
-    },
-    {
-      id: 'amountInCents',
-      label: 'Kwota',
-      renderCell: (row) => {
-        if (row.mode === "INCOME") return <><text style={{ color: "green" }}>+<Money inCents={row.amountInCents} /></text></>;
-        if (row.mode === "EXPENSE") return <><text style={{ color: "red" }}>-<Money inCents={row.amountInCents} /></text></>;
-      }
-    },
-    {
-      id: 'createdAt',
-      label: 'Data',
-      renderCell: (row) => <LocalizedDate date={row.createdAt} />,
-    },
-  ];
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <Error error={error} />;
-  }
-
-  if (!data?.length) {
-    return <NoContent />;
-  }
+  const deleteRecords = (ids) => {
+    mutation.mutate(ids);
+  };
 
   return (
-    <>
-      <Card
-        title={
-          <ActionHeader
-            variant={'h1'}
-            title="Portfel"
-            renderActions={() => (
-              <Box>
-                <Button sx={{ marginRight: '8px' }} onClick={() => openModal('INCOME')} startIcon={<AddIcon />}>Wpłać</Button>
-                <Button onClick={() => openModal('EXPENSE')} startIcon={<RemoveIcon />} >Wypłać</Button>
-              </Box>
-            )}
-          />
-        }
-      >
-        <Table rows={data}
-          headCells={tableDefinition}
+    <Card
+      sx={{ minHeight: '80vh', height: '100%' }}
+      title={
+        <ActionHeader
+          variant={'h1'}
+          title="Portfel"
+          renderActions={() => (
+            <Box>
+              <Button
+                startIcon={<AddOutlinedIcon />}
+                onClick={() => openModal('INCOME')}
+                sx={{ marginRight: '8px' }}
+              >
+                Wpłać
+              </Button>
+              <Button
+                startIcon={<RemoveOutlinedIcon />}
+                onClick={() => openModal('EXPENSE')}
+              >
+                Wypłać
+              </Button>
+            </Box>
+          )}
+        />
+      }
+    >
+      {isLoading && <Loader />}
+      {error && <Error error={error} />}
+      {!isLoading && !error && !data?.length && <NoContent />}
+      {!isLoading && !error && !!data?.length && (
+        <Table
+          rows={data}
+          headCells={headCells}
           getUniqueId={(row) => row.id}
           deleteRecords={deleteRecords}
         />
-      </Card>
-
-      <AddNewLedgerRecord
+      )}
+      <AddNewLedgerRecordModal
         open={modalVisible}
         onClose={() => toggleModal(false)}
         type={modalType}
-      >
-      </AddNewLedgerRecord>
-    </>
+      />
+    </Card>
   );
 };
+
+const headCells = [
+  {
+    id: 'title',
+    label: 'Nazwa',
+    renderCell: (row) => row.title,
+  },
+  {
+    id: 'categoryName',
+    label: 'Kategoria',
+    renderCell: (row) => {
+      if (!row.mode === 'INCOME') return 'Wpływ';
+
+      return (
+        <CategoryCell name={row.category?.name} color={row.category?.color} />
+      );
+    },
+  },
+  {
+    id: 'createdAt',
+    label: 'Data',
+    renderCell: (row) => <LocalizedDate date={row.createdAt} />,
+  },
+  {
+    id: 'amountInCents',
+    label: 'Kwota',
+    renderCell: (row) =>
+      row.mode === 'EXPENSE' ? (
+        <Typography color={'error.main'} variant={'p'}>
+          -<Money inCents={row.amountInCents} />
+        </Typography>
+      ) : (
+        <Typography color={'success.main'} variant={'p'}>
+          +<Money inCents={row.amountInCents} />
+        </Typography>
+      ),
+  },
+];

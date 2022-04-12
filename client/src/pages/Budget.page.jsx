@@ -5,10 +5,8 @@ import { Grid } from '@mui/material';
 import { BudgetTableWidget } from 'ui/organisms/BudgetTable.widget';
 import { AddNewBudgetRecordModal } from 'ui/organisms/AddNewBudgetRecord.modal';
 
-
 export const BudgetPage = () => {
   const [modalVisible, toggleModal] = useState(false);
-
   const openModal = () => {
     toggleModal(true);
   }
