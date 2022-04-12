@@ -8,7 +8,7 @@ Celem tego 3 miesięcznego wyzwania było nauczenie się korzystać z repozytori
 
 # Technologie 
 
-[React.js](https://reactjs.org/)
+[React.js](https://reactjs.org/)<br>
 [MUI](https://mui.com/)
 [React Hook Form](https://react-hook-form.com/)
 [React Query](https://react-query.tanstack.com/)
