@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import { Loader, Error, Money, ActionHeader, Card, CategoryCell } from 'ui';
 import { SummaryService } from 'api';
 import { SUMMARY_QUERY } from 'queryKeys';
@@ -7,9 +7,8 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { CardContent } from '@mui/material';
 
-export const SpendingChart = () => {
-  const queryClient = useQueryClient();
-
+export const SummaryChart = () => {
+  
   const { isLoading, isError, data, error } = useQuery(SUMMARY_QUERY, () =>
     SummaryService.findAll(),
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,8 +16,7 @@ import { BudgetService } from 'api';
 import { Card } from 'ui';
 
 export const BudgetChart = () => {
-  const queryClient = useQueryClient();
-
+  
   const { isLoading, isError, data, error } = useQuery(BUDGET_QUERY, () =>
     BudgetService.findAll(),
   );
