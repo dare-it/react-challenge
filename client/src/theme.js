@@ -27,14 +27,21 @@ let theme = createTheme({
       contrastText: '#fff',
     },
     success: {
-      main: '#00A980',
+      main: '#66bb6a',
       light: '#DBEBDB',
+      dark: '#00A980',
       contrastText: '#fff',
     },
     warning: {
       main: '#FFA726',
       light: '#FFF5D2',
+      dark: '#B28C09',
       contrastText: '#fff',
+    },
+    grey: {
+      lev1: 'rgba(51, 51, 51, 0.07)',
+      lev3: 'rgba(51, 51, 51, 0.25)',
+      lev4: 'rgba(51, 51, 51, 0.5)',
     },
     background: {
       default: '#F8F8F8',
@@ -141,7 +148,117 @@ theme = createTheme(theme, {
     MuiToolbar: {
       styleOverrides: {
         root: {
+          borderRadius: 0,
+        },
+      },
+    },
+    MuiTableRow: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '#F9FAFD',
+          },
+        },
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        variant: 'outlined',
+      },
+      styleOverrides: {
+        root: {
           borderRadius: theme.shape.borderRadius,
+          textTransform: 'none',
+          height: '34px',
+          margin: '3px',
+        },
+        contained: {
+          boxShadow: 'none',
+          ':active': {
+            boxShadow: theme.shadows[2],
+          },
+        },
+        containedPrimary: {
+          backgroundColor: theme.palette.primary.main,
+          color: theme.palette.primary.contrastText,
+          ':hover': {
+            backgroundColor: theme.palette.primary.dark,
+            color: theme.palette.primary.contrastText,
+            boxShadow: 'none',
+          },
+        },
+        containedError: {
+          backgroundColor: theme.palette.error.light,
+          color: theme.palette.error.dark,
+          ':hover': {
+            backgroundColor: theme.palette.error.main,
+            color: theme.palette.primary.contrastText,
+            boxShadow: 'none',
+          },
+        },
+        containedSuccess: {
+          backgroundColor: theme.palette.success.light,
+          color: theme.palette.success.dark,
+          ':hover': {
+            backgroundColor: theme.palette.success.main,
+            color: theme.palette.success.contrastText,
+            boxShadow: 'none',
+          },
+        },
+        containedWarning: {
+          backgroundColor: theme.palette.warning.light,
+          color: theme.palette.warning.dark,
+          ':hover': {
+            backgroundColor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText,
+            boxShadow: 'none',
+          },
+        },
+        outlined: {
+          ':active': {
+            boxShadow: theme.shadows[2],
+          },
+        },
+        outlinedPrimary: {
+          borderColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.secondary.main,
+          color: theme.palette.primary.main,
+          ':hover': {
+            borderColor: theme.palette.secondary.dark,
+            backgroundColor: theme.palette.secondary.dark,
+            color: theme.palette.primary.main,
+            boxShadow: 'none',
+          },
+        },
+        outlinedError: {
+          ':hover': {
+            backgroundColor: theme.palette.error.light,
+          },
+        },
+        outlinedSuccess: {
+          ':hover': {
+            backgroundColor: theme.palette.success.light,
+          },
+        },
+        outlinedWarning: {
+          ':hover': {
+            backgroundColor: theme.palette.warning.light,
+          },
+        },
+      },
+    },
+    MuiTouchRipple: {
+      styleOverrides: {
+        root: {
+          display: 'none',
+        },
+      },
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          width: '12px',
+          height: '12px',
         },
       },
     },
