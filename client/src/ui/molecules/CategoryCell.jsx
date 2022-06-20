@@ -1,11 +1,12 @@
-import { Box } from '@mui/material';
-import * as PropTypes from 'prop-types';
 import React from 'react';
+import * as PropTypes from 'prop-types';
+import { Box } from '@mui/material';
+
 import { ColorBox } from '../atoms/ColorBox';
 
-export const CategoryCell = ({ color, name }) => {
+export const CategoryCell = ({ color, name, size }) => {
   return (
-    <Box display={'flex'} alignItems={'center'}>
+    <Box display={'flex'} alignItems={'center'} style={{ fontSize: size }}>
       {color && <ColorBox color={color} />}
       {name}
     </Box>
